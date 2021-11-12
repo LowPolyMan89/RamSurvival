@@ -133,7 +133,14 @@ MonoBehaviour:
   Count: 1
   IsStack: 0
   Sprite: {fileID: 21300000, guid: e7cea69c61aa4ba4ca2f15870dffd9a3, type: 3}
-  itemDataSO: {fileID: 0}
-  playerBackpackData: {fileID: 11400000, guid: 58eabbe75ad4bf447a18d00b8efd0575, type: 2}
-  isVisualized: 0
-  collider: {fileID: 0}
+  colliders:
+  - {fileID: 6479799719001947198}
+  rendrers:
+  - {fileID: 8989775309400420859}
+  itemStats:
+  - StatName: MaxMass
+    StatValue: 40
+  - StatName: MaxSlots
+    StatValue: 3
+  rigidbody: {fileID: 4516966827054202658}
+  Prefab: {fileID: 4946865384954191845}

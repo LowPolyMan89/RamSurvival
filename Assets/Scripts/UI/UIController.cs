@@ -24,7 +24,7 @@ public class UIController : MonoBehaviour
 
 		selectedPanel.gameObject.SetActive(false);
 		inventoryUI.gameObject.SetActive(false);
-		eventManager = EventManager.instance;
+		eventManager = EventManager.Instance;
 		eventManager.OnResorceSelectAction += ShowSelectedPanel;
 
 		inventoryUI = FindObjectOfType<InventoryUI>();

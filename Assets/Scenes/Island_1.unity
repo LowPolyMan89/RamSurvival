@@ -1868,6 +1868,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1806292866504084849, guid: 4d39b2807416a214a8b907d6c589f05c, type: 3}
+      propertyPath: LockCameraPosition
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2257250434722780105, guid: 4d39b2807416a214a8b907d6c589f05c, type: 3}
       propertyPath: playerBackpackData
       value: 
@@ -1876,7 +1880,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: TestPlayer
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4098355528791502483, guid: 4d39b2807416a214a8b907d6c589f05c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4d39b2807416a214a8b907d6c589f05c, type: 3}
 --- !u!1001 &3397136631947373530
 PrefabInstance:

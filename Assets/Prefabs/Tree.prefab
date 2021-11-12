@@ -110,13 +110,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemId: Wood
+  ItemType: 2
+  equipType: 1
   ItemRare: 1
-  Count: 0
-  IsStack: 0
+  Count: 10
+  IsStack: 1
   Sprite: {fileID: 21300000, guid: d4ed52019683d714ca1b782cf9847660, type: 3}
-  itemDataSO: {fileID: 0}
-  isVisualized: 0
-  collider: {fileID: 0}
+  colliders:
+  - {fileID: 2150905881752871466}
+  rendrers: []
+  itemStats: []
+  rigidbody: {fileID: 0}
+  Prefab: {fileID: 4727572581050396682, guid: 85c61040f1c7f3449b06d6623cf74b08, type: 3}
   count: 10
   hitPoint: 35
   lootItem: {fileID: 4727572581050396681, guid: 85c61040f1c7f3449b06d6623cf74b08, type: 3}

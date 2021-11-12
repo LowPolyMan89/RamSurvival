@@ -5,18 +5,18 @@ using UnityEngine;
 
 public class EventManager : MonoBehaviour
 {
-	public static EventManager instance = null;
+	public static EventManager Instance = null;
 	public event Func<Entity, Entity> OnResorceSelectAction;
 	public Action OnUpdateUIAction;
 
-	void Start()
+	private void Start()
 	{
 
-		if (instance == null)
+		if (Instance == null)
 		{
-			instance = this;
+			Instance = this;
 		}
-		else if (instance == this)
+		else if (Instance == this)
 		{
 			Destroy(gameObject);
 		}
@@ -32,10 +32,8 @@ public class EventManager : MonoBehaviour
 
 	public void OnUpdateUI()
 	{
-		if (OnUpdateUIAction != null)
-		{
-			print("OnUpdateUIAction");
-			OnUpdateUIAction();
-		}
+		if (OnUpdateUIAction == null) return;
+		print("OnUpdateUIAction");
+		OnUpdateUIAction();
 	}
 }

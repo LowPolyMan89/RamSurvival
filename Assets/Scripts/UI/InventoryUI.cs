@@ -16,7 +16,7 @@ public class InventoryUI : MonoBehaviour
 
     private void Start()
     {
-        EventManager.instance.OnUpdateUIAction += UpdateUI;
+        EventManager.Instance.OnUpdateUIAction += UpdateUI;
     }
 
     private void OnEnable()
@@ -29,13 +29,13 @@ public class InventoryUI : MonoBehaviour
         inventory = FindObjectOfType<Inventory>();
         CreateInventoryCells();
         CreateInventoryUI(inventory.GetItems());
-        capacityText.text = inventory.CurrentCapacity.ToString("00") + "/" + PlayerStats.instance.GetInventoryCapacity();
-        capacityImage.fillAmount = (inventory.CurrentCapacity + 0.001f) / PlayerStats.instance.GetInventoryCapacity();
+        capacityText.text = inventory.CurrentCapacity.ToString("00") + "/" + PlayerStats.Instance.GetInventoryCapacity();
+        capacityImage.fillAmount = (inventory.CurrentCapacity + 0.001f) / PlayerStats.Instance.GetInventoryCapacity();
     }
 
     public void CreateInventoryCells()
     {
-        for(int i = 0; i < PlayerStats.instance.GetInventoryCellsCount(); i++)
+        for(int i = 0; i < PlayerStats.Instance.GetInventoryCellsCount(); i++)
         {
             InventoryCells newElement = Instantiate(inventoryCellsPrefab).GetComponent<InventoryCells>();
             newElement.transform.SetParent(itemUIElementParent);
@@ -43,19 +43,19 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
-    public void CreateInventoryUI(List<InventoryItem> inventoryItems)
+    public void CreateInventoryUI(List<Item> inventoryItems)
     {
         int slotscheck = 0;
 
         foreach(var i in inventoryItems)
         {
-            if (slotscheck < PlayerStats.instance.GetInventoryCellsCount())
+            if (slotscheck < PlayerStats.Instance.GetInventoryCellsCount())
             {
                 ItemUIElement newElement = Instantiate(itemUIElementPrefab).GetComponent<ItemUIElement>();
                 newElement.transform.SetParent(inventoryCells[slotscheck].transform);
-                if(i.Item.ItemType != ItemType.Equip)
+                if(i.ItemType != ItemType.Equip)
                     newElement.Set(i);
-                if (i.Item.ItemType == ItemType.Equip)
+                if (i.ItemType == ItemType.Equip)
                     newElement.SetEqip(i);
                 itemUIElements.Add(newElement);
                 slotscheck++;
@@ -82,6 +82,6 @@ public class InventoryUI : MonoBehaviour
 
     private void OnDestroy()
     {
-        EventManager.instance.OnUpdateUIAction -= UpdateUI;
+        EventManager.Instance.OnUpdateUIAction -= UpdateUI;
     }
 }

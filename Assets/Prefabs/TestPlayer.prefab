@@ -230,7 +230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ac2fab2af2cc29419b2fec7d7974750, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ShootPoint: {fileID: 1482824581348440134}
+  shootPoint: {fileID: 1482824581348440134}
   inventory: {fileID: 1482824580737300726}
   layerMask:
     serializedVersion: 2
@@ -253,7 +253,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items: []
-  eqipedItems: []
   inventoryStorage: {fileID: 84201424800392480}
   currentCapacity: 0
   inventoryBackpackPrefab: {fileID: 8276093090054053261, guid: 2699ed34b5862a74084d5a2e69a13cfa, type: 3}
@@ -274,10 +273,10 @@ MonoBehaviour:
   energy: 0
   inventory: {fileID: 1482824580737300726}
   playerStatsData: {fileID: 11400000, guid: 809e61f6dc4062d4badf5f6c4eee3e92, type: 2}
-  playerBackpackData: {fileID: 11400000, guid: 58eabbe75ad4bf447a18d00b8efd0575, type: 2}
   playerMultitoolData: {fileID: 11400000, guid: 07a433785682b0841ab74433f053c28b, type: 2}
   dropPoint: {fileID: 3701746892738852566}
   backpackPoint: {fileID: 8287545776862748227}
+  playerBackpackData: {fileID: 0}
 --- !u!114 &2694663279206655732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -538,7 +537,8 @@ PrefabInstance:
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 6334074279448654886}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2070925442191277753, guid: a1a802ecaf6775746bb2a929fb554ad8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a1a802ecaf6775746bb2a929fb554ad8, type: 3}
 --- !u!4 &4098355528329633618 stripped
 Transform:

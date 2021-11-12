@@ -4,33 +4,31 @@ using UnityEngine;
 
 public class Inventory : Entity
 {
-    [SerializeField] private List<InventoryItem> items = new List<InventoryItem>();
-    [SerializeField] private List<InventoryItem> eqipedItems = new List<InventoryItem>();
+    [SerializeField] private List<Item> items = new List<Item>();
     [SerializeField] private Transform inventoryStorage;
     [SerializeField] private float currentCapacity;
     [SerializeField] private Backpack inventoryBackpackPrefab;
-    public float CurrentCapacity { get => currentCapacity; }
+    public float CurrentCapacity => currentCapacity;
 
-    public virtual List<InventoryItem> GetItems()
+    public virtual List<Item> GetItems()
     {
         return items;
     }
 
-    public void EquipItem(InventoryItem item, EquipUISlot equipUISlot)
+    public void EquipItem(Item item, EquipUISlot equipUISlot)
     {
-        switch (item.Item.equipType)
+        switch (item.equipType)
         {
             case EquipType.Backpack:
-                PlayerStats.instance.PlayerBackpackData = item.GetComponent<Backpack>().playerBackpackData;
-                item.transform.SetParent(PlayerStats.instance.BackpackPoint);
+                
+                item.transform.SetParent(PlayerStats.Instance.BackpackPoint);
                 items.Remove(item);
-                eqipedItems.Add(item);
                 break;
             case EquipType.none:
                 break;
         }
 
-        EventManager.instance.OnUpdateUI();
+        EventManager.Instance.OnUpdateUI();
     }
 
     public virtual float CalculateCurrentCap()
@@ -39,70 +37,69 @@ public class Inventory : Entity
 
         foreach (var i in items)
         {
-            if(i.Item.ItemType != ItemType.Equip)
-                currentCap += i.Item.itemDataSO.Capacity * i.Count;
+            if(i.ItemType != ItemType.Equip)
+                currentCap += i.GetStat("Mass") * i.Count;
         }
 
         return currentCap;
     }
 
     /// <summary>
-    /// Возвращает существующий Item, если нет, то null.
+    /// Р’РѕР·РІСЂР°С‰Р°РµС‚ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РёР№ Item, РµСЃР»Рё РЅРµС‚, С‚Рѕ null.
     /// </summary>
-    /// <param name="newitem">Новый Item.</param>
-    /// <returns>Существующий Item.</returns>
-    public virtual Item FindEqualsItem(Item newitem)
+    /// <param name="newitem">РќРѕРІС‹Р№ Item.</param>
+    /// <returns>РЎСѓС‰РµСЃС‚РІСѓСЋС‰РёР№ Item.</returns>
+    protected virtual Item FindEqualsItem(Item newitem)
     {
         Item olditem = null;
 
-        foreach (var i in items)
+        for (var index = 0; index < items.Count; index++)
         {
-            if (i.Item.itemDataSO == newitem.itemDataSO)
-            {
-                olditem = i.Item;
-                return olditem;
-            }
+            var i = items[index];
+            if (i.GetName() != newitem.GetName()) continue;
+            olditem = i;
+            return olditem;
         }
-        return olditem;
+
+        return null;
     }
 
-    public int GetEmptyCellsCount()
+    private int GetEmptyCellsCount()
     {
-        int c = 0;
-        c = PlayerStats.instance.GetInventoryCellsCount() - inventoryStorage.childCount;
+        var c = 0;
+        c = PlayerStats.Instance.GetInventoryCellsCount() - inventoryStorage.childCount;
         return c;
     }
 
     /// <summary>
-    /// Возвращает существующий InventoryItem, если нет, то null.
+    /// Р’РѕР·РІСЂР°С‰Р°РµС‚ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РёР№ InventoryItem, РµСЃР»Рё РЅРµС‚, С‚Рѕ null.
     /// </summary>
-    public virtual InventoryItem FindEqualsInventoryItem(Item newitem)
+    protected virtual Item FindEqualsInventoryItem(Item newitem)
     {
-        InventoryItem olditem = null;
+        Item olditem = null;
 
-        foreach (var i in items)
+        for (var index = 0; index < items.Count; index++)
         {
-            if (i.Item.itemDataSO == newitem.itemDataSO)
-            {
-                olditem = i;
-                return olditem;
-            }
+            var i = items[index];
+            if (i.GetName() != newitem.GetName()) continue;
+            olditem = i;
+            return olditem;
         }
-        return olditem;
+
+        return null;
     }
 
     [ContextMenu("DropBackpack")]
     public void DropBackpack()
     {
-        PlayerBackpackDataSO playerBackpackDataSO = PlayerStats.instance.PlayerBackpackData;
 
-        PlayerStats.instance.PlayerBackpackData = null;
-        Backpack i = Instantiate(inventoryBackpackPrefab);
-        i.transform.position = PlayerStats.instance.DropPoint.position;
+        var i = Instantiate(inventoryBackpackPrefab);
+        i.transform.position = PlayerStats.Instance.DropPoint.position;
 
-        if(GetItems().Count > PlayerStats.instance.GetInventoryCellsCount())
+        if(GetItems().Count > PlayerStats.Instance.GetInventoryCellsCount())
         {
-            for(int a = PlayerStats.instance.GetInventoryCellsCount(); a < GetItems().Count; a++)
+            var a = PlayerStats.Instance.GetInventoryCellsCount();
+            for(; a < GetItems().Count; a++)
             {
                items.Remove(DropItem(items[a]));
             }
@@ -111,10 +108,10 @@ public class Inventory : Entity
         currentCapacity = CalculateCurrentCap();
     }
 
-    public virtual InventoryItem DropItem(InventoryItem item)
+    protected virtual Item DropItem(Item item)
     {
-        Item _item = Instantiate(item.Item.itemDataSO.Prefab).GetComponent<Item>();
-        _item.transform.position = PlayerStats.instance.DropPoint.position;
+        var _item = Instantiate(item.Prefab).GetComponent<Item>();
+        _item.transform.position = PlayerStats.Instance.DropPoint.position;
         _item.Count = item.Count;
         return item;
     }
@@ -128,26 +125,7 @@ public class Inventory : Entity
     {
         if (GetEmptyCellsCount() > 0)
         {
-            GameObject _tempgameObject = new GameObject();
-            _tempgameObject.name = item.ItemId;
-            _tempgameObject.transform.SetParent(inventoryStorage);
-            Item _newInventoryItem = new Item();
-
-            if (item.equipType == EquipType.Backpack)
-            {
-                _newInventoryItem = _tempgameObject.AddComponent<Backpack>();
-                _newInventoryItem.ItemId = item.ItemId;
-                _newInventoryItem.playerBackpackData = item.playerBackpackData;
-                _newInventoryItem.ItemRare = item.ItemRare;
-                _newInventoryItem.Count = 1;
-            }
             
-            InventoryItem newInvItem = _tempgameObject.AddComponent<InventoryItem>();
-            newInvItem.Set(_newInventoryItem, item.ItemType, 1);
-
-            items.Add(newInvItem);
-            Destroy(item.gameObject);
-            return _newInventoryItem;
         }
         else
         {
@@ -159,47 +137,36 @@ public class Inventory : Entity
 
     public virtual Item AddItem(Item item, int count)
     {
-        float maxCap = PlayerStats.instance.GetInventoryCapacity();
-        float currentCap = CalculateCurrentCap();
+        var maxCap = PlayerStats.Instance.GetInventoryCapacity();
+        var currentCap = CalculateCurrentCap();
 
-        if (maxCap < currentCap + item.itemDataSO.Capacity || currentCap >= maxCap)
+        if (maxCap < currentCap + item.GetStat("Mass") || currentCap >= maxCap)
         {
-            print("Can't take, new item is bigger max cap");
+            print("Can't take, new item is bigger max mass");
             return item;
         }
 
-        Item olditem = FindEqualsItem(item);
+        var olditem = FindEqualsItem(item);
 
-        if (olditem && item.equipType == EquipType.none)
+        //РµСЃР»Рё СѓР¶Рµ РµСЃС‚СЊ, С‚Рѕ РїРѕ РІРѕР·РјРѕР¶РЅРѕСЃС‚Рё РґРѕР±Р°РІР»СЏРµРј РІ РєСѓС‡Сѓ
+        if (olditem && item.equipType == EquipType.none && item.ItemType == ItemType.Resource)
         {
 
-            InventoryItem oldInvItem = FindEqualsInventoryItem(item);
-            oldInvItem.Add(count);
-            oldInvItem.Item.Count = count;
+            var oldInvItem = FindEqualsInventoryItem(item);
+            oldInvItem.Count += count;
             currentCapacity = CalculateCurrentCap();
             Destroy(item.gameObject);
-            return oldInvItem.Item;
+            return oldInvItem;
 
-        } 
-        else if(GetEmptyCellsCount() > 0)
+        }
+
+        //РµСЃР»Рё РЅРµС‚, С‚Рѕ РґРѕР±Р°РІР»СЏРµРј РЅРѕРІС‹Р№
+        else if (GetEmptyCellsCount() > 0)
         {
-            GameObject _tempgameObject = new GameObject();
-            _tempgameObject.name = item.ItemId;
-            _tempgameObject.transform.SetParent(inventoryStorage);
-
-            Item _newInventoryItem = _tempgameObject.AddComponent<Item>();
-            _newInventoryItem.ItemId = item.ItemId;
-            _newInventoryItem.itemDataSO = item.itemDataSO;
-            _newInventoryItem.ItemRare = item.ItemRare;
-            _newInventoryItem.Count = count;
-
-            InventoryItem newInvItem = _tempgameObject.AddComponent<InventoryItem>();
-            newInvItem.Set(_newInventoryItem, item.ItemType, count);
-
-            items.Add(newInvItem);
+            items.Add(item);
             currentCapacity = CalculateCurrentCap();
-            Destroy(item.gameObject);
-            return _newInventoryItem;
+            item.Visualize(false);
+            return item;
         }
 
         return null;

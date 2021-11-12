@@ -5,25 +5,25 @@ using UnityEngine.UI;
 
 public class ItemUIElement : MonoBehaviour
 {
-    [SerializeField] private InventoryItem inventoryItem;
+    [SerializeField] private Item inventoryItem;
     [SerializeField] private Image image;
     [SerializeField] private Text text;
 
-    public InventoryItem InventoryItem { get => inventoryItem; }
+    public Item InventoryItem { get => inventoryItem; }
 
-    public ItemUIElement Set(InventoryItem _inventoryItem)
+    public ItemUIElement Set(Item _inventoryItem)
     {
         inventoryItem = _inventoryItem;
-        image.sprite = _inventoryItem.Item.itemDataSO.ItemSprite;
+        image.sprite = _inventoryItem.Sprite;
         text.text = _inventoryItem.Count.ToString();
         return this;
     }
 
-    public ItemUIElement SetEqip(InventoryItem _inventoryItem)
+    public ItemUIElement SetEqip(Item _inventoryItem)
     {
-        if(_inventoryItem.Item.equipType == EquipType.Backpack)
+        if(_inventoryItem.equipType == EquipType.Backpack)
         {
-            image.sprite = _inventoryItem.Item.playerBackpackData.ItemSprite;
+           
         }
         inventoryItem = _inventoryItem;
         text.text = _inventoryItem.Count.ToString();
@@ -33,7 +33,7 @@ public class ItemUIElement : MonoBehaviour
     [ContextMenu("Eqip")]
     public void EqipItem()
     {
-        PlayerStats.instance.Inventory.EquipItem(inventoryItem, null);
+        PlayerStats.Instance.Inventory.EquipItem(inventoryItem, null);
         inventoryItem = null;
         image.sprite = null;
         text.text = "";

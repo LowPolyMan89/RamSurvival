@@ -9,30 +9,29 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float energy;
     [SerializeField] private Inventory inventory;
     [SerializeField] private PlayerStatsDataSO playerStatsData;
-    [SerializeField] private PlayerBackpackDataSO playerBackpackData;
     [SerializeField] private PlayerMultitoolDataSO playerMultitoolData;
     [SerializeField] private Transform dropPoint;
     [SerializeField] private Transform backpackPoint;
 
-    public static PlayerStats instance;
+    public static PlayerStats Instance;
+    [SerializeField] private Item playerBackpackData;
 
     public float HitPoint { get => hitPoint; }
     public float Food { get => food; }
     public float Energy { get => energy; }
     public PlayerStatsDataSO PlayerStatsData { get => playerStatsData; set => playerStatsData = value; }
-    public PlayerBackpackDataSO PlayerBackpackData { get => playerBackpackData; set => playerBackpackData = value; }
     public PlayerMultitoolDataSO PlayerMultitoolData { get => playerMultitoolData; set => playerMultitoolData = value; }
-    public Transform DropPoint { get => dropPoint; }
-    public Transform BackpackPoint { get => backpackPoint; }
+    public Transform DropPoint => dropPoint;
+    public Transform BackpackPoint => backpackPoint;
     public Inventory Inventory { get => inventory; set => inventory = value; }
 
     private void Start()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
         }
-        else if (instance == this)
+        else if (Instance == this)
         {
             Destroy(gameObject);
         }
@@ -46,7 +45,7 @@ public class PlayerStats : MonoBehaviour
     {
         float cap = 0;
 
-        cap = PlayerStatsData.MinimalInventoryCapacity + (playerBackpackData != null ? playerBackpackData.MaxCapacity : 0);
+        cap = PlayerStatsData.MinimalInventoryCapacity + (playerBackpackData != null ? playerBackpackData.GetStat("MaxMass") : 0);
 
         return cap;
     }
@@ -55,7 +54,7 @@ public class PlayerStats : MonoBehaviour
     {
         int cap = 0;
 
-        cap = PlayerStatsData.MimimalInventoryCells + (playerBackpackData != null ? playerBackpackData.MaxSlots : 0);
+       cap = PlayerStatsData.MimimalInventoryCells + (playerBackpackData != null ? (int)playerBackpackData.GetStat("MaxSlots") : 0);
 
         return cap;
     }

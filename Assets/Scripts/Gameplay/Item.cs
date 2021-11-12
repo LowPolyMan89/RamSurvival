@@ -11,28 +11,36 @@ public class Item : Entity
     public int Count;
     public bool IsStack;
     public Sprite Sprite;
-    public ItemDataSO itemDataSO;
-    public PlayerBackpackDataSO playerBackpackData;
-    public bool isVisualized;
-    [SerializeField] private Collider collider;
+    [SerializeField] private List<Collider> colliders = new List<Collider>();
+    [SerializeField] private List<Renderer> rendrers = new List<Renderer>();
+    [SerializeField] private List<ItemStats> itemStats = new List<ItemStats>();
+    [SerializeField] private Rigidbody rigidbody;
+
+    public GameObject Prefab;
 
     protected override void Start()
     {
-        if (itemDataSO)
-        {
-            ItemId = itemDataSO.ItemID;
-            ItemRare = itemDataSO.Tier;
-            Sprite = itemDataSO.ItemSprite;
-            if(itemDataSO)
-                ItemType = itemDataSO.itemType;
-        }
+
     }
 
-    public void Visualize(bool value)
+    public void Init()
     {
-        gameObject.GetComponent<Renderer>().enabled = value;
-        gameObject.GetComponent<Rigidbody>().isKinematic = value;
-        collider.enabled = false;
+
+    }
+
+    public void Visualize(bool state)
+    {
+        foreach(var c in colliders)
+        {
+            c.enabled = state;
+        }
+
+        foreach (var c in rendrers)
+        {
+            c.enabled = state;
+        }
+
+        rigidbody.isKinematic = state;
     }
 
     public override string GetName()
@@ -55,18 +63,42 @@ public class Item : Entity
 
     }
 
+    public float GetStat(string statName)
+    {
+        float value = 0;
+        foreach(var s in itemStats)
+        {
+            if(s.StatName == statName)
+            {
+                value = s.StatValue;
+                return value;
+            }
+        }
+
+        return value;
+    }
+
     public override Sprite GetSprite()
     {
         return Sprite;
+    }
+
+    [System.Serializable]
+    public class ItemStats
+    {
+        public string StatName;
+        public float StatValue;
     }
 }
 
 public enum ItemType
 {
-    Equip,Loot
+    Equip,Loot,Resource
 }
 
 public enum EquipType
 {
     Backpack, none
 }
+
+

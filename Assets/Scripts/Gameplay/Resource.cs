@@ -10,8 +10,8 @@ public class Resource : Item, IDamagable
 
     private float  _maxHitPoint;
 
-    public float HitPoint { get => hitPoint; }
-    public float MaxHitPoint { get => _maxHitPoint; }
+    public float HitPoint => hitPoint;
+    public float MaxHitPoint => _maxHitPoint;
 
     protected override void Start()
     {
@@ -51,7 +51,7 @@ public class Resource : Item, IDamagable
     [ContextMenu("CreateLootItem")]
     public void CreateLootItem()
     {
-        Item item = Instantiate(lootItem);
+        var item = Instantiate(lootItem);
         item.transform.position = transform.position;
         item.Count = count;
         Destroy(this.gameObject);

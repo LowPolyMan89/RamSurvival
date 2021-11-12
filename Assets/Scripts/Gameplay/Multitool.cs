@@ -1,120 +1,121 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using StarterAssets;
+using UnityEngine.Serialization;
 
 public class Multitool : MonoBehaviour
 {
-    [SerializeField] private Transform ShootPoint;
+    [SerializeField] private Transform shootPoint;
     [SerializeField] private Inventory inventory;
-    [SerializeField] private LayerMask layerMask;
-    [SerializeField] private Entity hitEntity;
 
     [SerializeField] private GameObject multitoolBody;
     [SerializeField] private Transform multitoolMountPoint;
-    [SerializeField] private GameObject particles;
+    [SerializeField] public GameObject particles;
 
-    private EventManager eventManager;
-    private StarterAssetsInputs _input;
+    private EventManager _eventManager;
+
 
     public bool isCollectingActive = false;
-    private bool dooDamageIsRunning = false;
+    public bool _dooDamageIsRunning = false;
+    private Camera _camera;
+    public Entity hitEntity;
+    public bool isRedy = false;
+
+    private IEnumerator Init()
+    {
+        yield return new WaitForSeconds(0.2f);
+        _camera = Camera.main;
+        _eventManager = EventManager.Instance;
+        isRedy = true;
+    }
 
     private void Start()
     {
-        eventManager = EventManager.instance;
-        _input = GetComponent<StarterAssetsInputs>();
         particles.SetActive(false);
+        StartCoroutine(Init());
     }
 
     private void Update()
     {
-        if(_input.use)
-        {
-            if (hitEntity)
-            {
-                if (hitEntity is Resource)
-                {
-                    isCollectingActive = true;
-                    particles.SetActive(true);
-
-                    if (!dooDamageIsRunning)
-                    {
-                        StartCoroutine(DooDamage());
-                    }
-                }
-                if (hitEntity is Item && hitEntity.tag != "Resource")
-                {
-                    _input.UseInput(false);
-                    Item _item = hitEntity.GetComponent<Item>();
-
-                    if(_item.ItemType == ItemType.Loot)
-                    {
-                        inventory.AddItem(_item, _item.Count);
-                    }
-                    if (_item.ItemType == ItemType.Equip)
-                    {
-                        inventory.AddEqipItem(_item);
-                    }
-                }
-
-            }
-        }
+        if (!isRedy) return;
 
         if (hitEntity)
         {
             multitoolBody.transform.LookAt(hitEntity.transform);
+            
+            if (hitEntity is Resource && isCollectingActive)
+            {
+                particles.SetActive(true);
+
+                if (!_dooDamageIsRunning)
+                {
+                    StartCoroutine(DooDamage());
+                }
+            }
+
+            if (hitEntity is Item && !hitEntity.CompareTag("Resource"))
+            {
+                var item = hitEntity.GetComponent<Item>();
+
+                switch (item.ItemType)
+                {
+                    case ItemType.Loot:
+                        inventory.AddItem(item, item.Count);
+                        break;
+                    case ItemType.Equip:
+                        inventory.AddEqipItem(item);
+                        break;
+                    case ItemType.Resource:
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+            
         }
 
+        if (hitEntity)
+        {
+            if (CalculateDistance(hitEntity.transform) > PlayerStats.Instance.PlayerMultitoolData.MiningRange)
+            {
+                hitEntity = null;
+                
+            }
+
+        }
         else
         {
             isCollectingActive = false;
             particles.SetActive(false);
-            _input.UseInput(false);
+            multitoolBody.transform.LookAt(shootPoint);
             StopCoroutine(DooDamage());
         }
     }
 
-    public IEnumerator DooDamage()
+    private float CalculateDistance(Transform target)
     {
-        dooDamageIsRunning = true;
-        yield return new WaitForSeconds(1f);
-        print("Doo Damage " + PlayerStats.instance.PlayerMultitoolData.MiningDPS);
+        if (!target) return 500f;
+        var dist = Vector3.Distance(multitoolBody.transform.position, target.position);
+        return dist;
+    }
 
-        if(hitEntity)
+
+    private IEnumerator DooDamage()
+    {
+        _dooDamageIsRunning = true;
+        yield return new WaitForSeconds(1f);
+        print("Doo Damage " + PlayerStats.Instance.PlayerMultitoolData.MiningDPS);
+
+        if (hitEntity)
         {
-            if(hitEntity is Resource)
+            if (hitEntity is Resource)
             {
-                hitEntity.GetComponent<Resource>().TakeDamage(PlayerStats.instance.PlayerMultitoolData.MiningDPS);
+                hitEntity.GetComponent<Resource>().TakeDamage(PlayerStats.Instance.PlayerMultitoolData.MiningDPS);
             }
         }
-        dooDamageIsRunning = false;
-    }
 
-    void FixedUpdate()
-    {
-        Ray ray = new Ray(Camera.main.transform.position, (ShootPoint.position - Camera.main.transform.position));
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit, PlayerStats.instance.PlayerMultitoolData.MiningRange, layerMask))
-        {
-            Debug.DrawLine(ray.origin, hit.point);
-            AddSelectionEntity(hit.collider.GetComponent<Entity>());
-
-        }
-        else
-        {
-            AddSelectionEntity(null);
-        }
-            
-    }
-
-    private void AddSelectionEntity(Entity entity)
-    {
-        if (!eventManager)
-            return;
-
-        eventManager.OnResorceSelect(entity);
-        hitEntity = entity;
+        _dooDamageIsRunning = false;
     }
 }
