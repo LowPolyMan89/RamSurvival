@@ -5,32 +5,46 @@ using UnityEngine;
 public class Inventory : Entity
 {
     [SerializeField] private List<Item> items = new List<Item>();
+    [SerializeField] private List<Item> eqipeditems = new List<Item>();
     [SerializeField] private Transform inventoryStorage;
     [SerializeField] private float currentCapacity;
     [SerializeField] private Backpack inventoryBackpackPrefab;
+    public InventoryUI InventoryUI;
+ 
+
     public float CurrentCapacity => currentCapacity;
+
+    public Transform InventoryStorage => inventoryStorage;
 
     public virtual List<Item> GetItems()
     {
         return items;
     }
+    public virtual List<Item> GetEqipItems()
+    {
+        return eqipeditems;
+    }
 
-    public void EquipItem(Item item, EquipUISlot equipUISlot)
+    public void EquipItem(Item item)
     {
         switch (item.equipType)
         {
             case EquipType.Backpack:
-                
-                item.transform.SetParent(PlayerStats.Instance.BackpackPoint);
                 items.Remove(item);
+                eqipeditems.Add(item);
+                print("Eqip item " + item.GetName());
                 break;
             case EquipType.none:
                 break;
         }
-
-        EventManager.Instance.OnUpdateUI();
+        
     }
 
+    public void UpdateCapacity()
+    {
+        currentCapacity = CalculateCurrentCap();
+    }
+    
     public virtual float CalculateCurrentCap()
     {
         float currentCap = 0f;
@@ -89,51 +103,57 @@ public class Inventory : Entity
         return null;
     }
 
-    [ContextMenu("DropBackpack")]
-    public void DropBackpack()
+    public void DropDragItem()
     {
+        ItemUIElement item = PlayerStats.Instance.Inventory.InventoryUI.dragElement;
+        Item newobj = Instantiate(item.InventoryItem.Prefab).GetComponent<Item>();
+        newobj.transform.position = PlayerStats.Instance.DropPoint.position;
+        newobj.Count = item.InventoryItem.Count;
+        Destroy(item);
 
-        var i = Instantiate(inventoryBackpackPrefab);
-        i.transform.position = PlayerStats.Instance.DropPoint.position;
-
-        if(GetItems().Count > PlayerStats.Instance.GetInventoryCellsCount())
+    }
+    
+    public  Item DropItem(ItemUIElement item)
+    {
+        if (!item) return null;
+        InventoryUI.StartDrop(item);
+        return item.InventoryItem;
+    }
+    
+    public  void DropEqipItem(Item item)
+    {
+        item.transform.position = PlayerStats.Instance.DropPoint.position;
+        item.transform.SetParent(null);
+        if (item.equipType == EquipType.Backpack)
         {
-            var a = PlayerStats.Instance.GetInventoryCellsCount();
-            for(; a < GetItems().Count; a++)
-            {
-               items.Remove(DropItem(items[a]));
-            }
+            PlayerStats.Instance.DropBackpack();
         }
-
-        currentCapacity = CalculateCurrentCap();
-    }
-
-    protected virtual Item DropItem(Item item)
-    {
-        var _item = Instantiate(item.Prefab).GetComponent<Item>();
-        _item.transform.position = PlayerStats.Instance.DropPoint.position;
-        _item.Count = item.Count;
-        return item;
-    }
-
-    public void ChangeBackpack()
-    {
+        eqipeditems.Remove(item);
 
     }
+    
 
     public virtual Item AddEqipItem(Item item)
     {
         if (GetEmptyCellsCount() > 0)
         {
-            
+            items.Add(item);
+            item.Visualize(false);
+            item.transform.SetParent(inventoryStorage);
+            return item;
         }
         else
         {
+            if (PlayerStats.Instance.Inventory.InventoryUI.dragElement)
+            {
+                DropDragItem();
+            }
             print("Can't find emty slot in enventory!");
         }
 
         return item;
     }
+    
 
     public virtual Item AddItem(Item item, int count)
     {
@@ -166,6 +186,8 @@ public class Inventory : Entity
             items.Add(item);
             currentCapacity = CalculateCurrentCap();
             item.Visualize(false);
+            item.transform.SetParent(inventoryStorage);
+            
             return item;
         }
 

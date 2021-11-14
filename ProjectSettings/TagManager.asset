@@ -6,6 +6,9 @@ TagManager:
   tags:
   - CinemachineTarget
   - Resource
+  - Cell
+  - ItemSlot
+  - DropZone
   layers:
   - Default
   - TransparentFX

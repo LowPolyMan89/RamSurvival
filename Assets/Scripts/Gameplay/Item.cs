@@ -16,6 +16,8 @@ public class Item : Entity
     [SerializeField] private List<ItemStats> itemStats = new List<ItemStats>();
     [SerializeField] private Rigidbody rigidbody;
 
+    public Rigidbody Rigidbody => rigidbody;
+
     public GameObject Prefab;
 
     protected override void Start()
@@ -39,8 +41,18 @@ public class Item : Entity
         {
             c.enabled = state;
         }
+        
+        if (state)
+        {
+            rigidbody.isKinematic = false;
+            rigidbody.useGravity = true;
+        }
+        else
+        {
+            rigidbody.isKinematic = true;
+            rigidbody.useGravity = false;
+        }
 
-        rigidbody.isKinematic = state;
     }
 
     public override string GetName()

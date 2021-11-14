@@ -49,6 +49,19 @@ public class PlayerStats : MonoBehaviour
 
         return cap;
     }
+    
+
+    public void EqipBacpack(Item item)
+    {
+        playerBackpackData = item;
+        inventory.EquipItem(item);
+        EventManager.Instance.OnUpdateUI();
+    }
+
+    public void DropBackpack()
+    {
+        playerBackpackData = null;
+    }
 
     public int GetInventoryCellsCount()
     {

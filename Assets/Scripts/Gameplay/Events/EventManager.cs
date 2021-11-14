@@ -7,6 +7,8 @@ public class EventManager : MonoBehaviour
 {
 	public static EventManager Instance = null;
 	public event Func<Entity, Entity> OnResorceSelectAction;
+	public event Func<ItemUIElement, ItemUIElement> OnStartDragAction;
+	public event Func<ItemUIElement, ItemUIElement> OnEndDragAction;
 	public Action OnUpdateUIAction;
 
 	private void Start()
@@ -33,7 +35,18 @@ public class EventManager : MonoBehaviour
 	public void OnUpdateUI()
 	{
 		if (OnUpdateUIAction == null) return;
-		print("OnUpdateUIAction");
 		OnUpdateUIAction();
+	}
+
+	public ItemUIElement OnOnStartDrag(ItemUIElement arg)
+	{
+		OnStartDragAction?.Invoke(arg);
+		return arg;
+	}
+	
+	public ItemUIElement OnOnEndDrag(ItemUIElement arg)
+	{
+		OnEndDragAction?.Invoke(arg);
+		return arg;
 	}
 }

@@ -14,6 +14,7 @@ public class Selector : MonoBehaviour
     [SerializeField] private Entity hitEntity;
     private StarterAssetsInputs _input;
     [SerializeField] private Multitool _multitool;
+    [SerializeField] private UIController _uiController;
 
     public bool isRedy = false;
     
@@ -30,17 +31,14 @@ public class Selector : MonoBehaviour
         _eventManager = EventManager.Instance;
         _inventory = PlayerStats.Instance.Inventory;
         _input = GetComponent<StarterAssetsInputs>();
+        _uiController = FindObjectOfType<UIController>();
+        _uiController.GrabButton.onClick.AddListener(Grab);
         isRedy = true;
     }
 
-    private void Update()
+    public void Grab()
     {
-        if(!isRedy)
-            return;
-        
-        if (_input.use)
-        {
-            if (hitEntity)
+        if (hitEntity)
             {
                 if (hitEntity is Resource)
                 {
@@ -63,12 +61,25 @@ public class Selector : MonoBehaviour
                             PlayerStats.Instance.Inventory.AddEqipItem(item);
                             break;
                         case ItemType.Resource:
+                            PlayerStats.Instance.Inventory.AddItem(item, item.Count);
                             break;
                         default:
                             throw new ArgumentOutOfRangeException();
                     }
                 }
             }
+        
+    }
+    
+    private void Update()
+    {
+        if(!isRedy)
+            return;
+        _uiController.isGrabObjectFind = hitEntity ? true : false;
+
+        if (_input.use)
+        {
+            Grab();
         }
     }
 

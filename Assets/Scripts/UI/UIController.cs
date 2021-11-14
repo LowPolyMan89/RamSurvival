@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
@@ -9,6 +11,16 @@ public class UIController : MonoBehaviour
 	[SerializeField] private EventManager eventManager;
 	[SerializeField] private InventoryUI inventoryUI;
 	[SerializeField] private EquipUI equipUI;
+	[SerializeField] private Button grabButton;
+
+	public Button GrabButton => grabButton;
+
+	public bool isGrabObjectFind = false;
+
+	private void Update()
+	{
+		grabButton.gameObject.SetActive(isGrabObjectFind);
+	}
 
 	void Start()
 	{

@@ -41,6 +41,7 @@
             <e p="ItemUIElement.cs" t="Include" />
             <e p="SelectedPanel.cs" t="Include" />
             <e p="UIController.cs" t="Include" />
+            <e p="UiDropPanel.cs" t="Include" />
             <e p="UIElement.cs" t="Include" />
           </e>
         </e>
