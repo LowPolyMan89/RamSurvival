@@ -1,9 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using StarterAssets;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
+
 using UnityEngine.UI;
 
 public class ItemUIElement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
@@ -19,6 +20,7 @@ public class ItemUIElement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
     {
         startRoot = transform.parent;
         
+
     }
 
     public ItemUIElement Set(Item _inventoryItem)
@@ -46,9 +48,9 @@ public class ItemUIElement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
     public void OnDrag(PointerEventData eventData)
     {
 #if UNITY_EDITOR
-        transform.position = Mouse.current.position.ReadValue();
+        transform.position = Input.mousePosition;
 #endif
-        
+
 #if !UNITY_EDITOR
         transform.position = Input.touches[0].position;
 #endif
@@ -80,7 +82,7 @@ public class ItemUIElement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
         if (uiEventSystem != null)
         {
             var uiPointerEventData = new PointerEventData(uiEventSystem);
-            uiPointerEventData.position = Mouse.current.position.ReadValue();
+            uiPointerEventData.position = Input.mousePosition;
 
             List<RaycastResult> uiRaycastResultCache = new List<RaycastResult>();
 

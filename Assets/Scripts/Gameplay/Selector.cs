@@ -12,7 +12,7 @@ public class Selector : MonoBehaviour
     [SerializeField] private LayerMask layerMask;
     private EventManager _eventManager;
     [SerializeField] private Entity hitEntity;
-    private StarterAssetsInputs _input;
+
     [SerializeField] private Multitool _multitool;
     [SerializeField] private UIController _uiController;
 
@@ -30,7 +30,7 @@ public class Selector : MonoBehaviour
         _camera = Camera.main;
         _eventManager = EventManager.Instance;
         _inventory = PlayerStats.Instance.Inventory;
-        _input = GetComponent<StarterAssetsInputs>();
+
         _uiController = FindObjectOfType<UIController>();
         _uiController.GrabButton.onClick.AddListener(Grab);
         isRedy = true;
@@ -44,12 +44,12 @@ public class Selector : MonoBehaviour
                 {
                     _multitool.hitEntity = hitEntity;
                     _multitool.isCollectingActive = true;
-                    _input.UseInput(false);
+                    
                 }
 
                 if (hitEntity is Item && !hitEntity.CompareTag("Resource"))
                 {
-                    _input.UseInput(false);
+                    
                     var item = hitEntity.GetComponent<Item>();
 
                     switch (item.ItemType)
@@ -77,7 +77,7 @@ public class Selector : MonoBehaviour
             return;
         _uiController.isGrabObjectFind = hitEntity ? true : false;
 
-        if (_input.use)
+        if (Input.GetKeyDown(KeyCode.E))
         {
             Grab();
         }
@@ -90,7 +90,7 @@ public class Selector : MonoBehaviour
         if (!_camera) return;
         var transform1 = _camera.transform;
         var position = transform1.position;
-        var ray = new Ray(position, (shootPoint.position - position));
+        var ray = new Ray(position, (shootPoint.position - Camera.main.transform.position));
 
         if (Physics.Raycast(ray, out var hit, PlayerStats.Instance.PlayerMultitoolData.MiningRange, layerMask))
         {
