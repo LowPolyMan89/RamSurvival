@@ -31,12 +31,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7be855d3-bc60-4a48-aeff-eaa341bc0760" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.RamSurv/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RamSurv/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.RamSurv/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RamSurv/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI_Canvas.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI_Canvas.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Island_1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Island_1.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Gameplay/Inventory/Inventory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Gameplay/Inventory/Inventory.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Gameplay/Inventory/InventoryStorage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Gameplay/Inventory/InventoryStorage.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/ItemUIElement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/ItemUIElement.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +58,6 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/Gameplay/Item.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/UIController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Gameplay/Events/EventManager.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Gameplay/Inventory/Inventory.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/InventoryUI.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/UiDropPanel.cs" />
         <option value="$PROJECT_DIR$/Assets/StarterAssets/InputSystem/StarterAssetsInputs.cs" />
@@ -75,8 +71,9 @@
         <option value="$PROJECT_DIR$/Assets/Standard Assets/CrossPlatformInput/Scripts/Joystick.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Gameplay/Selector.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/ItemUIElement.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Gameplay/Inventory/InventoryStorage.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Gameplay/Inventory/InventoryStorageUI.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Gameplay/Inventory/InventoryStorage.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Gameplay/Inventory/Inventory.cs" />
       </list>
     </option>
   </component>
@@ -130,7 +127,7 @@
       <workItem from="1636884525678" duration="10932000" />
       <workItem from="1636899364041" duration="104000" />
       <workItem from="1636899503515" duration="4100000" />
-      <workItem from="1637000412167" duration="4359000" />
+      <workItem from="1637000412167" duration="5692000" />
     </task>
     <servers />
   </component>

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Inventory : Entity
 {
+    [Header("Параметры инвентаря")]
+    public bool isPlayerInventory = true;
     [SerializeField] private List<Item> items = new List<Item>();
     [SerializeField] private List<Item> eqipeditems = new List<Item>();
     [SerializeField] private Transform inventoryStorage;
@@ -11,7 +13,11 @@ public class Inventory : Entity
     [SerializeField] private Backpack inventoryBackpackPrefab;
     public InventoryUI InventoryUI;
  
-
+    [Header("Параметры сундука")]
+    [SerializeField] private float capacity;
+    [SerializeField] private int slots;
+    [SerializeField] private Transform dropPoint;
+    
     public float CurrentCapacity => currentCapacity;
 
     public Transform InventoryStorage => inventoryStorage;
@@ -27,6 +33,9 @@ public class Inventory : Entity
 
     public void EquipItem(Item item)
     {
+        if(!isPlayerInventory)
+            return;
+        
         switch (item.equipType)
         {
             case EquipType.Backpack:
@@ -81,7 +90,17 @@ public class Inventory : Entity
     private int GetEmptyCellsCount()
     {
         var c = 0;
-        c = PlayerStats.Instance.GetInventoryCellsCount() - inventoryStorage.childCount;
+        
+        if (isPlayerInventory)
+        {
+            c = PlayerStats.Instance.GetInventoryCellsCount() - inventoryStorage.childCount;
+        }
+            
+        else
+        {
+            c = slots - inventoryStorage.childCount;
+        }
+        
         return c;
     }
 
@@ -122,6 +141,9 @@ public class Inventory : Entity
     
     public  void DropEqipItem(Item item)
     {
+        if(!isPlayerInventory)
+            return;
+        
         item.transform.position = PlayerStats.Instance.DropPoint.position;
         item.transform.SetParent(null);
         if (item.equipType == EquipType.Backpack)
@@ -154,18 +176,37 @@ public class Inventory : Entity
         return item;
     }
     
+    public float GetStorageCapacity()
+    {
+        float cap = 0;
+
+        cap = capacity;
+
+        return cap;
+    }
 
     public virtual Item AddItem(Item item, int count)
     {
-        var maxCap = PlayerStats.Instance.GetInventoryCapacity();
-        var currentCap = CalculateCurrentCap();
+        var maxCap = 0f;
+        var currentCap = 0f;
+        currentCap = CalculateCurrentCap();
+        
+        if (isPlayerInventory)
+        {
+            maxCap = PlayerStats.Instance.GetInventoryCapacity();
+        }
+        else
+        {
+            maxCap = GetStorageCapacity();
+        }
+ 
 
         if (maxCap < currentCap + item.GetStat("Mass") || currentCap >= maxCap)
         {
             print("Can't take, new item is bigger max mass");
             return item;
         }
-
+//TODO
         var olditem = FindEqualsItem(item);
 
         //если уже есть, то по возможности добавляем в кучу
