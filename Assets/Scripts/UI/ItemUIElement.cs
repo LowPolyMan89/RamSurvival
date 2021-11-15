@@ -64,11 +64,13 @@ public class ItemUIElement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
         
         if (PlayerStats.Instance.Inventory.GetItems().Contains(inventoryItem))
         {
-          //  PlayerStats.Instance.Inventory.DropItem(inventoryItem);
+            //PlayerStats.Instance.Inventory.DropItem(this);
+            PlayerStats.Instance.Inventory.GetItems().Remove(inventoryItem);
         }
         
         if (PlayerStats.Instance.Inventory.GetEqipItems().Contains(inventoryItem))
         {
+            PlayerStats.Instance.Inventory.GetEqipItems().Remove(inventoryItem);
             PlayerStats.Instance.Inventory.DropEqipItem(inventoryItem);
         }
         transform.SetParent(transform.root);

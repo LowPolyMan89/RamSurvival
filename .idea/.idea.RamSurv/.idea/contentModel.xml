@@ -18,6 +18,7 @@
             <e p="Inventory" t="Include">
               <e p="Inventory.cs" t="Include" />
               <e p="InventoryStorage.cs" t="Include" />
+              <e p="InventoryStorageUI.cs" t="Include" />
             </e>
             <e p="Item.cs" t="Include" />
             <e p="Multitool.cs" t="Include" />
