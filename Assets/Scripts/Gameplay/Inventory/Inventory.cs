@@ -201,12 +201,12 @@ public class Inventory : Entity
         }
  
 
-        if (maxCap < currentCap + item.GetStat("Mass") || currentCap >= maxCap)
+        if (maxCap < currentCap + item.GetStat("Mass") || currentCap == maxCap)
         {
             print("Can't take, new item is bigger max mass");
             return item;
         }
-//TODO
+
         var olditem = FindEqualsItem(item);
 
         //если уже есть, то по возможности добавляем в кучу
@@ -215,7 +215,17 @@ public class Inventory : Entity
 
             var oldInvItem = FindEqualsInventoryItem(item);
             oldInvItem.Count += count;
-            currentCapacity = CalculateCurrentCap();
+            
+            if (isPlayerInventory)
+            {
+                currentCapacity = CalculateCurrentCap();
+            }
+            else
+            {
+                currentCapacity = GetStorageCapacity();
+            }
+            
+            
             Destroy(item.gameObject);
             return oldInvItem;
 
@@ -225,7 +235,16 @@ public class Inventory : Entity
         else if (GetEmptyCellsCount() > 0)
         {
             items.Add(item);
-            currentCapacity = CalculateCurrentCap();
+            
+            if (isPlayerInventory)
+            {
+                currentCapacity = CalculateCurrentCap();
+            }
+            else
+            {
+                currentCapacity = GetStorageCapacity();
+            }
+            
             item.Visualize(false);
             item.transform.SetParent(inventoryStorage);
             
@@ -238,6 +257,7 @@ public class Inventory : Entity
 
     protected override void Start()
     {
-        print("Create Player Inventory");
+        if(isPlayerInventory)
+            print("Create Player Inventory");
     }
 }

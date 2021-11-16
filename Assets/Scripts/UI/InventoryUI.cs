@@ -17,6 +17,7 @@ public class InventoryUI : MonoBehaviour
     public EquipUISlot backpackUIslot;
     [SerializeField] private EquipUI _equipUI;
     public ItemUIElement dragElement;
+    public InventoryStorageUI InventoryStorageUI;
 
     public EquipUI EquipUI => _equipUI;
 
@@ -38,7 +39,7 @@ public class InventoryUI : MonoBehaviour
     public void UpdateUI()
     {
         ClearUI();
-        inventory = FindObjectOfType<Inventory>();
+        inventory = PlayerStats.Instance.Inventory;
         CreateInventoryCells();
         CreateInventoryUI(inventory.GetItems(), inventory.GetEqipItems());
         capacityText.text = inventory.CurrentCapacity.ToString("00") + "/" + PlayerStats.Instance.GetInventoryCapacity();
@@ -134,4 +135,8 @@ public class InventoryUI : MonoBehaviour
     }
 
 
+    public void OpenStorageUI(Inventory storage)
+    {
+        InventoryStorageUI.gameObject.SetActive(true);
+    }
 }

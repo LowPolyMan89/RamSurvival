@@ -9,6 +9,7 @@ TagManager:
   - Cell
   - ItemSlot
   - DropZone
+  - Storage
   layers:
   - Default
   - TransparentFX

@@ -64,6 +64,15 @@ public class UIController : MonoBehaviour
 				selectedPanel.entity = entity;
 				selectedPanel.Init();
 			}
+			if (entity is Inventory)
+			{
+				InventoryStorage inventoryStorage = entity.GetComponent<InventoryStorage>();
+				selectedPanel.Name.text = (string)inventoryStorage.Name + " T" + inventoryStorage.Tier;
+				selectedPanel.Count.text = "";
+				selectedPanel.Icon.sprite = inventoryStorage.Sprite;
+				selectedPanel.entity = entity;
+				selectedPanel.Init();
+			}
 		}
 		else
 		{

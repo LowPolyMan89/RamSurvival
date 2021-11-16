@@ -44,9 +44,17 @@ public class Selector : MonoBehaviour
                 {
                     _multitool.hitEntity = hitEntity;
                     _multitool.isCollectingActive = true;
-                    
                 }
 
+                if (hitEntity is Inventory)
+                {
+                    print("Open storage");
+                    Inventory storage = hitEntity.GetComponent<Inventory>();
+                    PlayerStats.Instance.Inventory.InventoryUI.gameObject.SetActive(true);
+                    PlayerStats.Instance.Inventory.InventoryUI.OpenStorageUI(storage);
+
+                }
+                
                 if (hitEntity is Item && !hitEntity.CompareTag("Resource"))
                 {
                     

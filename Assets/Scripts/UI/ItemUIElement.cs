@@ -96,6 +96,11 @@ public class ItemUIElement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
                 {
                     if(v.gameObject.CompareTag($"Cell"))
                     {
+                        if (v.gameObject.transform.childCount > 0)
+                        {
+                            ResetPosition();
+                            return;
+                        }
                         NewPosition(v.gameObject.transform);
                         PlayerStats.Instance.Inventory.AddItem(inventoryItem, inventoryItem.Count);
                         isEqiped = false;
@@ -120,12 +125,15 @@ public class ItemUIElement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
                     else if(v.gameObject.CompareTag($"DropZone"))
                     {
                         PlayerStats.Instance.Inventory.DropItem(this);
+                        PlayerStats.Instance.Inventory.AddItem(inventoryItem, inventoryItem.Count);
+                        isEqiped = false;
+                        ResetPosition();
                         EventManager.Instance.OnOnEndDrag(this);
                         return;
                     }
                     else
                     {
-                        isEqiped = false;
+                       isEqiped = false;
                        ResetPosition();
                     }
                 }

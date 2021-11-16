@@ -17,7 +17,6 @@
             </e>
             <e p="Inventory" t="Include">
               <e p="Inventory.cs" t="Include" />
-              <e p="InventoryStorage.cs" t="Include" />
               <e p="InventoryStorageUI.cs" t="Include" />
             </e>
             <e p="Item.cs" t="Include" />
@@ -30,6 +29,7 @@
           <e p="IDamagable.cs" t="Include" />
           <e p="Items" t="Include">
             <e p="Backpack.cs" t="Include" />
+            <e p="InventoryStorage.cs" t="Include" />
           </e>
           <e p="SimpleCameraController.cs" t="Include" />
           <e p="SO" t="Include">
@@ -43,6 +43,7 @@
             <e p="InventoryUI.cs" t="Include" />
             <e p="ItemUIElement.cs" t="Include" />
             <e p="SelectedPanel.cs" t="Include" />
+            <e p="UiComponentsSwitcher.cs" t="Include" />
             <e p="UIController.cs" t="Include" />
             <e p="UiDropPanel.cs" t="Include" />
             <e p="UIElement.cs" t="Include" />
