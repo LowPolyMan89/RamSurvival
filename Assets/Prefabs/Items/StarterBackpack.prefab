@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8989775309400420859}
   - component: {fileID: 6479799719001947198}
   - component: {fileID: 4516966827054202658}
-  - component: {fileID: 8276093090054053261}
+  - component: {fileID: 7258509035089072599}
   m_Layer: 7
   m_Name: StarterBackpack
   m_TagString: Untagged
@@ -114,7 +114,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &8276093090054053261
+--- !u!114 &7258509035089072599
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -123,24 +123,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 4946865384954191845}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 982fffcbd34fe1b48bebfb11f4de8cbe, type: 3}
+  m_Script: {fileID: 11500000, guid: 37b09050eb6b1834d8b270421fd442d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemId: Bacpack
+  ItemId: StarterBackpuck
+  DescriptionId: StarterBackpuck_info
   ItemType: 0
   equipType: 0
   ItemRare: 1
   Count: 1
   IsStack: 0
+  MaxStack: 1
   Sprite: {fileID: 21300000, guid: e7cea69c61aa4ba4ca2f15870dffd9a3, type: 3}
   colliders:
   - {fileID: 6479799719001947198}
   rendrers:
   - {fileID: 8989775309400420859}
   itemStats:
+  - StatName: Mass
+    StatValue: 1
   - StatName: MaxMass
-    StatValue: 40
-  - StatName: MaxSlots
-    StatValue: 3
+    StatValue: 50
   rigidbody: {fileID: 4516966827054202658}
   Prefab: {fileID: 4946865384954191845}

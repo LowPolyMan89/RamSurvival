@@ -6,12 +6,13 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
-	public static UIController instance = null;
+	public static UIController Instance = null;
 	[SerializeField] private SelectedPanel selectedPanel;
 	[SerializeField] private EventManager eventManager;
-	[SerializeField] private InventoryUI inventoryUI;
 	[SerializeField] private EquipUI equipUI;
 	[SerializeField] private Button grabButton;
+
+	public UiInventory UiInventory;
 
 	public Button GrabButton => grabButton;
 
@@ -25,21 +26,18 @@ public class UIController : MonoBehaviour
 	void Start()
 	{
 
-		if (instance == null)
+		if (Instance == null)
 		{
-			instance = this;
+			Instance = this;
 		}
-		else if (instance == this)
+		else if (Instance == this)
 		{
 			Destroy(gameObject);
 		}
-
-		selectedPanel.gameObject.SetActive(false);
-		inventoryUI.gameObject.SetActive(false);
+		
 		eventManager = EventManager.Instance;
 		eventManager.OnResorceSelectAction += ShowSelectedPanel;
-
-		inventoryUI = FindObjectOfType<InventoryUI>();
+		
 	}
 
 	private Entity ShowSelectedPanel(Entity entity)
@@ -64,15 +62,7 @@ public class UIController : MonoBehaviour
 				selectedPanel.entity = entity;
 				selectedPanel.Init();
 			}
-			if (entity is Inventory)
-			{
-				InventoryStorage inventoryStorage = entity.GetComponent<InventoryStorage>();
-				selectedPanel.Name.text = (string)inventoryStorage.Name + " T" + inventoryStorage.Tier;
-				selectedPanel.Count.text = "";
-				selectedPanel.Icon.sprite = inventoryStorage.Sprite;
-				selectedPanel.entity = entity;
-				selectedPanel.Init();
-			}
+			
 		}
 		else
 		{
@@ -81,4 +71,6 @@ public class UIController : MonoBehaviour
 
 		return entity;
 	}
+
+
 }

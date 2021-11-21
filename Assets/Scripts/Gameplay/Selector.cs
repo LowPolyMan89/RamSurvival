@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class Selector : MonoBehaviour
 {
-    private Inventory _inventory;
     private Camera _camera;
     [SerializeField] private Transform shootPoint;
     [SerializeField] private LayerMask layerMask;
@@ -29,7 +28,6 @@ public class Selector : MonoBehaviour
         // ReSharper disable once Unity.PerformanceCriticalCodeCameraMain
         _camera = Camera.main;
         _eventManager = EventManager.Instance;
-        _inventory = PlayerStats.Instance.Inventory;
 
         _uiController = FindObjectOfType<UIController>();
         _uiController.GrabButton.onClick.AddListener(Grab);
@@ -46,14 +44,7 @@ public class Selector : MonoBehaviour
                     _multitool.isCollectingActive = true;
                 }
 
-                if (hitEntity is Inventory)
-                {
-                    print("Open storage");
-                    Inventory storage = hitEntity.GetComponent<Inventory>();
-                    PlayerStats.Instance.Inventory.InventoryUI.gameObject.SetActive(true);
-                    PlayerStats.Instance.Inventory.InventoryUI.OpenStorageUI(storage);
-
-                }
+               
                 
                 if (hitEntity is Item && !hitEntity.CompareTag("Resource"))
                 {
@@ -63,13 +54,13 @@ public class Selector : MonoBehaviour
                     switch (item.ItemType)
                     {
                         case ItemType.Loot:
-                            PlayerStats.Instance.Inventory.AddItem(item, item.Count);
+                            
                             break;
                         case ItemType.Equip:
-                            PlayerStats.Instance.Inventory.AddEqipItem(item);
+                            
                             break;
                         case ItemType.Resource:
-                            PlayerStats.Instance.Inventory.AddItem(item, item.Count);
+                           Player.Instance.PlayerInventory.AddItem(item);
                             break;
                         default:
                             throw new ArgumentOutOfRangeException();
@@ -100,7 +91,7 @@ public class Selector : MonoBehaviour
         var position = transform1.position;
         var ray = new Ray(position, (shootPoint.position - Camera.main.transform.position));
 
-        if (Physics.Raycast(ray, out var hit, PlayerStats.Instance.PlayerMultitoolData.MiningRange, layerMask))
+        if (Physics.Raycast(ray, out var hit, 20, layerMask))
         {
             Debug.DrawLine(ray.origin, hit.point);
             // ReSharper disable once Unity.PerformanceCriticalCodeInvocation

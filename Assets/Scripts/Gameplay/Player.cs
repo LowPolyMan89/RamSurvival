@@ -4,6 +4,22 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
- 
+    public Inventory PlayerInventory;
+    public static Player Instance;
+    public UiInventory UiInventory;
+    public PlayerStats PlayerStats;
+    public Item EqippedBackpack;
+    
+    private void Start()
+    {
 
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else if (Instance == this)
+        {
+            Destroy(gameObject);
+        }
+    }
 }

@@ -23,7 +23,7 @@ public class UiDropPanel : MonoBehaviour
         public void Init(ItemUIElement itemToDrop)
         {
                 DropSlider.minValue = 1;
-                DropItem = itemToDrop.InventoryItem;
+              //  DropItem = itemToDrop.InventoryItem;
                 DropSlider.maxValue = DropItem.Count;
                 countToDrop = DropItem.Count;
                 Image.sprite = DropItem.Sprite;
@@ -46,7 +46,7 @@ public class UiDropPanel : MonoBehaviour
                 if (countToDrop < DropItem.Count)
                 {
                         Item item = Instantiate(DropItem.Prefab).GetComponent<Item>();
-                        item.transform.position = PlayerStats.Instance.DropPoint.position;
+                        //item.transform.position = PlayerStats.Instance.DropPoint.position;
                         item.Visualize(true);
                         item.Count = countToDrop;
                         DropItem.Count -= countToDrop;
@@ -54,17 +54,17 @@ public class UiDropPanel : MonoBehaviour
                 }
                 else
                 {
-                        PlayerStats.Instance.Inventory.InventoryUI.itemUIElements.Remove(ItemUIElement);
+                       // PlayerStats.Instance.Inventory.InventoryUI.itemUIElements.Remove(ItemUIElement);
                         Destroy(ItemUIElement);
-                        DropItem.transform.position = PlayerStats.Instance.DropPoint.position;
+                       // DropItem.transform.position = PlayerStats.Instance.DropPoint.position;
                         DropItem.transform.SetParent(null);
                         DropItem.Visualize(true);
-                        PlayerStats.Instance.Inventory.GetItems().Remove(DropItem);
+                       // PlayerStats.Instance.Inventory.GetItems().Remove(DropItem);
                         print($@"Item {DropItem.GetName()} dropped ");
                         
                 }
-                PlayerStats.Instance.Inventory.UpdateCapacity();
-                PlayerStats.Instance.Inventory.InventoryUI.UpdateUI();
+              //  PlayerStats.Instance.Inventory.UpdateCapacity();
+                //PlayerStats.Instance.Inventory.InventoryUI.UpdateUI();
                 gameObject.SetActive(false);
         }
         

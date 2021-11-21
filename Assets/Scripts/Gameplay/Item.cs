@@ -5,11 +5,13 @@ using UnityEngine;
 public class Item : Entity
 {
     public string ItemId;
+    public string DescriptionId;
     public ItemType ItemType;
     public EquipType equipType;
     public int ItemRare;
     public int Count;
     public bool IsStack;
+    public int MaxStack;
     public Sprite Sprite;
     [SerializeField] private List<Collider> colliders = new List<Collider>();
     [SerializeField] private List<Renderer> rendrers = new List<Renderer>();

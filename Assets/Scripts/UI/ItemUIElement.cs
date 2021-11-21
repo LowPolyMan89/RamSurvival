@@ -9,48 +9,36 @@ using UnityEngine.UI;
 
 public class ItemUIElement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
-    [SerializeField] private Item inventoryItem;
-    [SerializeField] private Image image;
-    [SerializeField] private Text text;
+    public Item Item;
+    public Image Image;
+    public Text CountText;
     [SerializeField] private Transform startRoot;
-    public bool isEqiped = false;
-    public Item InventoryItem { get => inventoryItem; }
 
-    private void Start()
+    public void OnEnable()
     {
-        startRoot = transform.parent;
-        
-
+        StartCoroutine(CustomUpdate());
     }
 
-    public ItemUIElement Set(Item _inventoryItem)
+    private void OnDisable()
     {
-        inventoryItem = _inventoryItem;
-        image.sprite = _inventoryItem.Sprite;
-        text.text = _inventoryItem.Count.ToString();
-        return this;
+        StopCoroutine(CustomUpdate());
     }
 
-    public ItemUIElement SetEqip(Item _inventoryItem)
+    private IEnumerator CustomUpdate()
     {
-        if(_inventoryItem.equipType == EquipType.Backpack)
-        {
-            inventoryItem = _inventoryItem;
-            text.text = _inventoryItem.Count.ToString();
-            image.sprite = _inventoryItem.Sprite;
-        }
-
-        return this;
+        yield return new WaitForSeconds(0.1f);
+        Image.sprite = Item.Sprite;
+        CountText.text = Item.Count.ToString();
+        StartCoroutine(CustomUpdate());
     }
-
-
-
+    
+    
     public void OnDrag(PointerEventData eventData)
     {
 #if UNITY_EDITOR
         transform.position = Input.mousePosition;
 #endif
-
+ 
 #if !UNITY_EDITOR
         transform.position = Input.touches[0].position;
 #endif
@@ -58,28 +46,13 @@ public class ItemUIElement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        EventManager.Instance.OnOnStartDrag(this);
         startRoot = transform.parent;
-        PlayerStats.Instance.Inventory.InventoryUI.dragElement = this;
-        
-        if (PlayerStats.Instance.Inventory.GetItems().Contains(inventoryItem))
-        {
-            //PlayerStats.Instance.Inventory.DropItem(this);
-            PlayerStats.Instance.Inventory.GetItems().Remove(inventoryItem);
-        }
-        
-        if (PlayerStats.Instance.Inventory.GetEqipItems().Contains(inventoryItem))
-        {
-            PlayerStats.Instance.Inventory.GetEqipItems().Remove(inventoryItem);
-            PlayerStats.Instance.Inventory.DropEqipItem(inventoryItem);
-        }
         transform.SetParent(transform.root);
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
         var uiEventSystem = EventSystem.current;
-        
         
         if (uiEventSystem != null)
         {
@@ -89,74 +62,68 @@ public class ItemUIElement : MonoBehaviour, IDragHandler, IBeginDragHandler, IEn
             List<RaycastResult> uiRaycastResultCache = new List<RaycastResult>();
 
             uiEventSystem.RaycastAll(uiPointerEventData, uiRaycastResultCache);
-            
+
             if (uiRaycastResultCache.Count > 0)
             {
                 foreach (var v in uiRaycastResultCache)
                 {
-                    if(v.gameObject.CompareTag($"Cell"))
+                    if (v.gameObject.CompareTag($"Cell"))
                     {
                         if (v.gameObject.transform.childCount > 0)
                         {
                             ResetPosition();
                             return;
                         }
-                        NewPosition(v.gameObject.transform);
-                        PlayerStats.Instance.Inventory.AddItem(inventoryItem, inventoryItem.Count);
-                        isEqiped = false;
-                        EventManager.Instance.OnOnEndDrag(this);
-                        return;
-                    }
-                    else if(v.gameObject.CompareTag($"ItemSlot"))
-                    {
-                        var slot = v.gameObject.GetComponent<EquipUISlot>();
-                        
-                        if (slot.SlotEquipType == EquipType.Backpack)
+                        else
                         {
-                            isEqiped = true;
-                            inventoryItem.transform.SetParent(PlayerStats.Instance.Inventory.InventoryStorage);
-                            PlayerStats.Instance.EqipBacpack(inventoryItem);
+                            transform.SetParent(v.gameObject.transform);
+                            transform.localPosition = Vector3.zero;
                         }
-                        
-                        NewPosition(v.gameObject.transform);
-                        EventManager.Instance.OnOnEndDrag(this);
+
                         return;
                     }
-                    else if(v.gameObject.CompareTag($"DropZone"))
+
+                    if (v.gameObject.CompareTag($"ItemSlot"))
                     {
-                        PlayerStats.Instance.Inventory.DropItem(this);
-                        PlayerStats.Instance.Inventory.AddItem(inventoryItem, inventoryItem.Count);
-                        isEqiped = false;
-                        ResetPosition();
-                        EventManager.Instance.OnOnEndDrag(this);
+                        if (v.gameObject.transform.childCount > 0)
+                        {
+                            ResetPosition();
+                            return;
+                        }
+                        else
+                        {
+                            transform.SetParent(v.gameObject.transform);
+                            transform.localPosition = Vector3.zero;
+                        }
+
+                        return;
+                    }
+
+                    if (v.gameObject.CompareTag($"DropZone"))
+                    {
+
+                        transform.SetParent(v.gameObject.transform);
+                        transform.localPosition = Vector3.zero;
+
                         return;
                     }
                     else
                     {
-                       isEqiped = false;
-                       ResetPosition();
+                        ResetPosition();
                     }
+
                 }
             }
+            else
+            {
+                ResetPosition();
+            }
         }
-        
-        
-
     }
-
-    public void NewPosition(Transform parent)
-    {
-        transform.SetParent(parent);
-        transform.localPosition = Vector3.zero;
-    }
+    
     private void ResetPosition()
     {
         transform.SetParent(startRoot);
         transform.localPosition = Vector3.zero;
-    }
-
-    private void OnDestroy()
-    {
-        
     }
 }

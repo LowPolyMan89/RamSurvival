@@ -8,7 +8,6 @@ using UnityEngine.Serialization;
 public class Multitool : MonoBehaviour
 {
     [SerializeField] private Transform shootPoint;
-    [SerializeField] private Inventory inventory;
 
     [SerializeField] private GameObject multitoolBody;
     [SerializeField] private Transform multitoolMountPoint;
@@ -62,10 +61,10 @@ public class Multitool : MonoBehaviour
                 switch (item.ItemType)
                 {
                     case ItemType.Loot:
-                        inventory.AddItem(item, item.Count);
+                        //inventory.AddItem(item, item.Count);
                         break;
                     case ItemType.Equip:
-                        inventory.AddEqipItem(item);
+                        //inventory.AddEqipItem(item);
                         break;
                     case ItemType.Resource:
                         break;
@@ -78,7 +77,7 @@ public class Multitool : MonoBehaviour
 
         if (hitEntity)
         {
-            if (CalculateDistance(hitEntity.transform) > PlayerStats.Instance.PlayerMultitoolData.MiningRange)
+            if (CalculateDistance(hitEntity.transform) > 20)
             {
                 hitEntity = null;
                 
@@ -106,13 +105,13 @@ public class Multitool : MonoBehaviour
     {
         _dooDamageIsRunning = true;
         yield return new WaitForSeconds(1f);
-        print("Doo Damage " + PlayerStats.Instance.PlayerMultitoolData.MiningDPS);
+      //  print("Doo Damage " + PlayerStats.Instance.PlayerMultitoolData.MiningDPS);
 
         if (hitEntity)
         {
             if (hitEntity is Resource)
             {
-                hitEntity.GetComponent<Resource>().TakeDamage(PlayerStats.Instance.PlayerMultitoolData.MiningDPS);
+               // hitEntity.GetComponent<Resource>().TakeDamage(PlayerStats.Instance.PlayerMultitoolData.MiningDPS);
             }
         }
 
