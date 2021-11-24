@@ -15,9 +15,9 @@ public class UiInventory : MonoBehaviour
     [SerializeField] private GameObject infoButton;
     [SerializeField] private GameObject useButton;
     [SerializeField] private GameObject dropButton;
-
+    public UiDropPanel UiDropPanel;
     public ItemUIElement SelectedItem;
-    
+
     [ContextMenu("CreateCells")]
     public void CreateCells()
     {
@@ -40,12 +40,11 @@ public class UiInventory : MonoBehaviour
     {
         _player = Player.Instance;
         StartCoroutine(CustomUpdate());
-        useButton.SetActive(false);
-        infoButton.SetActive(false);
-        dropButton.SetActive(false);
+        HideButtons();
     }
 
-    private void OnDisable()
+
+private void OnDisable()
     {
         StopCoroutine(CustomUpdate());
     }
@@ -65,15 +64,29 @@ public class UiInventory : MonoBehaviour
     {
         //create item ui
        ItemUIElement itemUIElement = Instantiate(_itemUIElement);
-       itemUIElement.transform.SetParent(InventoryCellses[0].transform);
+       itemUIElement.transform.SetParent(GetEmptyCell());
        itemUIElement.transform.localPosition = Vector3.zero;
        itemUIElement.Item = item;
        
     }
 
+    public Transform GetEmptyCell()
+    {
+        foreach (var v in InventoryCellses)
+        {
+            if (v.transform.childCount == 0)
+            {
+                return v.transform;
+            }
+        }
+
+        return null;
+    }
+    
     public void DropButtonUse()
     {
-        
+        UiDropPanel.gameObject.SetActive(true);
+        UiDropPanel.Init(SelectedItem);
     }
 
     public void InfoButtonUse()
@@ -83,16 +96,62 @@ public class UiInventory : MonoBehaviour
 
     public void EqipButtonUse()
     {
-        
+        switch (SelectedItem.Item.equipType)
+        {
+            case EquipType.Backpack:
+                if (SelectedItem.IsEqipped)
+                {
+                    Player.Instance.EqipBackpack(null);
+                    Player.Instance.PlayerInventory.AddItem(SelectedItem.Item);
+                    Destroy(SelectedItem.gameObject);
+                    SelectedItem = null;
+                    HideButtons();
+                }
+                else
+                {
+                    Player.Instance.EqipBackpack(SelectedItem.Item);
+                    SelectedItem.IsEqipped = true;
+                    var tr = UIController.Instance.GetEqipSlot(SelectedItem.Item);
+                    tr.Item = SelectedItem.Item;
+                    SelectedItem.transform.SetParent(tr.transform);
+                    SelectedItem.transform.localPosition = Vector3.zero;
+                    Player.Instance.PlayerInventory.RemoveItem(SelectedItem.Item);
+                    SelectedItem = null;
+                    HideButtons();
+                }
+                break;
+            case EquipType.none:
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+    }
+
+    private void HideButtons()
+    {
+        useButton.SetActive(false);
+        infoButton.SetActive(false);
+        dropButton.SetActive(false);
     }
     
     public void SelectItem(ItemUIElement itemUIElement)
     {
+        if (itemUIElement == null)
+        {
+            HideButtons();
+            return;
+        }
         SelectedItem = itemUIElement;
-       useButton.SetActive(false);
+        useButton.SetActive(false);
 
        if (itemUIElement.Item.ItemType == ItemType.Resource)
        {
+           infoButton.SetActive(true);
+           dropButton.SetActive(true);
+       }
+       if (itemUIElement.Item.ItemType == ItemType.Equip)
+       {
+           useButton.SetActive(true);
            infoButton.SetActive(true);
            dropButton.SetActive(true);
        }

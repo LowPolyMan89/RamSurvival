@@ -14,6 +14,21 @@ public class UIController : MonoBehaviour
 
 	public UiInventory UiInventory;
 
+	public EquipUISlot GetEqipSlot(Item item)
+	{
+		EquipType type = item.equipType;
+		
+		foreach (var VARIABLE in equipUI.EquipUISlots)
+		{
+			if (VARIABLE.SlotEquipType == type)
+			{
+				return VARIABLE;
+			}
+		}
+
+		return null;
+	}
+	
 	public Button GrabButton => grabButton;
 
 	public bool isGrabObjectFind = false;

@@ -9,48 +9,63 @@ public class Inventory : MonoBehaviour
     public List<Item> Items = new List<Item>();
     public float CurrentCapacity { get; set; }
 
+
+    public void RemoveItem(Item item)
+    {
+        Items.Remove(item);
+    }
+    
     public void AddItem(Item item)
     {
-        Item containsItem = FindContainsItem(item);
+        int count = item.Count;
+
+        bool play = false;
         
-        if (TryToAddItem(item))
+        Item v = FindContainsItemWithEmptyStack(item);
+
+        
+        for (int i = 0; i < count; i++)
         {
 
-            if (containsItem != null)
+            play = TryToAddItem(item);
+            
+            if (!play)
             {
-                containsItem.Count += item.Count;
-                print($@"Add new item to stack count: {item.Count} . Item: {item.ItemId}");
-                Destroy(item.gameObject);
-               
+                break;
+            }
+
+            if (item.IsStack)
+            {
+                if (v != null)
+                {
+                    item.Count--;
+                    v.Count++;
+                }
+                else
+                {
+                    Items.Add(item);
+                    Player.Instance.UiInventory.AddItem(item);
+                    break;
+                }
             }
             else
             {
                 Items.Add(item);
-                UIController.Instance.UiInventory.AddItem(item);
-                item.Visualize(false);
-                item.transform.SetParent(transform);
-                print($@"Add new item count: {item.Count}. Item: {item.ItemId}");
+                Player.Instance.UiInventory.AddItem(item);
+                break;
             }
             
         }
-        else
+        
+        if (play)
         {
-            int value = GetItemCountToAdd(item);
-            item.Count -= value;
-            
-            if (containsItem != null)
-            {
-                containsItem.Count += value;
-            }
-            else
-            {
-                Item newItem = Instantiate(item.Prefab).GetComponent<Item>();
-                Items.Add(newItem);
-                newItem.Count = value;
-                UIController.Instance.UiInventory.AddItem(newItem);
-                newItem.Visualize(false);
-                newItem.transform.SetParent(transform);
-            }
+            item.Visualize(false);
+            item.transform.SetParent(transform);
+        }
+
+        if (item.Count == 0)
+        {
+            Destroy(item.gameObject);
         }
 
     }
@@ -62,6 +77,22 @@ public class Inventory : MonoBehaviour
             if (i.ItemId == item.ItemId)
             {
                 return i;
+            }
+        }
+
+        return null;
+    }
+
+    public Item FindContainsItemWithEmptyStack(Item item)
+    {
+        foreach (var i in Items)
+        {
+            if (i.ItemId == item.ItemId)
+            {
+                if (i.Count < i.MaxStack)
+                {
+                    return i;
+                }
             }
         }
 
@@ -81,7 +112,7 @@ public class Inventory : MonoBehaviour
         bool check = true;
         
         float curentMass = GetCurrentInventoryMass();
-        float newItemMass = item.GetStat("Mass") * item.Count;
+        float newItemMass = item.GetStat("Mass");
 
         if (curentMass + newItemMass > GetMaxInventoryMass())
         {

@@ -9,6 +9,13 @@ public class Player : MonoBehaviour
     public UiInventory UiInventory;
     public PlayerStats PlayerStats;
     public Item EqippedBackpack;
+
+    public Transform dropPoint;
+
+    public void EqipBackpack(Item backpackItem)
+    {
+        EqippedBackpack = backpackItem;
+    }
     
     private void Start()
     {

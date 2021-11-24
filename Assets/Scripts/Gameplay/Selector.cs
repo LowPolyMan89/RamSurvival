@@ -44,8 +44,6 @@ public class Selector : MonoBehaviour
                     _multitool.isCollectingActive = true;
                 }
 
-               
-                
                 if (hitEntity is Item && !hitEntity.CompareTag("Resource"))
                 {
                     
@@ -54,10 +52,10 @@ public class Selector : MonoBehaviour
                     switch (item.ItemType)
                     {
                         case ItemType.Loot:
-                            
+                            Player.Instance.PlayerInventory.AddItem(item);
                             break;
                         case ItemType.Equip:
-                            
+                            Player.Instance.PlayerInventory.AddItem(item);
                             break;
                         case ItemType.Resource:
                            Player.Instance.PlayerInventory.AddItem(item);

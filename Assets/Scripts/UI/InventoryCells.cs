@@ -23,5 +23,9 @@ public class InventoryCells : MonoBehaviour
             ItemUIElement = transform.GetChild(0).GetComponent<ItemUIElement>();
             UiInventory.SelectItem(ItemUIElement);
         }
+        else
+        {
+            UiInventory.SelectItem(null);
+        }
     }
 }

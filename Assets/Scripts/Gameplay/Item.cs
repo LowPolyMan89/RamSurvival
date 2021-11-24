@@ -27,6 +27,25 @@ public class Item : Entity
 
     }
 
+    public Item CloneItem(Item item)
+    {
+        
+        ItemId = item.ItemId;
+        DescriptionId = item.DescriptionId;
+        equipType = item.equipType;
+        ItemRare = item.ItemRare;
+        Count = item.Count;
+        IsStack = item.IsStack;
+        MaxStack = item.MaxStack;
+        Sprite = item.Sprite;
+        colliders.AddRange(item.colliders);
+        rendrers.AddRange(item.rendrers);
+        itemStats.AddRange(item.itemStats);
+        rigidbody = item.rigidbody;
+        Prefab = item.Prefab;
+        return this;
+    }
+    
     public void Init()
     {
 

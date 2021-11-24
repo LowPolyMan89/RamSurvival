@@ -54,25 +54,6 @@ public class Multitool : MonoBehaviour
                 }
             }
 
-            if (hitEntity is Item && !hitEntity.CompareTag("Resource"))
-            {
-                var item = hitEntity.GetComponent<Item>();
-
-                switch (item.ItemType)
-                {
-                    case ItemType.Loot:
-                        //inventory.AddItem(item, item.Count);
-                        break;
-                    case ItemType.Equip:
-                        //inventory.AddEqipItem(item);
-                        break;
-                    case ItemType.Resource:
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
-            }
-            
         }
 
         if (hitEntity)
@@ -105,13 +86,12 @@ public class Multitool : MonoBehaviour
     {
         _dooDamageIsRunning = true;
         yield return new WaitForSeconds(1f);
-      //  print("Doo Damage " + PlayerStats.Instance.PlayerMultitoolData.MiningDPS);
 
         if (hitEntity)
         {
             if (hitEntity is Resource)
             {
-               // hitEntity.GetComponent<Resource>().TakeDamage(PlayerStats.Instance.PlayerMultitoolData.MiningDPS);
+                hitEntity.GetComponent<Resource>().TakeDamage(15);
             }
         }
 
