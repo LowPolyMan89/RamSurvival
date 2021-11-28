@@ -126,8 +126,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37b09050eb6b1834d8b270421fd442d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemId: StarterBackpuck
-  DescriptionId: StarterBackpuck_info
+  ItemId: StarterBackpack_name_id
+  DescriptionId: StarterBackpack_description_id
   ItemType: 0
   equipType: 0
   ItemRare: 1

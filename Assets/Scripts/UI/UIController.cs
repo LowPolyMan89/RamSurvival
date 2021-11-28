@@ -13,6 +13,7 @@ public class UIController : MonoBehaviour
 	[SerializeField] private Button grabButton;
 
 	public UiInventory UiInventory;
+	public CrafterUi CrafterUi;
 
 	public EquipUISlot GetEqipSlot(Item item)
 	{
@@ -88,4 +89,13 @@ public class UIController : MonoBehaviour
 	}
 
 
+	public void OpenCraftPlayer()
+	{
+		OpenCraftPanel(Player.Instance.playerCrafter.Sheme, Player.Instance.PlayerInventory);
+	}
+	
+	public void OpenCraftPanel(CraftSheme sheme, Inventory inventoryToGetItems)
+	{
+		CrafterUi.Open(sheme);
+	}
 }

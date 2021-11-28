@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     public UiInventory UiInventory;
     public PlayerStats PlayerStats;
     public Item EqippedBackpack;
-
+    public Crafter playerCrafter;
     public Transform dropPoint;
 
     public void EqipBackpack(Item backpackItem)
