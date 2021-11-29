@@ -74,4 +74,12 @@ public class CrafterUi : MonoBehaviour
             public TMP_Text ReqItemCountText;
         }
     }
+
+    public void BlueprintSelect(CraftBlueprintUi craftBlueprintUi)
+    {
+        print("Select Blueprint" + craftBlueprintUi.currentBlueprint.BlueprintId.ToLower());
+        craftInfoPanel.ItemNameText.text = craftBlueprintUi.currentBlueprint.BlueprintId.ToLower();
+        craftInfoPanel.DescriptionText.text = DatabaseManager.GetItemData(craftBlueprintUi.currentBlueprint.OutputItem.ItemId).DescriptionId;
+        craftInfoPanel.ItemImage.sprite = DatabaseManager.GetItemData(craftBlueprintUi.currentBlueprint.OutputItem.ItemId).Sprite;
+    }
 }

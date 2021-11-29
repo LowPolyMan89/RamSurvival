@@ -12,7 +12,7 @@ public static class Support
     {
         Debug.Log(ConvertTimeSecondsToString(3600));
     }
-    
+
     public static string ConvertTimeSecondsToString(float value)
     {
         float totalSeconds = value;
@@ -24,3 +24,5 @@ public static class Support
         return result;
     }
 }
+
+

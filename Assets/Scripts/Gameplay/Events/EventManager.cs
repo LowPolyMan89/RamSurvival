@@ -6,6 +6,7 @@ using UnityEngine;
 public class EventManager : MonoBehaviour
 {
 	public static EventManager Instance = null;
+	public event Action OnTimerSecondAction;
 	public event Func<Entity, Entity> OnResorceSelectAction;
 	public event Func<ItemUIElement, ItemUIElement> OnStartDragAction;
 	public event Func<ItemUIElement, ItemUIElement> OnEndDragAction;
@@ -29,6 +30,14 @@ public class EventManager : MonoBehaviour
 		if (OnResorceSelectAction != null)
 		{
 			OnResorceSelectAction(entity);
+		}
+	}
+	
+	public void OnTimerSecond()
+	{
+		if (OnTimerSecondAction != null)
+		{
+			OnTimerSecondAction();
 		}
 	}
 
