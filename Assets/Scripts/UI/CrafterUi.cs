@@ -10,8 +10,8 @@ public class CrafterUi : MonoBehaviour
 {
     public Button StartCraftButton;
     public CrafterRequiredPanel crafterRequiredPanel;
+    public Transform crafterBlueprintPanel;
     public CraftInfoPanel craftInfoPanel;
-    public List<Transform> blueprintsSlots = new List<Transform>();
     public CraftBlueprintUi CraftBlueprintUi;
     private void Start()
     {
@@ -20,12 +20,9 @@ public class CrafterUi : MonoBehaviour
 
     public void Open(CraftSheme sheme)
     {
-        for (int i = 0; i < blueprintsSlots.Count; i++)
+        for (int i = 0; i < crafterBlueprintPanel.childCount; i++)
         {
-            if (blueprintsSlots[i].childCount > 0)
-            {
-                Destroy(blueprintsSlots[i].GetChild(0).gameObject);
-            }
+            Destroy(crafterBlueprintPanel.GetChild(i).gameObject, 0.1f);
         }
         CreateBlueprints(sheme);
     }
@@ -44,7 +41,7 @@ public class CrafterUi : MonoBehaviour
     {
         for (int i = 0; i < sheme.Blueprints.Count; i++)
         {
-            CraftBlueprintUi element = Instantiate(CraftBlueprintUi, blueprintsSlots[i], false);
+            CraftBlueprintUi element = Instantiate(CraftBlueprintUi, crafterBlueprintPanel, false);
             element.transform.localPosition = Vector3.zero;
             element.currentBlueprint = sheme.Blueprints[i];
             element.Create(sheme.Blueprints[i]);
