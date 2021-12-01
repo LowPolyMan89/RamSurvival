@@ -44,8 +44,11 @@
           </e>
           <e p="Support.cs" t="Include" />
           <e p="UI" t="Include">
-            <e p="CraftBlueprintUi.cs" t="Include" />
-            <e p="CrafterUi.cs" t="Include" />
+            <e p="Craft" t="Include">
+              <e p="CraftBlueprintUi.cs" t="Include" />
+              <e p="CrafterUi.cs" t="Include" />
+              <e p="CraftReqSlot.cs" t="Include" />
+            </e>
             <e p="EquipUI.cs" t="Include" />
             <e p="EquipUISlot.cs" t="Include" />
             <e p="InventoryCells.cs" t="Include" />

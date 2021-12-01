@@ -13,6 +13,7 @@ public class CrafterUi : MonoBehaviour
     public Transform crafterBlueprintPanel;
     public CraftInfoPanel craftInfoPanel;
     public CraftBlueprintUi CraftBlueprintUi;
+    public List<CraftBlueprintUi> CraftBlueprintUis = new List<CraftBlueprintUi>();
     private void Start()
     {
         StartCraftButton.onClick.AddListener(StartCraftButtonClick);
@@ -20,11 +21,13 @@ public class CrafterUi : MonoBehaviour
 
     public void Open(CraftSheme sheme)
     {
+        CraftBlueprintUis.Clear();
         for (int i = 0; i < crafterBlueprintPanel.childCount; i++)
         {
             Destroy(crafterBlueprintPanel.GetChild(i).gameObject, 0.1f);
         }
         CreateBlueprints(sheme);
+        BlueprintSelect(CraftBlueprintUis[0]);
     }
     
     private void StartCraftButtonClick()
@@ -45,6 +48,7 @@ public class CrafterUi : MonoBehaviour
             element.transform.localPosition = Vector3.zero;
             element.currentBlueprint = sheme.Blueprints[i];
             element.Create(sheme.Blueprints[i]);
+            CraftBlueprintUis.Add(element);
         }
     }
 
@@ -61,15 +65,15 @@ public class CrafterUi : MonoBehaviour
     public class CrafterRequiredPanel
     {
         public Transform Panel;
-        public List<CrafterRequiredPanelSlot> Slots = new List<CrafterRequiredPanelSlot>();
-        public CrafterRequiredPanelSlot TimerSlot;
-        
-        [System.Serializable]
-        public class CrafterRequiredPanelSlot
+        public List<CraftReqSlot> Slots = new List<CraftReqSlot>();
+        public CraftReqSlot TimerSlot;
+        public CraftReqSlot EnergySlot;
+        public GameObject SlotPrefab;
+        public void AddSlot(Sprite item, int needcount, int currentcount)
         {
-            public Image ReqItemImage;
-            public TMP_Text ReqItemCountText;
+            
         }
+        
     }
 
     public void BlueprintSelect(CraftBlueprintUi craftBlueprintUi)
