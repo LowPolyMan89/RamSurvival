@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 94dd1e8b6e023f644a132b89aef74ffb, type: 3}
-  m_Name: BasicPlanks
+  m_Name: basic_planks
   m_EditorClassIdentifier: 
-  ItemId: BasicPlanks_name_id
-  DescriptionId: BasicPlanks_description_id
+  ItemId: basic_planks_name_id
+  DescriptionId: basic_planks_description_id
   ItemType: 2
   equipType: 1
   ItemRare: 1

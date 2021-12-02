@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 34c5118a57faf244a8d422cd142a996f, type: 3}
-  m_Name: BasicPlanks
+  m_Name: basic_planks
   m_EditorClassIdentifier: 
-  BlueprintId: BasicPlanks_name_id
+  BlueprintId: basic_planks_name_id
   Constrainses: []
   RequiredItems:
-  - ItemId: Wood_T1_name_id
+  - ItemId: wood_T1_name_id
     ItemValue: 5
   OutputItem:
-    ItemId: BasicPlanks_name_id
+    ItemId: basic_planks_name_id
     ItemValue: 1
   CraftTimeInSeconds: 10
