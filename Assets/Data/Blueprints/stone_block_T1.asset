@@ -21,3 +21,4 @@ MonoBehaviour:
     ItemId: stone_block_T1_name_id
     ItemValue: 1
   CraftTimeInSeconds: 30
+  EnergyCost: 10
