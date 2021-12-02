@@ -21,3 +21,4 @@ MonoBehaviour:
     ItemId: basic_planks_name_id
     ItemValue: 1
   CraftTimeInSeconds: 10
+  EnergyCost: 5
