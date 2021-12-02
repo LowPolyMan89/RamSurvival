@@ -22,4 +22,10 @@ public class PlayerStats : MonoBehaviour
     public float MinimumMass => minimumMass;
 
     public int MinimumCells => minimumCells;
+
+    public float Energy
+    {
+        get => energy;
+        set => energy = value;
+    }
 }

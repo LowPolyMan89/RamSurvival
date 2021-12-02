@@ -20,7 +20,7 @@ MonoBehaviour:
   Count: 0
   IsStack: 1
   MaxStack: 20
-  Sprite: {fileID: 21300000, guid: d4ed52019683d714ca1b782cf9847660, type: 3}
+  Sprite: {fileID: 21300000, guid: d991e8fbc6abd1d48b0f640d521bf3ef, type: 3}
   ItemStats:
   - StatName: Mass
     StatValue: 2
