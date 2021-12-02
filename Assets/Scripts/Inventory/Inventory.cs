@@ -82,6 +82,21 @@ public class Inventory : MonoBehaviour
 
         return null;
     }
+    
+    public int GetContainsItemCount(string id)
+    {
+        int value = 0;
+        
+        foreach (var i in Items)
+        {
+            if (i.ItemId == id)
+            {
+                value += i.Count;
+            }
+        }
+
+        return value;
+    }
 
     public Item FindContainsItemWithEmptyStack(Item item)
     {

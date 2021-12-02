@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -69,18 +70,40 @@ public class CrafterUi : MonoBehaviour
         public CraftReqSlot TimerSlot;
         public CraftReqSlot EnergySlot;
         public GameObject SlotPrefab;
+        
         public void AddSlot(Sprite item, int needcount, int currentcount)
         {
-            
+            CraftReqSlot slot = Instantiate(SlotPrefab, Panel).GetComponent<CraftReqSlot>();
+            slot.transform.localPosition = Vector3.zero;
+            slot.Image.sprite = item;
+            slot.Text.text = needcount.ToString() + "/" + currentcount.ToString();
+            Slots.Add(slot);
         }
         
     }
 
     public void BlueprintSelect(CraftBlueprintUi craftBlueprintUi)
     {
+
+        foreach (var slot in crafterRequiredPanel.Slots)
+        {
+            Destroy(slot.gameObject, 0.01f);
+        }
+        
+        crafterRequiredPanel.Slots.Clear();
+        
         print("Select Blueprint" + craftBlueprintUi.currentBlueprint.BlueprintId.ToLower());
         craftInfoPanel.ItemNameText.text = craftBlueprintUi.currentBlueprint.BlueprintId.ToLower();
         craftInfoPanel.DescriptionText.text = DatabaseManager.GetItemData(craftBlueprintUi.currentBlueprint.OutputItem.ItemId).DescriptionId;
         craftInfoPanel.ItemImage.sprite = DatabaseManager.GetItemData(craftBlueprintUi.currentBlueprint.OutputItem.ItemId).Sprite;
+
+        crafterRequiredPanel.EnergySlot.Text.text = craftBlueprintUi.currentBlueprint.EnergyCost.ToString() + "/" + Player.Instance.PlayerStats.Energy;
+        crafterRequiredPanel.TimerSlot.Text.text = Support.ConvertTimeSecondsToString(craftBlueprintUi.currentBlueprint.CraftTimeInSeconds);
+
+        foreach (var reqitem in craftBlueprintUi.currentBlueprint.RequiredItems)
+        {
+            var item = DatabaseManager.GetItemData(reqitem.ItemId);
+            crafterRequiredPanel.AddSlot(item.Sprite, reqitem.ItemValue, Player.Instance.PlayerInventory.GetContainsItemCount(reqitem.ItemId));
+        }
     }
 }
