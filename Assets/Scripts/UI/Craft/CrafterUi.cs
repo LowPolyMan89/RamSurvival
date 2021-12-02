@@ -10,9 +10,10 @@ public class CrafterUi : MonoBehaviour
 {
     public Button StartCraftButton;
     public CrafterRequiredPanel crafterRequiredPanel;
+    public Transform crafterBlueprintPanel;
     public CraftInfoPanel craftInfoPanel;
-    public List<Transform> blueprintsSlots = new List<Transform>();
     public CraftBlueprintUi CraftBlueprintUi;
+    public List<CraftBlueprintUi> CraftBlueprintUis = new List<CraftBlueprintUi>();
     private void Start()
     {
         StartCraftButton.onClick.AddListener(StartCraftButtonClick);
@@ -20,14 +21,13 @@ public class CrafterUi : MonoBehaviour
 
     public void Open(CraftSheme sheme)
     {
-        for (int i = 0; i < blueprintsSlots.Count; i++)
+        CraftBlueprintUis.Clear();
+        for (int i = 0; i < crafterBlueprintPanel.childCount; i++)
         {
-            if (blueprintsSlots[i].childCount > 0)
-            {
-                Destroy(blueprintsSlots[i].GetChild(0).gameObject);
-            }
+            Destroy(crafterBlueprintPanel.GetChild(i).gameObject, 0.1f);
         }
         CreateBlueprints(sheme);
+        BlueprintSelect(CraftBlueprintUis[0]);
     }
     
     private void StartCraftButtonClick()
@@ -44,10 +44,11 @@ public class CrafterUi : MonoBehaviour
     {
         for (int i = 0; i < sheme.Blueprints.Count; i++)
         {
-            CraftBlueprintUi element = Instantiate(CraftBlueprintUi, blueprintsSlots[i], false);
+            CraftBlueprintUi element = Instantiate(CraftBlueprintUi, crafterBlueprintPanel, false);
             element.transform.localPosition = Vector3.zero;
             element.currentBlueprint = sheme.Blueprints[i];
             element.Create(sheme.Blueprints[i]);
+            CraftBlueprintUis.Add(element);
         }
     }
 
@@ -64,14 +65,22 @@ public class CrafterUi : MonoBehaviour
     public class CrafterRequiredPanel
     {
         public Transform Panel;
-        public List<CrafterRequiredPanelSlot> Slots = new List<CrafterRequiredPanelSlot>();
-        public CrafterRequiredPanelSlot TimerSlot;
-        
-        [System.Serializable]
-        public class CrafterRequiredPanelSlot
+        public List<CraftReqSlot> Slots = new List<CraftReqSlot>();
+        public CraftReqSlot TimerSlot;
+        public CraftReqSlot EnergySlot;
+        public GameObject SlotPrefab;
+        public void AddSlot(Sprite item, int needcount, int currentcount)
         {
-            public Image ReqItemImage;
-            public TMP_Text ReqItemCountText;
+            
         }
+        
+    }
+
+    public void BlueprintSelect(CraftBlueprintUi craftBlueprintUi)
+    {
+        print("Select Blueprint" + craftBlueprintUi.currentBlueprint.BlueprintId.ToLower());
+        craftInfoPanel.ItemNameText.text = craftBlueprintUi.currentBlueprint.BlueprintId.ToLower();
+        craftInfoPanel.DescriptionText.text = DatabaseManager.GetItemData(craftBlueprintUi.currentBlueprint.OutputItem.ItemId).DescriptionId;
+        craftInfoPanel.ItemImage.sprite = DatabaseManager.GetItemData(craftBlueprintUi.currentBlueprint.OutputItem.ItemId).Sprite;
     }
 }

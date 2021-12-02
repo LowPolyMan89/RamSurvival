@@ -19,7 +19,11 @@ public static class DatabaseManager
 
        foreach (var data in _itemsDatabase.ItemsData)
        {
-           ItemsData.Add(data.ItemId, data);
+           string id = data.ItemId.ToLower();
+           data.DescriptionId = data.DescriptionId.ToLower();
+           data.ItemId = id;
+           
+           ItemsData.Add(id, data);
        }
        
        Debug.Log("Item data loaded!");
@@ -48,26 +52,24 @@ public static class DatabaseManager
 
     public static ItemDataSO GetItemData(string itemId)
     {
+        
+        string id = itemId.ToLower();
+        
         if (_itemsDatabase == null)
         {
             LoadItemsDatabase();
             Test();
         }
 
-        if (ItemsData.TryGetValue(itemId, out var value))
+        if (ItemsData.TryGetValue(id, out var value))
         {
             
         }
         else
         {
-            Debug.LogError("Cant find Item in Database: " + itemId);
+            Debug.LogError("Cant find Item in Database: " + id);
         }
         return value;
     }
 
-    public static Sprite GetItemSprite(string itemId)
-    {
-        return null;
-    }
-    
 }

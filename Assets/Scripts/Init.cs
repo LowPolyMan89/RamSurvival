@@ -13,5 +13,6 @@ public class Init : MonoBehaviour
     private void Initilize()
     {
         DatabaseManager.LoadItemsDatabase();
+        gameObject.AddComponent<GameTime>();
     }
 }
