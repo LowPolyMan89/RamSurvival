@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1128172048929127267
+--- !u!1 &6554397708101141748
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,48 +8,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6006241994969930897}
-  - component: {fileID: 7981616751595790973}
-  - component: {fileID: 3232488184991713342}
-  - component: {fileID: 8839622374880628693}
-  - component: {fileID: 9159715005461920353}
-  - component: {fileID: 8593408774176290458}
+  - component: {fileID: 2528232154748150377}
+  - component: {fileID: 1176610715399710892}
+  - component: {fileID: 2412021423782227544}
+  - component: {fileID: 3064551741890125926}
+  - component: {fileID: 8934673471676562982}
+  - component: {fileID: 3330864587935377216}
   m_Layer: 7
-  m_Name: stone_block_t1
+  m_Name: plank_t1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6006241994969930897
+--- !u!4 &2528232154748150377
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1128172048929127267}
+  m_GameObject: {fileID: 6554397708101141748}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 21.705, y: 0.165, z: 7.436}
-  m_LocalScale: {x: 0.3941, y: 0.3941, z: 0.3941}
+  m_LocalPosition: {x: 22.99, y: 0.93, z: 5.74}
+  m_LocalScale: {x: 0.10823908, y: 0.63026, z: 0.14268212}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &7981616751595790973
+--- !u!33 &1176610715399710892
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1128172048929127267}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &3232488184991713342
+  m_GameObject: {fileID: 6554397708101141748}
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &2412021423782227544
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1128172048929127267}
+  m_GameObject: {fileID: 6554397708101141748}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -84,56 +84,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &8839622374880628693
-BoxCollider:
+--- !u!136 &3064551741890125926
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1128172048929127267}
+  m_GameObject: {fileID: 6554397708101141748}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &9159715005461920353
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1128172048929127267}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37b09050eb6b1834d8b270421fd442d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ItemId: stone_block_T1_name_id
-  DescriptionId: stone_block_T1_description_id
-  ItemType: 2
-  equipType: 1
-  ItemRare: 1
-  Count: 1
-  IsStack: 1
-  MaxStack: 10
-  Sprite: {fileID: 21300000, guid: 0533417d27dd4a449aeb1ec86e1bffb9, type: 3}
-  colliders:
-  - {fileID: 8839622374880628693}
-  rendrers:
-  - {fileID: 3232488184991713342}
-  itemStats:
-  - StatName: Mass
-    StatValue: 2
-  rigidbody: {fileID: 8593408774176290458}
-  Prefab: {fileID: 1128172048929127267}
---- !u!54 &8593408774176290458
+  m_Radius: 0.5000001
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!54 &8934673471676562982
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1128172048929127267}
+  m_GameObject: {fileID: 6554397708101141748}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -143,3 +114,33 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3330864587935377216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6554397708101141748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37b09050eb6b1834d8b270421fd442d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ItemId: BasicPlank_name_id
+  DescriptionId: BasicPlank_description_id
+  ItemType: 2
+  equipType: 1
+  ItemRare: 1
+  Count: 1
+  IsStack: 1
+  MaxStack: 20
+  Sprite: {fileID: 21300000, guid: 11307cef70ab9f8439f76b2389ade7f3, type: 3}
+  colliders:
+  - {fileID: 3064551741890125926}
+  rendrers:
+  - {fileID: 2412021423782227544}
+  itemStats:
+  - StatName: Mass
+    StatValue: 1
+  rigidbody: {fileID: 8934673471676562982}
+  Prefab: {fileID: 6554397708101141748}
