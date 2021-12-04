@@ -10,16 +10,38 @@ using UnityEngine.UI;
 public class CrafterUi : MonoBehaviour
 {
     public Button StartCraftButton;
+    public Button PlusCraftButton;
+    public Button MinusCraftButton;
     public CrafterRequiredPanel crafterRequiredPanel;
     public Transform crafterBlueprintPanel;
     public CraftInfoPanel craftInfoPanel;
     public CraftBlueprintUi CraftBlueprintUi;
     public List<CraftBlueprintUi> CraftBlueprintUis = new List<CraftBlueprintUi>();
+    public TMP_Text countToCraftText;
+    private CraftBlueprintUi currentBlueprint;
+    private BlueprintItemsCollection blueprintItemsCollection;
+    private int itemToCraftCount = 1;
     private void Start()
     {
         StartCraftButton.onClick.AddListener(StartCraftButtonClick);
+        PlusCraftButton.onClick.AddListener(PlusButton);
+        MinusCraftButton.onClick.AddListener(MinusButton);
+        gameObject.SetActive(false);
     }
 
+    private void PlusButton()
+    {
+        itemToCraftCount++;
+        BlueprintSelect(currentBlueprint, itemToCraftCount);
+    }
+    
+    private void MinusButton()
+    {
+        if(itemToCraftCount < 2) return;
+        itemToCraftCount--;
+        BlueprintSelect(currentBlueprint, itemToCraftCount);
+    }
+    
     public void Open(CraftSheme sheme)
     {
         CraftBlueprintUis.Clear();
@@ -28,7 +50,9 @@ public class CrafterUi : MonoBehaviour
             Destroy(crafterBlueprintPanel.GetChild(i).gameObject, 0.1f);
         }
         CreateBlueprints(sheme);
-        BlueprintSelect(CraftBlueprintUis[0]);
+        BlueprintSelect(CraftBlueprintUis[0], 1);
+        itemToCraftCount = 1;
+        countToCraftText.text = itemToCraftCount.ToString();
     }
     
     private void StartCraftButtonClick()
@@ -82,28 +106,69 @@ public class CrafterUi : MonoBehaviour
         
     }
 
-    public void BlueprintSelect(CraftBlueprintUi craftBlueprintUi)
+    public void BlueprintSelect(CraftBlueprintUi craftBlueprintUi, int craftitemcount)
     {
-
+        StartCraftButton.interactable = true;
+        currentBlueprint = craftBlueprintUi;
+        countToCraftText.text = craftitemcount.ToString();
+        
+        blueprintItemsCollection = new BlueprintItemsCollection();
+        
         foreach (var slot in crafterRequiredPanel.Slots)
         {
             Destroy(slot.gameObject, 0.01f);
         }
         
         crafterRequiredPanel.Slots.Clear();
-        
+
+        float energycost = craftitemcount * craftBlueprintUi.currentBlueprint.EnergyCost;
+        float playerenergy = Player.Instance.PlayerStats.Energy;
+        float time = craftBlueprintUi.currentBlueprint.CraftTimeInSeconds * craftitemcount;
+
         print("Select Blueprint" + craftBlueprintUi.currentBlueprint.BlueprintId.ToLower());
         craftInfoPanel.ItemNameText.text = craftBlueprintUi.currentBlueprint.BlueprintId.ToLower();
         craftInfoPanel.DescriptionText.text = DatabaseManager.GetItemData(craftBlueprintUi.currentBlueprint.OutputItem.ItemId).DescriptionId;
         craftInfoPanel.ItemImage.sprite = DatabaseManager.GetItemData(craftBlueprintUi.currentBlueprint.OutputItem.ItemId).Sprite;
 
-        crafterRequiredPanel.EnergySlot.Text.text = craftBlueprintUi.currentBlueprint.EnergyCost.ToString() + "/" + Player.Instance.PlayerStats.Energy;
-        crafterRequiredPanel.TimerSlot.Text.text = Support.ConvertTimeSecondsToString(craftBlueprintUi.currentBlueprint.CraftTimeInSeconds);
+        crafterRequiredPanel.EnergySlot.Text.text = energycost.ToString() + "/" + Player.Instance.PlayerStats.Energy;
+        crafterRequiredPanel.TimerSlot.Text.text = Support.ConvertTimeSecondsToString(time);
 
+        if (energycost > playerenergy)
+        {
+            StartCraftButton.interactable = false;
+        }
+        
         foreach (var reqitem in craftBlueprintUi.currentBlueprint.RequiredItems)
         {
             var item = DatabaseManager.GetItemData(reqitem.ItemId);
-            crafterRequiredPanel.AddSlot(item.Sprite, reqitem.ItemValue, Player.Instance.PlayerInventory.GetContainsItemCount(reqitem.ItemId));
+            int itemcount = reqitem.ItemValue * craftitemcount;
+            blueprintItemsCollection.Items.Add(new BlueprintItemsCollection.ItemsToCraft(Player.Instance.PlayerInventory.GetItem(reqitem.ItemId), itemcount));
+            crafterRequiredPanel.AddSlot(item.Sprite, itemcount, Player.Instance.PlayerInventory.GetContainsItemCount(reqitem.ItemId));
+            
+            if (itemcount > Player.Instance.PlayerInventory.GetContainsItemCount(reqitem.ItemId))
+            {
+                StartCraftButton.interactable = false;
+            }
+        }
+        
+        blueprintItemsCollection.Energy = energycost;
+        blueprintItemsCollection.Time = time;
+    }
+    
+    private class BlueprintItemsCollection
+    {
+        public float Time;
+        public float Energy;
+        public List<ItemsToCraft> Items = new List<ItemsToCraft>();
+        public struct ItemsToCraft
+        {
+            public Item Item;
+            public int Count;
+            public ItemsToCraft(Item item, int count)
+            {
+                Item = item;
+                Count = count;
+            }
         }
     }
 }

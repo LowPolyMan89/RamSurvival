@@ -82,6 +82,28 @@ public class Inventory : MonoBehaviour
 
         return null;
     }
+
+    public void PickItem(string id, int valueToRemove)
+    {
+        int cashvalue = valueToRemove;
+        Item item = GetItem(id);
+        if (item)
+        {
+            
+        }
+    }
+    
+    public Item GetItem(string id)
+    {
+        foreach (var i in Items)
+        {
+            if (i.ItemId == id)
+            {
+                return i;
+            }
+        }
+        return null;
+    }
     
     public int GetContainsItemCount(string id)
     {
