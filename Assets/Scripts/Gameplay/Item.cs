@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class Item : Entity
@@ -26,7 +27,58 @@ public class Item : Entity
     {
 
     }
+    
+    public void LoadData()
+    {
+        ItemDataSO data = DatabaseManager.GetItemData(ItemId);
+        
+        if (!data)
+        {
+            Debug.LogError("Cant find item with id: " + ItemId);
+            return;
+        }
 
+        gameObject.name = data.ItemId;
+        DescriptionId = data.DescriptionId;
+        ItemType = data.ItemType;
+        equipType = data.equipType;
+        ItemRare = data.ItemRare;
+        Count = 1;
+        IsStack = data.IsStack;
+        MaxStack = data.MaxStack;
+        Sprite = data.Sprite;
+        gameObject.layer = LayerMask.NameToLayer("Triggered");
+        
+        itemStats.Clear();
+        
+        foreach (var stat in data.ItemStats)
+        {
+            ItemStats ststs = new ItemStats();
+            ststs.StatName = stat.StatName;
+            ststs.StatValue = stat.StatValue;
+            itemStats.Add(ststs);
+        }
+
+        colliders.Clear();
+        
+        foreach (var collider in GetComponents<Collider>())
+        {
+            colliders.Add(collider);
+        }
+
+        rigidbody = GetComponent<Rigidbody>();
+        Prefab = gameObject;
+        string localPath = "Assets/Prefabs/Export/" + gameObject.name + ".prefab";
+
+        // Make sure the file name is unique, in case an existing Prefab has the same name.
+        localPath = AssetDatabase.GenerateUniqueAssetPath(localPath);
+
+        // Create the new Prefab.
+        PrefabUtility.SaveAsPrefabAssetAndConnect(gameObject, localPath, InteractionMode.AutomatedAction);
+        
+
+    }
+    
     public Item CloneItem(Item item)
     {
         
@@ -132,6 +184,21 @@ public enum ItemType
 public enum EquipType
 {
     Backpack, none
+}
+
+[CustomEditor(typeof(Item))]
+public class ItemEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+
+        Item myScript = (Item)target;
+        if(GUILayout.Button("Load From Database"))
+        {
+            myScript.LoadData();
+        }
+    }
 }
 
 
