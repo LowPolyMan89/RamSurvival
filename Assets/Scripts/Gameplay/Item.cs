@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -66,17 +67,39 @@ public class Item : Entity
             colliders.Add(collider);
         }
 
+        rendrers.Clear();
+        
+        foreach (var rend in GetComponents<Renderer>())
+        {
+            rendrers.Add(rend);
+        }
+
         rigidbody = GetComponent<Rigidbody>();
         Prefab = gameObject;
-        string localPath = "Assets/Prefabs/Export/" + gameObject.name + ".prefab";
+        
+        
+        string localPath = "";
+
+        switch (ItemType)
+        {
+            case ItemType.Equip:
+                localPath = "Assets/Prefabs/Items/" + gameObject.name + ".prefab";
+                break;
+            case ItemType.Loot:
+                localPath = "Assets/Prefabs/Items/" + gameObject.name + ".prefab";
+                break;
+            case ItemType.Resource:
+                localPath = "Assets/Prefabs/Resources/" + gameObject.name + ".prefab";
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
 
         // Make sure the file name is unique, in case an existing Prefab has the same name.
         localPath = AssetDatabase.GenerateUniqueAssetPath(localPath);
-
         // Create the new Prefab.
         PrefabUtility.SaveAsPrefabAssetAndConnect(gameObject, localPath, InteractionMode.AutomatedAction);
-        
-
+        Prefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Export/" + gameObject.name + ".prefab");
     }
     
     public Item CloneItem(Item item)
