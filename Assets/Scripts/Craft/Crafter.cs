@@ -6,11 +6,12 @@ using UnityEngine;
 public class Crafter : MonoBehaviour
 {
     public CraftSheme Sheme;
-    private CraftController _craftController;
+    public CraftController _craftController;
     
     private void Start()
     {
         _craftController = new CraftController();
+        _craftController.Init();
     }
     
     public void OpenCraft()
@@ -27,4 +28,5 @@ public class Crafter : MonoBehaviour
     {
         _craftController.OpenCraft(sheme, inventory, crafter);
     }
+    
 }

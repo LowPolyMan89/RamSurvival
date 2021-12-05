@@ -12,6 +12,9 @@ public class CrafterUi : MonoBehaviour
     public Button StartCraftButton;
     public Button PlusCraftButton;
     public Button MinusCraftButton;
+    public Transform CraftPanel;
+    public Transform CraftProcessPanel;
+    public CraftProcessUI craftProcessUI;
     public CrafterRequiredPanel crafterRequiredPanel;
     public Transform crafterBlueprintPanel;
     public CraftInfoPanel craftInfoPanel;
@@ -27,9 +30,28 @@ public class CrafterUi : MonoBehaviour
         StartCraftButton.onClick.AddListener(StartCraftButtonClick);
         PlusCraftButton.onClick.AddListener(PlusButton);
         MinusCraftButton.onClick.AddListener(MinusButton);
-        gameObject.SetActive(false);
+        craftProcessUI.Init(CurrentCrafter, CraftProcessPanel, CraftPanel);
     }
 
+    private void OnEnable()
+    {
+        EventManager.Instance.OnTimerSecondAction += OneSecondTick;
+    }
+
+    private void OnDisable()
+    {
+        EventManager.Instance.OnTimerSecondAction -= OneSecondTick;
+    }
+
+    private void OneSecondTick()
+    {
+        if (CurrentCrafter._craftController.CraftProcesses.Count > 0)
+        {
+            var p = CurrentCrafter._craftController.CraftProcesses.Peek();   
+            craftProcessUI.CraftProcees(p.CurrentTime, p.CraftTimeMax, p.OutputValue.ToString());
+        }
+    }
+    
     private void PlusButton()
     {
         itemToCraftCount++;
@@ -61,11 +83,8 @@ public class CrafterUi : MonoBehaviour
     private void StartCraftButtonClick()
     {
         CurrentCrafter.StartCraft(blueprintItemsCollection);
-    }
-
-    private void SelectCraftBlueprint()
-    {
-        
+        CraftPanel.gameObject.SetActive(false);
+        CraftProcessPanel.gameObject.SetActive(true);
     }
 
     public void CreateBlueprints(CraftSheme sheme)
@@ -176,6 +195,39 @@ public class CrafterUi : MonoBehaviour
                 Item = item;
                 Count = count;
             }
+        }
+    }
+    
+    [System.Serializable]
+    public class CraftProcessUI
+    {
+        public Image CraftProcessImage;
+        public TMP_Text TimerText;
+        public TMP_Text CountText;
+        public Button GetButton;
+        private Transform _processPanel;
+        private Transform _craftpanel;
+
+        public void Init(Crafter crafter, Transform processPanel, Transform craftpanel)
+        {
+            GetButton.onClick.AddListener(crafter._craftController.CollectItem);
+            GetButton.onClick.AddListener(FinalCraft);
+            _processPanel = processPanel;
+            _craftpanel = craftpanel;
+        }
+
+        private void FinalCraft()
+        {
+            _processPanel.gameObject.SetActive(false);
+            _craftpanel.gameObject.SetActive(true);
+        }
+        
+        public void CraftProcees(float time, float maxtime, string count)
+        {
+            TimerText.text = Support.ConvertTimeSecondsToString(maxtime - time);
+            CountText.text = "X " + count;
+            CraftProcessImage.fillAmount = time/maxtime;
+            GetButton.interactable = time >= maxtime ? true : false;
         }
     }
 }
