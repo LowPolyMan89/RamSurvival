@@ -98,8 +98,9 @@ public class Item : Entity
         // Make sure the file name is unique, in case an existing Prefab has the same name.
         localPath = AssetDatabase.GenerateUniqueAssetPath(localPath);
         // Create the new Prefab.
-        PrefabUtility.SaveAsPrefabAssetAndConnect(gameObject, localPath, InteractionMode.AutomatedAction);
-        Prefab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Export/" + gameObject.name + ".prefab");
+        PrefabUtility.SaveAsPrefabAssetAndConnect(gameObject, localPath, InteractionMode.UserAction);
+        Prefab = AssetDatabase.LoadAssetAtPath<GameObject>(localPath);
+        data.Prefab = Prefab;
     }
     
     public Item CloneItem(Item item)
