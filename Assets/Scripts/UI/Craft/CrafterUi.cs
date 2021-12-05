@@ -162,9 +162,9 @@ public class CrafterUi : MonoBehaviour
         public List<ItemsToCraft> Items = new List<ItemsToCraft>();
         public struct ItemsToCraft
         {
-            public Item Item;
+            public ItemView Item;
             public int Count;
-            public ItemsToCraft(Item item, int count)
+            public ItemsToCraft(ItemView item, int count)
             {
                 Item = item;
                 Count = count;

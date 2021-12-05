@@ -15,9 +15,11 @@ public class UIController : MonoBehaviour
 	public UiInventory UiInventory;
 	public CrafterUi CrafterUi;
 
-	public EquipUISlot GetEqipSlot(Item item)
+	public EquipUISlot GetEqipSlot(string itemid)
 	{
-		EquipType type = item.equipType;
+		ItemDataSO data = DatabaseManager.GetItemData(itemid);
+		
+		EquipType type = data.equipType;
 		
 		foreach (var VARIABLE in equipUI.EquipUISlots)
 		{

@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 public class ItemUIElement : MonoBehaviour
 {
-    public Item Item;
+    public ItemView Item;
     public Image Image;
     public Text CountText;
     [SerializeField] private Transform startRoot;
@@ -28,7 +28,7 @@ public class ItemUIElement : MonoBehaviour
     private IEnumerator CustomUpdate()
     {
         yield return new WaitForSeconds(0.1f);
-        Image.sprite = Item.Sprite;
+        Image.sprite = DatabaseManager.GetItemData(Item.ItemId).Sprite;
         CountText.text = Item.Count.ToString();
         StartCoroutine(CustomUpdate());
     }

@@ -8,7 +8,7 @@ public class EquipUISlot : MonoBehaviour
     public ItemUIElement ItemUIElement;
     [SerializeField] private EquipType slotEquipType;
     [SerializeField] public Image image;
-    public Item Item;
+    public ItemView Item;
 
     public EquipType SlotEquipType { get => slotEquipType; }
     

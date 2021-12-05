@@ -60,7 +60,7 @@ private void OnDisable()
     }
     
 
-    public void AddItem(Item item)
+    public void AddItem(ItemView item)
     {
         //create item ui
        ItemUIElement itemUIElement = Instantiate(_itemUIElement);
@@ -96,26 +96,26 @@ private void OnDisable()
 
     public void EqipButtonUse()
     {
-        switch (SelectedItem.Item.equipType)
+        switch (DatabaseManager.GetItemData(SelectedItem.Item.ItemId).equipType)
         {
             case EquipType.Backpack:
                 if (SelectedItem.IsEqipped)
                 {
                     Player.Instance.EqipBackpack(null);
-                    Player.Instance.PlayerInventory.AddItem(SelectedItem.Item);
+                    Player.Instance.PlayerInventory.AddEqipItem(SelectedItem.Item.ItemId);
                     Destroy(SelectedItem.gameObject);
                     SelectedItem = null;
                     HideButtons();
                 }
                 else
                 {
-                    Player.Instance.EqipBackpack(SelectedItem.Item);
+                    Player.Instance.EqipBackpack(SelectedItem.Item.ItemId);
                     SelectedItem.IsEqipped = true;
-                    var tr = UIController.Instance.GetEqipSlot(SelectedItem.Item);
+                    var tr = UIController.Instance.GetEqipSlot(SelectedItem.Item.ItemId);
                     tr.Item = SelectedItem.Item;
                     SelectedItem.transform.SetParent(tr.transform);
                     SelectedItem.transform.localPosition = Vector3.zero;
-                    Player.Instance.PlayerInventory.RemoveItem(SelectedItem.Item);
+                    Player.Instance.PlayerInventory.RemoveItem(SelectedItem.Item.ItemId);
                     SelectedItem = null;
                     HideButtons();
                 }
@@ -127,7 +127,7 @@ private void OnDisable()
         }
     }
 
-    private void HideButtons()
+    public void HideButtons()
     {
         useButton.SetActive(false);
         infoButton.SetActive(false);
@@ -144,12 +144,14 @@ private void OnDisable()
         SelectedItem = itemUIElement;
         useButton.SetActive(false);
 
-       if (itemUIElement.Item.ItemType == ItemType.Resource)
+        ItemDataSO data = DatabaseManager.GetItemData(itemUIElement.Item.ItemId);
+
+       if (data.ItemType == ItemType.Resource)
        {
            infoButton.SetActive(true);
            dropButton.SetActive(true);
        }
-       if (itemUIElement.Item.ItemType == ItemType.Equip)
+       if (data.ItemType == ItemType.Equip)
        {
            useButton.SetActive(true);
            infoButton.SetActive(true);

@@ -8,13 +8,13 @@ public class Player : MonoBehaviour
     public static Player Instance;
     public UiInventory UiInventory;
     public PlayerStats PlayerStats;
-    public Item EqippedBackpack;
+    public ItemDataSO EqippedBackpack;
     public Crafter playerCrafter;
     public Transform dropPoint;
 
-    public void EqipBackpack(Item backpackItem)
+    public void EqipBackpack(string backpackItemId)
     {
-        EqippedBackpack = backpackItem;
+        EqippedBackpack = DatabaseManager.GetItemData(backpackItemId);
     }
     
     private void Start()

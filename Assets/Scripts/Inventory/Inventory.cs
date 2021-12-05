@@ -6,35 +6,57 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    public List<Item> Items = new List<Item>();
+    public List<ItemView> Items = new List<ItemView>();
     public float CurrentCapacity { get; set; }
 
 
-    public void RemoveItem(Item item)
+    public void RemoveItem(string item)
     {
-        Items.Remove(item);
+        ItemView i = GetItem(item);
+        Items.Remove(i);
     }
-    
+
+    public void AddEqipItem(string id)
+    {
+        bool play = false;
+
+        ItemDataSO data = DatabaseManager.GetItemData(id);
+
+        play = TryToAddItem(id);
+
+        if (!play)
+        {
+            return;
+        }
+
+        ItemView newitemv = new ItemView(id, 1);
+        Items.Add(newitemv);
+        Player.Instance.UiInventory.AddItem(newitemv);
+
+    }
+
+
     public void AddItem(Item item)
     {
         int count = item.Count;
 
         bool play = false;
-        
-        Item v = FindContainsItemWithEmptyStack(item);
 
-        
+        ItemView v = FindContainsItemWithEmptyStack(item.ItemId);
+
+        ItemDataSO data = DatabaseManager.GetItemData(item.ItemId);
+
         for (int i = 0; i < count; i++)
         {
 
-            play = TryToAddItem(item);
-            
+            play = TryToAddItem(item.ItemId);
+
             if (!play)
             {
                 break;
             }
 
-            if (item.IsStack)
+            if (data.IsStack)
             {
                 if (v != null)
                 {
@@ -43,24 +65,25 @@ public class Inventory : MonoBehaviour
                 }
                 else
                 {
-                    Items.Add(item);
-                    Player.Instance.UiInventory.AddItem(item);
+                    ItemView newitemv = new ItemView(item.ItemId, item.Count);
+                    Items.Add(newitemv);
+                    Player.Instance.UiInventory.AddItem(newitemv);
                     break;
                 }
             }
             else
             {
-                Items.Add(item);
-                Player.Instance.UiInventory.AddItem(item);
+                ItemView newitemv = new ItemView(item.ItemId, item.Count);
+                Items.Add(newitemv);
+                Player.Instance.UiInventory.AddItem(newitemv);
                 break;
             }
-            
+
         }
-        
+
         if (play)
         {
-            item.Visualize(false);
-            item.transform.SetParent(transform);
+            Destroy(item.gameObject);
         }
 
         if (item.Count == 0)
@@ -70,11 +93,11 @@ public class Inventory : MonoBehaviour
 
     }
 
-    public Item FindContainsItem(Item item)
+    public ItemView FindContainsItem(string id)
     {
         foreach (var i in Items)
         {
-            if (i.ItemId == item.ItemId)
+            if (i.ItemId == id)
             {
                 return i;
             }
@@ -86,14 +109,11 @@ public class Inventory : MonoBehaviour
     public void PickItem(string id, int valueToRemove)
     {
         int cashvalue = valueToRemove;
-        Item item = GetItem(id);
-        if (item)
-        {
-            
-        }
+        ItemView item = GetItem(id);
+
     }
-    
-    public Item GetItem(string id)
+
+    public ItemView GetItem(string id)
     {
         foreach (var i in Items)
         {
@@ -102,13 +122,14 @@ public class Inventory : MonoBehaviour
                 return i;
             }
         }
+
         return null;
     }
-    
+
     public int GetContainsItemCount(string id)
     {
         int value = 0;
-        
+
         foreach (var i in Items)
         {
             if (i.ItemId == id)
@@ -120,13 +141,13 @@ public class Inventory : MonoBehaviour
         return value;
     }
 
-    public Item FindContainsItemWithEmptyStack(Item item)
+    public ItemView FindContainsItemWithEmptyStack(string id)
     {
         foreach (var i in Items)
         {
-            if (i.ItemId == item.ItemId)
+            if (i.ItemId == id)
             {
-                if (i.Count < i.MaxStack)
+                if (i.Count < DatabaseManager.GetItemData(id).MaxStack)
                 {
                     return i;
                 }
@@ -140,32 +161,32 @@ public class Inventory : MonoBehaviour
     public float GetCurrentInventoryMass()
     {
         float val = 0;
-        Items.ForEach(x => { val += x.GetStat("Mass") * x.Count; });
+        Items.ForEach(x => { val += DatabaseManager.GetItemData(x.ItemId).GetStat("Mass") * x.Count; });
         return val;
     }
-    
-    public bool TryToAddItem(Item item)
+
+    public bool TryToAddItem(string id)
     {
         bool check = true;
-        
+
         float curentMass = GetCurrentInventoryMass();
-        float newItemMass = item.GetStat("Mass");
+        float newItemMass = DatabaseManager.GetItemData(id).GetStat("Mass");
 
         if (curentMass + newItemMass > GetMaxInventoryMass())
         {
             check = false;
         }
-        
+
         return check;
     }
-    
+
 
     public int GetItemCountToAdd(Item item)
     {
 
         float curentMass = GetCurrentInventoryMass();
         float newItemMass = 0;
-        
+
         for (int i = 1; i < item.Count; i++)
         {
             newItemMass += item.GetStat("Mass");
@@ -177,14 +198,18 @@ public class Inventory : MonoBehaviour
         return 0;
     }
 
-    public List<Item> GetItems()
+    public List<ItemView> GetItems()
     {
         return Items;
     }
 
     public float GetMaxInventoryMass()
     {
-        float value = Player.Instance.PlayerStats.MinimumMass + (Player.Instance.EqippedBackpack != null ? Player.Instance.EqippedBackpack.GetStat("MaxMass") : 0);
+        float value = Player.Instance.PlayerStats.MinimumMass + (Player.Instance.EqippedBackpack != null
+            ? Player.Instance.EqippedBackpack.GetStat("MaxMass")
+            : 0);
         return value;
     }
+
+
 }
