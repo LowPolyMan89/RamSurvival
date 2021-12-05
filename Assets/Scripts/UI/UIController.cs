@@ -93,11 +93,11 @@ public class UIController : MonoBehaviour
 
 	public void OpenCraftPlayer()
 	{
-		OpenCraftPanel(Player.Instance.playerCrafter.Sheme, Player.Instance.PlayerInventory);
+		OpenCraftPanel(Player.Instance.playerCrafter.Sheme, Player.Instance.PlayerInventory, Player.Instance.playerCrafter);
 	}
 	
-	public void OpenCraftPanel(CraftSheme sheme, Inventory inventoryToGetItems)
+	public void OpenCraftPanel(CraftSheme sheme, Inventory inventoryToGetItems, Crafter currentcrafter)
 	{
-		CrafterUi.Open(sheme);
+		CrafterUi.Open(sheme, inventoryToGetItems, currentcrafter);
 	}
 }

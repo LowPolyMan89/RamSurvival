@@ -18,6 +18,7 @@ public class CrafterUi : MonoBehaviour
     public CraftBlueprintUi CraftBlueprintUi;
     public List<CraftBlueprintUi> CraftBlueprintUis = new List<CraftBlueprintUi>();
     public TMP_Text countToCraftText;
+    public Crafter CurrentCrafter;
     private CraftBlueprintUi currentBlueprint;
     private BlueprintItemsCollection blueprintItemsCollection;
     private int itemToCraftCount = 1;
@@ -42,9 +43,10 @@ public class CrafterUi : MonoBehaviour
         BlueprintSelect(currentBlueprint, itemToCraftCount);
     }
     
-    public void Open(CraftSheme sheme)
+    public void Open(CraftSheme sheme, Inventory inventory, Crafter crafter)
     {
         CraftBlueprintUis.Clear();
+        CurrentCrafter = crafter;
         for (int i = 0; i < crafterBlueprintPanel.childCount; i++)
         {
             Destroy(crafterBlueprintPanel.GetChild(i).gameObject, 0.1f);
@@ -53,11 +55,12 @@ public class CrafterUi : MonoBehaviour
         BlueprintSelect(CraftBlueprintUis[0], 1);
         itemToCraftCount = 1;
         countToCraftText.text = itemToCraftCount.ToString();
+        crafter.OpenCraft(sheme, inventory, crafter);
     }
     
     private void StartCraftButtonClick()
     {
-        
+        CurrentCrafter.StartCraft(blueprintItemsCollection);
     }
 
     private void SelectCraftBlueprint()
@@ -150,16 +153,20 @@ public class CrafterUi : MonoBehaviour
                 StartCraftButton.interactable = false;
             }
         }
-        
+
+        blueprintItemsCollection.OutputItemId = craftBlueprintUi.currentBlueprint.BlueprintId;
+        blueprintItemsCollection.OutputItemValue = craftitemcount;
         blueprintItemsCollection.Energy = energycost;
         blueprintItemsCollection.Time = time;
     }
     
-    private class BlueprintItemsCollection
+    public class BlueprintItemsCollection
     {
         public float Time;
         public float Energy;
         public List<ItemsToCraft> Items = new List<ItemsToCraft>();
+        public string OutputItemId;
+        public int OutputItemValue;
         public struct ItemsToCraft
         {
             public ItemView Item;

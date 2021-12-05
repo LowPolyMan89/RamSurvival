@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 using UnityEditor;
 using UnityEngine;
@@ -14,6 +15,11 @@ public class Inventory : MonoBehaviour
     {
         ItemView i = GetItem(item);
         Items.Remove(i);
+    }
+
+    public void RemoveItem(ItemView item)
+    {
+        Items.Remove(item);
     }
 
     public void AddEqipItem(string id)
@@ -35,7 +41,78 @@ public class Inventory : MonoBehaviour
 
     }
 
+    public void MassRemoveItem(string id, int value)
+    {
+        int capacity = value;
 
+        ItemView[] stacks = GetItemsStacks(id).ToArray();
+        
+        for (int i = 0; i < stacks.Length; i++)
+        {
+            if (capacity < 1)
+            {
+                break;
+            }
+            
+            for (int j = capacity; j > 0;)
+            {
+                stacks[i].Count--;
+                capacity--;
+                j--;
+                
+                if (stacks[i].Count < 1)
+                {
+                    RemoveItem(stacks[i]);
+                    break;
+                }
+            }
+        }
+
+    }
+
+    public List<ItemView> GetItemsStacks(string id)
+    {
+        return Items.Where(item => item.ItemId == id).ToList();
+    }
+    
+    public void AddItem(string ItemId, int value)
+    {
+        int count = value;
+
+        bool play = false;
+
+        ItemView v = FindContainsItemWithEmptyStack(ItemId);
+
+        ItemDataSO data = DatabaseManager.GetItemData(ItemId);
+
+        for (int i = 0; i < count; i++)
+        {
+            if (data.IsStack)
+            {
+                if (v != null)
+                {
+                    v.Count++;
+                }
+                else
+                {
+                    ItemView newitemv = new ItemView(ItemId, count);
+                    Items.Add(newitemv);
+                    Player.Instance.UiInventory.AddItem(newitemv);
+                    break;
+                }
+            }
+            else
+            {
+                ItemView newitemv = new ItemView(ItemId, count);
+                Items.Add(newitemv);
+                Player.Instance.UiInventory.AddItem(newitemv);
+                break;
+            }
+
+        }
+
+    }
+    
     public void AddItem(Item item)
     {
         int count = item.Count;
@@ -105,13 +182,7 @@ public class Inventory : MonoBehaviour
 
         return null;
     }
-
-    public void PickItem(string id, int valueToRemove)
-    {
-        int cashvalue = valueToRemove;
-        ItemView item = GetItem(id);
-
-    }
+    
 
     public ItemView GetItem(string id)
     {

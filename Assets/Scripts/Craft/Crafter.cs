@@ -12,10 +12,19 @@ public class Crafter : MonoBehaviour
     {
         _craftController = new CraftController();
     }
-
-    [ContextMenu("OpenCraft")]
+    
     public void OpenCraft()
     {
-        _craftController.OpenCraft(Sheme, Player.Instance.PlayerInventory);
+        _craftController.OpenCraft(Sheme, Player.Instance.PlayerInventory, this);
+    }
+
+    public void StartCraft(CrafterUi.BlueprintItemsCollection blueprintItemsCollection)
+    {
+        _craftController.StartCraft(blueprintItemsCollection);
+    }
+
+    public void OpenCraft(CraftSheme sheme, Inventory inventory, Crafter crafter)
+    {
+        _craftController.OpenCraft(sheme, inventory, crafter);
     }
 }

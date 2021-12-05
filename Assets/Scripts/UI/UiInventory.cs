@@ -55,6 +55,17 @@ private void OnDisable()
         
         capacityText.text = _player.PlayerInventory.GetCurrentInventoryMass().ToString("00") + "/" + _player.PlayerInventory.GetMaxInventoryMass();
         capacityImage.fillAmount = (_player.PlayerInventory.GetCurrentInventoryMass() + 0.001f) / _player.PlayerInventory.GetMaxInventoryMass();
+
+        foreach (var cell in InventoryCellses)
+        {
+            if (cell.transform.childCount > 0)
+            {
+                if (cell.transform.GetChild(0).GetComponent<ItemUIElement>().Item.Count < 1)
+                {
+                    Destroy(cell.transform.GetChild(0).gameObject, 0.05f);
+                }
+            }
+        }
         
         StartCoroutine(CustomUpdate());
     }
