@@ -1,24 +1,38 @@
 {
   "Locals": [
     {
-      "LocalizationObjectID": "item_name_id",
+      "LocalizationObjectID": "wood_t1_name_id",
+      "Local": [
+        "Бревно",
+        "Wood"
+      ]
+    },
+    {
+      "LocalizationObjectID": "wood_t1_desription_id",
+      "Local": [
+        "Простое бревно.....",
+        "English localization...."
+      ]
+    },
+    {
+      "LocalizationObjectID": "item3_name_id",
       "Local": [
         "Русская локализация",
         "English localization"
       ]
     },
     {
-      "LocalizationObjectID": "item_name2_id",
+      "LocalizationObjectID": "item_4_name_id",
       "Local": [
-        "Русская локализация",
-        "English localization"
+        "Русская локализация4",
+        "English localization42232"
       ]
     },
     {
-      "LocalizationObjectID": "item_name3_id",
+      "LocalizationObjectID": "item_5_name_id",
       "Local": [
-        "Русская локализация",
-        "English localization"
+        "Русская локализация4555",
+        "English localization4223255555"
       ]
     }
   ]
