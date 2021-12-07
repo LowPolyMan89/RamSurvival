@@ -8,8 +8,10 @@ using UnityEngine;
 public class Inventory : MonoBehaviour
 {
     public List<ItemView> Items = new List<ItemView>();
+    public bool IsPlayerInventory;
     public float CurrentCapacity { get; set; }
-
+    public int Sloots;
+    public float MaxMass;
 
     public void RemoveItem(string item)
     {
@@ -97,16 +99,22 @@ public class Inventory : MonoBehaviour
                 {
                     ItemView newitemv = new ItemView(ItemId, count);
                     Items.Add(newitemv);
-                    Player.Instance.UiInventory.AddItem(newitemv);
-                    break;
+                    if (IsPlayerInventory)
+                    {
+                        Player.Instance.UiInventory.AddItem(newitemv);
+                        break;
+                    }
                 }
             }
             else
             {
                 ItemView newitemv = new ItemView(ItemId, count);
                 Items.Add(newitemv);
-                Player.Instance.UiInventory.AddItem(newitemv);
-                break;
+                if (IsPlayerInventory)
+                {
+                    Player.Instance.UiInventory.AddItem(newitemv);
+                    break;
+                }
             }
 
         }
@@ -144,16 +152,22 @@ public class Inventory : MonoBehaviour
                 {
                     ItemView newitemv = new ItemView(item.ItemId, item.Count);
                     Items.Add(newitemv);
-                    Player.Instance.UiInventory.AddItem(newitemv);
-                    break;
+                    if (IsPlayerInventory)
+                    {
+                        Player.Instance.UiInventory.AddItem(newitemv);
+                        break;
+                    }
                 }
             }
             else
             {
                 ItemView newitemv = new ItemView(item.ItemId, item.Count);
                 Items.Add(newitemv);
-                Player.Instance.UiInventory.AddItem(newitemv);
-                break;
+                if (IsPlayerInventory)
+                {
+                    Player.Instance.UiInventory.AddItem(newitemv);
+                    break;
+                }
             }
 
         }
@@ -276,10 +290,17 @@ public class Inventory : MonoBehaviour
 
     public float GetMaxInventoryMass()
     {
-        float value = Player.Instance.PlayerStats.MinimumMass + (Player.Instance.EqippedBackpack != null
-            ? Player.Instance.EqippedBackpack.GetStat("MaxMass")
-            : 0);
-        return value;
+        if (IsPlayerInventory)
+        {
+            float value = Player.Instance.PlayerStats.MinimumMass + (Player.Instance.EqippedBackpack != null
+                ? Player.Instance.EqippedBackpack.GetStat("MaxMass")
+                : 0);
+            return value;
+        }
+        else
+        {
+            return MaxMass;
+        }
     }
 
 

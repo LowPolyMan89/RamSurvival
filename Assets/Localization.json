@@ -1,0 +1,25 @@
+{
+  "Locals": [
+    {
+      "LocalizationObjectID": "item_name_id",
+      "Local": [
+        "Русская локализация",
+        "English localization"
+      ]
+    },
+    {
+      "LocalizationObjectID": "item_name2_id",
+      "Local": [
+        "Русская локализация",
+        "English localization"
+      ]
+    },
+    {
+      "LocalizationObjectID": "item_name3_id",
+      "Local": [
+        "Русская локализация",
+        "English localization"
+      ]
+    }
+  ]
+}
