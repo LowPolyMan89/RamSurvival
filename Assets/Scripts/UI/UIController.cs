@@ -11,10 +11,12 @@ public class UIController : MonoBehaviour
 	[SerializeField] private EventManager eventManager;
 	[SerializeField] private EquipUI equipUI;
 	[SerializeField] private Button grabButton;
-
+	[SerializeField] private Transform chestUi;
 	public UiInventory UiInventory;
 	public CrafterUi CrafterUi;
-
+	public ChestInventoryUI ChestInventoryUI;
+	public UiDropPanel UiDropPanel;
+	public Transform MainInventory;
 	public EquipUISlot GetEqipSlot(string itemid)
 	{
 		ItemDataSO data = DatabaseManager.GetItemData(itemid);
@@ -99,5 +101,12 @@ public class UIController : MonoBehaviour
 	public void OpenCraftPanel(CraftSheme sheme, Inventory inventoryToGetItems, Crafter currentcrafter)
 	{
 		CrafterUi.Open(sheme, inventoryToGetItems, currentcrafter);
+	}
+
+	public void OpenChestUi(Chest value)
+	{
+		MainInventory.gameObject.SetActive(true);
+		chestUi.gameObject.SetActive(true);
+		ChestInventoryUI.Open(value);
 	}
 }

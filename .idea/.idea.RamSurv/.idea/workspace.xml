@@ -32,11 +32,16 @@
   <component name="ChangeListManager">
     <list default="true" id="7be855d3-bc60-4a48-aeff-eaa341bc0760" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.RamSurv/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RamSurv/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.RamSurv/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RamSurv/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.RamSurv/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RamSurv/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI_Canvas.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI_Canvas.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Island_1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Island_1.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Gameplay/Entity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Gameplay/Entity.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Gameplay/Selector.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Gameplay/Selector.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Inventory/Inventory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Inventory/Inventory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Standard Assets/Characters/ThirdPersonCharacter/Animation/HumanoidIdle.fbx.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Standard Assets/Characters/ThirdPersonCharacter/Animation/HumanoidIdle.fbx.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Standard Assets/Characters/ThirdPersonCharacter/Animation/HumanoidRun.fbx.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Standard Assets/Characters/ThirdPersonCharacter/Animation/HumanoidRun.fbx.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Standard Assets/Characters/ThirdPersonCharacter/Prefabs/ThirdPersonController.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Standard Assets/Characters/ThirdPersonCharacter/Prefabs/ThirdPersonController.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/InventoryCells.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/InventoryCells.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/UIController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/UIController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/UiInventory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/UiInventory.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,13 +72,14 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F98083CB-C97E-4FA0-A4EF-2F523FEFF5E1/8b/85bc3f1a/Object.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Init.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Inventory/ItemView.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/Inventory/Chest.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/EF28F193-EAB6-4E49-B44B-3FB27EAB4F75/a8/77ca8224/List`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F98083CB-C97E-4FA0-A4EF-2F523FEFF5E1/07/ec74db0e/UnityEvent.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/ChestInventoryUI.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Assets/Scripts/Gameplay/Resource.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/EquipUI.cs" />
         <option value="$PROJECT_DIR$/Assets/StarterAssets/InputSystem/StarterAssetsInputs.cs" />
         <option value="$PROJECT_DIR$/Assets/StarterAssets/Mobile/Scripts/Utilities/MobileDisableAutoSwitchControls.cs" />
@@ -91,8 +97,6 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/InventoryUI.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Gameplay/Inventory/Inventory.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Gameplay/PlayerStats.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/UI/InventoryCells.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Gameplay/Selector.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Gameplay/Multitool.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Craft/CraftSheme.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Support.cs" />
@@ -111,16 +115,22 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/EquipUISlot.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/UiDropPanel.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Inventory/ItemView.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/UI/UIController.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/UI/UiInventory.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/SO/ItemDBSO.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Gameplay/Item.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Craft/Crafter.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Craft/CraftController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/Craft/CrafterUi.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Inventory/Inventory.cs" />
-        <option value="$PROJECT_DIR$/Assets/Localization.json" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Editor/LocalizationCreator.cs" />
+        <option value="$PROJECT_DIR$/Assets/Localization.json" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/IInteractive.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Inventory/Inventory.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Gameplay/Entity.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/UI/InventoryCells.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/UI/UiInventory.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Inventory/Chest.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Gameplay/Selector.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/UI/UIController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/UI/ChestInventoryUI.cs" />
       </list>
     </option>
   </component>
@@ -193,6 +203,8 @@
       <workItem from="1638699029842" duration="14263000" />
       <workItem from="1638823174412" duration="333000" />
       <workItem from="1638903867322" duration="1899000" />
+      <workItem from="1638906781678" duration="454000" />
+      <workItem from="1638989295754" duration="5018000" />
     </task>
     <servers />
   </component>

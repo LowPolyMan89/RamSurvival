@@ -34,8 +34,10 @@
           </e>
           <e p="GameTime.cs" t="Include" />
           <e p="IDamagable.cs" t="Include" />
+          <e p="IInteractive.cs" t="Include" />
           <e p="Init.cs" t="Include" />
           <e p="Inventory" t="Include">
+            <e p="Chest.cs" t="Include" />
             <e p="Inventory.cs" t="Include" />
             <e p="ItemView.cs" t="Include" />
           </e>
@@ -48,6 +50,7 @@
           </e>
           <e p="Support.cs" t="Include" />
           <e p="UI" t="Include">
+            <e p="ChestInventoryUI.cs" t="Include" />
             <e p="Craft" t="Include">
               <e p="CraftBlueprintUi.cs" t="Include" />
               <e p="CrafterUi.cs" t="Include" />

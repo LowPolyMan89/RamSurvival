@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using UnityEditor;
 using UnityEngine;
 
-public class Inventory : MonoBehaviour
+public class Inventory : Entity
 {
     public List<ItemView> Items = new List<ItemView>();
     public bool IsPlayerInventory;

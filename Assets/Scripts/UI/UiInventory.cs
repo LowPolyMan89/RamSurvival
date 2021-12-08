@@ -62,7 +62,7 @@ private void OnDisable()
             {
                 if (cell.transform.GetChild(0).GetComponent<ItemUIElement>().Item.Count < 1)
                 {
-                    Destroy(cell.transform.GetChild(0).gameObject, 0.05f);
+                    Destroy(cell.transform.GetChild(0).gameObject, 0.01f);
                 }
             }
         }
@@ -90,7 +90,6 @@ private void OnDisable()
                 return v.transform;
             }
         }
-
         return null;
     }
     
