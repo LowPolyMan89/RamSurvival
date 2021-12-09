@@ -31,16 +31,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7be855d3-bc60-4a48-aeff-eaa341bc0760" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.RamSurv/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RamSurv/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.RamSurv/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RamSurv/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.RamSurv/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RamSurv/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI_Canvas.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI_Canvas.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Island_1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Island_1.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Gameplay/Entity.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Gameplay/Entity.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Gameplay/Selector.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Gameplay/Selector.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Gameplay/Item.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Gameplay/Item.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Inventory/Inventory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Inventory/Inventory.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/InventoryCells.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/InventoryCells.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/UIController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/UIController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SO/ItemDataSO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SO/ItemDataSO.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/ChestInventoryUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/ChestInventoryUI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/UiDropPanel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/UiDropPanel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/UiInventory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/UiInventory.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -109,27 +106,27 @@
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/Craft/CraftReqSlot.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Craft/CraftBlueprint.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/Craft/CraftBlueprintUi.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/SO/ItemDataSO.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/ItemUIElement.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Gameplay/Player.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/EquipUISlot.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/UI/UiDropPanel.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Inventory/ItemView.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/SO/ItemDBSO.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Gameplay/Item.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Craft/Crafter.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Craft/CraftController.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/Craft/CrafterUi.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Editor/LocalizationCreator.cs" />
         <option value="$PROJECT_DIR$/Assets/Localization.json" />
         <option value="$PROJECT_DIR$/Assets/Scripts/IInteractive.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/Inventory/Inventory.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Gameplay/Entity.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/InventoryCells.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scripts/UI/UiInventory.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Inventory/Chest.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/Gameplay/Selector.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/UIController.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/SO/ItemDataSO.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Gameplay/Item.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/Inventory/Inventory.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/UI/UiDropPanel.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scripts/UI/UiInventory.cs" />
         <option value="$PROJECT_DIR$/Assets/Scripts/UI/ChestInventoryUI.cs" />
       </list>
     </option>
@@ -205,6 +202,7 @@
       <workItem from="1638903867322" duration="1899000" />
       <workItem from="1638906781678" duration="454000" />
       <workItem from="1638989295754" duration="5018000" />
+      <workItem from="1639075424957" duration="1990000" />
     </task>
     <servers />
   </component>

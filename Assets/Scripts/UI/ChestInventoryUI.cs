@@ -60,7 +60,7 @@ public class ChestInventoryUI : MonoBehaviour
     public void DropButtonUse()
     {
         UIController.Instance.UiDropPanel.gameObject.SetActive(true);
-        UIController.Instance.UiDropPanel.Init(SelectedItem);
+        UIController.Instance.UiDropPanel.Init(SelectedItem, currentInventoryChest);
     }
 
     public void InfoButtonUse()
@@ -136,17 +136,22 @@ public class ChestInventoryUI : MonoBehaviour
             CreateCells();
         }
 
+        int curritemstypecount = 0;
         foreach (var v in InventoryCellses)
         {
             if (v.transform.childCount > 0)
             {
-                Destroy(v.transform.GetChild(0).gameObject);
+                curritemstypecount++;
             }
         }
-        
-        foreach (var item in chest.Items)
+
+        if (chest.Items.Count != curritemstypecount)
         {
-            AddItem(item);
+            foreach (var item in chest.Items)
+            {
+                AddItem(item);
+            }
         }
+
     }
 }

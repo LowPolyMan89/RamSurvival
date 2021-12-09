@@ -96,7 +96,7 @@ private void OnDisable()
     public void DropButtonUse()
     {
         UiDropPanel.gameObject.SetActive(true);
-        UiDropPanel.Init(SelectedItem);
+        UiDropPanel.Init(SelectedItem, _player.PlayerInventory);
     }
 
     public void InfoButtonUse()

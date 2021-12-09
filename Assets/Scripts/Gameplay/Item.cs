@@ -45,8 +45,6 @@ public class Item : Entity
         equipType = data.equipType;
         ItemRare = data.ItemRare;
         Count = 1;
-        IsStack = data.IsStack;
-        MaxStack = data.MaxStack;
         Sprite = data.Sprite;
         gameObject.layer = LayerMask.NameToLayer("Triggered");
         

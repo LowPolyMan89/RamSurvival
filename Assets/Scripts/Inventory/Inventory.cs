@@ -76,35 +76,22 @@ public class Inventory : Entity
     {
         return Items.Where(item => item.ItemId == id).ToList();
     }
-    
+
     public void AddItem(string ItemId, int value)
     {
         int count = value;
 
         bool play = false;
 
-        ItemView v = FindContainsItemWithEmptyStack(ItemId);
+        ItemView v = FindContainsItem(ItemId);
 
         ItemDataSO data = DatabaseManager.GetItemData(ItemId);
 
         for (int i = 0; i < count; i++)
         {
-            if (data.IsStack)
+            if (v != null)
             {
-                if (v != null)
-                {
-                    v.Count++;
-                }
-                else
-                {
-                    ItemView newitemv = new ItemView(ItemId, count);
-                    Items.Add(newitemv);
-                    if (IsPlayerInventory)
-                    {
-                        Player.Instance.UiInventory.AddItem(newitemv);
-                        break;
-                    }
-                }
+                v.Count++;
             }
             else
             {
@@ -118,7 +105,6 @@ public class Inventory : Entity
             }
 
         }
-
     }
     
     public void AddItem(Item item)
@@ -127,7 +113,7 @@ public class Inventory : Entity
 
         bool play = false;
 
-        ItemView v = FindContainsItemWithEmptyStack(item.ItemId);
+        ItemView v = FindContainsItem(item.ItemId);
 
         ItemDataSO data = DatabaseManager.GetItemData(item.ItemId);
 
@@ -140,24 +126,11 @@ public class Inventory : Entity
             {
                 break;
             }
-
-            if (data.IsStack)
+            
+            if (v != null)
             {
-                if (v != null)
-                {
-                    item.Count--;
-                    v.Count++;
-                }
-                else
-                {
-                    ItemView newitemv = new ItemView(item.ItemId, item.Count);
-                    Items.Add(newitemv);
-                    if (IsPlayerInventory)
-                    {
-                        Player.Instance.UiInventory.AddItem(newitemv);
-                        break;
-                    }
-                }
+                item.Count--;
+                v.Count++;
             }
             else
             {
@@ -224,22 +197,6 @@ public class Inventory : Entity
         }
 
         return value;
-    }
-
-    public ItemView FindContainsItemWithEmptyStack(string id)
-    {
-        foreach (var i in Items)
-        {
-            if (i.ItemId == id)
-            {
-                if (i.Count < DatabaseManager.GetItemData(id).MaxStack)
-                {
-                    return i;
-                }
-            }
-        }
-
-        return null;
     }
 
 

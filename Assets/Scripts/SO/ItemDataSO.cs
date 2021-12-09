@@ -11,8 +11,6 @@ public class ItemDataSO : ScriptableObject
     public EquipType equipType;
     public int ItemRare;
     public int Count;
-    public bool IsStack;
-    public int MaxStack;
     public Sprite Sprite;
     public List<Item.ItemStats> ItemStats = new List<Item.ItemStats>();
     public GameObject Prefab;

@@ -13,6 +13,7 @@ public class UiDropPanel : MonoBehaviour
         public Slider DropSlider;
         public Text InventoryCount, ToDropCount;
         public int countToDrop = 1;
+        private Inventory dropinvent;
         private void Start()
         {
                 DropButton.onClick.AddListener(Drop);
@@ -20,7 +21,7 @@ public class UiDropPanel : MonoBehaviour
         }
 
 
-        public void Init(ItemUIElement itemToDrop)
+        public void Init(ItemUIElement itemToDrop, Inventory dropinventory)
         {
                 ItemUIElement = itemToDrop;
                 DropSlider.minValue = 1;
@@ -30,7 +31,8 @@ public class UiDropPanel : MonoBehaviour
                 Image.sprite = DatabaseManager.GetItemData(DropItem.ItemId).Sprite;
                 DropSlider.value = countToDrop;
                 ToDropCount.text = countToDrop.ToString();
-                InventoryCount.text = (DropItem.Count - countToDrop).ToString();  
+                InventoryCount.text = (DropItem.Count - countToDrop).ToString();
+                dropinvent = dropinventory;
         }
         
         private void ValueChangeCheck(float arg0)
@@ -62,9 +64,14 @@ public class UiDropPanel : MonoBehaviour
                         item.transform.position = Player.Instance.dropPoint.position;
                         item.Visualize(true);
                         item.Count = countToDrop;
-                        Player.Instance.PlayerInventory.RemoveItem(DropItem.ItemId);
+                        dropinvent.RemoveItem(DropItem.ItemId);
                         print($@"Item {DropItem.ItemId} dropped ");
-                        UIController.Instance.UiInventory.HideButtons();
+                        
+                        if(dropinvent is Inventory)
+                                UIController.Instance.UiInventory.HideButtons();
+                        if(dropinvent is Chest)
+                                UIController.Instance.ChestInventoryUI.HideButtons();
+                        
                         Destroy(ItemUIElement.gameObject);
                 }
                 gameObject.SetActive(false);
