@@ -6,16 +6,27 @@ using UnityEngine;
 public class Crafter : MonoBehaviour
 {
     public CraftSheme Sheme;
-    private CraftController _craftController;
+    public CraftController _craftController;
     
     private void Start()
     {
         _craftController = new CraftController();
+        _craftController.Init();
     }
-
-    [ContextMenu("OpenCraft")]
+    
     public void OpenCraft()
     {
-        _craftController.OpenCraft(Sheme, Player.Instance.PlayerInventory);
+        _craftController.OpenCraft(Sheme, Player.Instance.PlayerInventory, this);
     }
+
+    public void StartCraft(CrafterUi.BlueprintItemsCollection blueprintItemsCollection)
+    {
+        _craftController.StartCraft(blueprintItemsCollection);
+    }
+
+    public void OpenCraft(CraftSheme sheme, Inventory inventory, Crafter crafter)
+    {
+        _craftController.OpenCraft(sheme, inventory, crafter);
+    }
+    
 }

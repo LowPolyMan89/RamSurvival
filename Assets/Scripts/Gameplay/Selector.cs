@@ -36,36 +36,40 @@ public class Selector : MonoBehaviour
 
     public void Grab()
     {
-        if (hitEntity)
-            {
-                if (hitEntity is Resource)
-                {
-                    _multitool.hitEntity = hitEntity;
-                    _multitool.isCollectingActive = true;
-                }
-
-                if (hitEntity is Item && !hitEntity.CompareTag("Resource"))
-                {
-                    
-                    var item = hitEntity.GetComponent<Item>();
-
-                    switch (item.ItemType)
-                    {
-                        case ItemType.Loot:
-                            Player.Instance.PlayerInventory.AddItem(item);
-                            break;
-                        case ItemType.Equip:
-                            Player.Instance.PlayerInventory.AddItem(item);
-                            break;
-                        case ItemType.Resource:
-                           Player.Instance.PlayerInventory.AddItem(item);
-                            break;
-                        default:
-                            throw new ArgumentOutOfRangeException();
-                    }
-                }
-            }
+        if (!hitEntity) return;
         
+        switch (hitEntity)
+        {
+            case Chest _:
+                print("Select Chest");
+                hitEntity.GetComponent<Chest>().Use(hitEntity.GetComponent<Chest>());
+                break;
+            case Resource _:
+                _multitool.hitEntity = hitEntity;
+                _multitool.isCollectingActive = true;
+                break;
+        }
+
+        if (hitEntity is Item && !hitEntity.CompareTag("Resource"))
+        {
+            var item = hitEntity.GetComponent<Item>();
+
+            switch (item.ItemType)
+            {
+                case ItemType.Loot:
+                    Player.Instance.PlayerInventory.AddItem(item);
+                    break;
+                case ItemType.Equip:
+                    Player.Instance.PlayerInventory.AddItem(item);
+                    break;
+                case ItemType.Resource:
+                    Player.Instance.PlayerInventory.AddItem(item);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+
     }
     
     private void Update()
@@ -92,7 +96,6 @@ public class Selector : MonoBehaviour
         if (Physics.Raycast(ray, out var hit, 20, layerMask))
         {
             Debug.DrawLine(ray.origin, hit.point);
-            // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
             AddSelectionEntity(hit.collider.GetComponent<Entity>());
 
         }

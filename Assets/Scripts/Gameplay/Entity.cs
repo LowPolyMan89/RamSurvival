@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
+
+    public string EntityID;
     
     protected virtual void Start()
     {

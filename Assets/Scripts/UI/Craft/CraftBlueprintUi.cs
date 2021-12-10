@@ -29,6 +29,6 @@ public class CraftBlueprintUi : MonoBehaviour
     
     private void ClickSelectButton()
     {
-        UIController.Instance.CrafterUi.BlueprintSelect(this);
+        UIController.Instance.CrafterUi.BlueprintSelect(this, 1);
     }
 }
