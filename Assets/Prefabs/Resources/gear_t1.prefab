@@ -114,10 +114,10 @@ MonoBehaviour:
   DescriptionId: gear_t1_description_id
   ItemType: 2
   equipType: 1
-  ItemRare: 2
+  ItemRare: 3
   Count: 1
-  IsStack: 1
-  MaxStack: 30
+  IsStack: 0
+  MaxStack: 0
   Sprite: {fileID: 21300000, guid: b7005cf4c01238143898c1818b0e451f, type: 3}
   colliders:
   - {fileID: 5321526115457833616}

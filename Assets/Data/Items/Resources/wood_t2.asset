@@ -16,12 +16,12 @@ MonoBehaviour:
   DescriptionId: wood_t2_description_id
   ItemType: 2
   equipType: 1
-  ItemRare: 1
+  ItemRare: 2
   Count: 0
-  IsStack: 1
-  MaxStack: 20
+  IsStack: 0
+  MaxStack: 0
   Sprite: {fileID: 21300000, guid: 1fc4a5c3bfdba3f4b80249384bcd7fb5, type: 3}
   ItemStats:
   - StatName: Mass
-    StatValue: 1
+    StatValue: 2
   Prefab: {fileID: 671296565591593823, guid: fc3340529964f654284f6a6e6c700df0, type: 3}

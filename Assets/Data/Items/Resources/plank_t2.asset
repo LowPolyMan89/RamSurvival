@@ -16,12 +16,12 @@ MonoBehaviour:
   DescriptionId: plank_t2_description_id
   ItemType: 2
   equipType: 1
-  ItemRare: 1
+  ItemRare: 2
   Count: 0
-  IsStack: 1
-  MaxStack: 20
+  IsStack: 0
+  MaxStack: 0
   Sprite: {fileID: 21300000, guid: 03d160f9589da414fa0d7d02ad076b1b, type: 3}
   ItemStats:
   - StatName: Mass
-    StatValue: 1
+    StatValue: 2
   Prefab: {fileID: 188845022191747606, guid: d0e363657fbc0744d98ba371010fa0f8, type: 3}
