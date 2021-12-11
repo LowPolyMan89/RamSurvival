@@ -9,11 +9,23 @@ public class InventoryCells : MonoBehaviour
     public ItemUIElement ItemUIElement;
     public Button Button;
     public UiInventory UiInventory;
+    public ChestInventoryUI chestUI;
+    public bool IsChest = false;
+    
     private void Start()
     {
         Button = gameObject.GetComponent<Button>();
         Button.onClick.AddListener(Click);
-        UiInventory = Player.Instance.UiInventory;
+        
+        if (!IsChest)
+        {
+            UiInventory = Player.Instance.UiInventory;
+        }
+        else
+        {
+            chestUI = UIController.Instance.ChestInventoryUI;
+        }
+        
     }
 
     public void Click()
@@ -21,11 +33,25 @@ public class InventoryCells : MonoBehaviour
         if (transform.childCount > 0)
         {
             ItemUIElement = transform.GetChild(0).GetComponent<ItemUIElement>();
-            UiInventory.SelectItem(ItemUIElement);
+            if (!IsChest)
+            {
+                UiInventory.SelectItem(ItemUIElement);
+            }
+            else
+            {
+                chestUI.SelectItem(ItemUIElement);
+            }
         }
         else
         {
-            UiInventory.SelectItem(null);
+            if (!IsChest)
+            {
+                UiInventory.SelectItem(null);
+            }
+            else
+            {
+                chestUI.SelectItem(null);
+            }
         }
     }
 }

@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class Item : Entity
@@ -26,7 +28,79 @@ public class Item : Entity
     {
 
     }
+    
+    public void LoadData()
+    {
+        ItemDataSO data = DatabaseManager.GetItemData(ItemId);
+        
+        if (!data)
+        {
+            Debug.LogError("Cant find item with id: " + ItemId);
+            return;
+        }
 
+        gameObject.name = data.ItemId;
+        DescriptionId = data.DescriptionId;
+        ItemType = data.ItemType;
+        equipType = data.equipType;
+        ItemRare = data.ItemRare;
+        Count = 1;
+        Sprite = data.Sprite;
+        gameObject.layer = LayerMask.NameToLayer("Triggered");
+        
+        itemStats.Clear();
+        
+        foreach (var stat in data.ItemStats)
+        {
+            ItemStats ststs = new ItemStats();
+            ststs.StatName = stat.StatName;
+            ststs.StatValue = stat.StatValue;
+            itemStats.Add(ststs);
+        }
+
+        colliders.Clear();
+        
+        foreach (var collider in GetComponents<Collider>())
+        {
+            colliders.Add(collider);
+        }
+
+        rendrers.Clear();
+        
+        foreach (var rend in GetComponents<Renderer>())
+        {
+            rendrers.Add(rend);
+        }
+
+        rigidbody = GetComponent<Rigidbody>();
+        Prefab = gameObject;
+        
+        
+        string localPath = "";
+
+        switch (ItemType)
+        {
+            case ItemType.Equip:
+                localPath = "Assets/Prefabs/Items/" + gameObject.name + ".prefab";
+                break;
+            case ItemType.Loot:
+                localPath = "Assets/Prefabs/Items/" + gameObject.name + ".prefab";
+                break;
+            case ItemType.Resource:
+                localPath = "Assets/Prefabs/Resources/" + gameObject.name + ".prefab";
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+
+        // Make sure the file name is unique, in case an existing Prefab has the same name.
+        localPath = AssetDatabase.GenerateUniqueAssetPath(localPath);
+        // Create the new Prefab.
+        PrefabUtility.SaveAsPrefabAssetAndConnect(gameObject, localPath, InteractionMode.UserAction);
+        Prefab = AssetDatabase.LoadAssetAtPath<GameObject>(localPath);
+        data.Prefab = Prefab;
+    }
+    
     public Item CloneItem(Item item)
     {
         
@@ -132,6 +206,21 @@ public enum ItemType
 public enum EquipType
 {
     Backpack, none
+}
+
+[CustomEditor(typeof(Item))]
+public class ItemEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+
+        Item myScript = (Item)target;
+        if(GUILayout.Button("Load From Database"))
+        {
+            myScript.LoadData();
+        }
+    }
 }
 
 

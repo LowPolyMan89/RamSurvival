@@ -9,6 +9,7 @@ public class CraftBlueprint : ScriptableObject
     public List<BlueprintItem> RequiredItems = new List<BlueprintItem>();
     public BlueprintItem OutputItem;
     public float CraftTimeInSeconds;
+    public float EnergyCost;
 }
 
 
