@@ -3,36 +3,155 @@
     {
       "LocalizationObjectID": "wood_t1_name_id",
       "Local": [
-        "Бревно",
-        "Wood"
+        "Бревно березовое",
+        "Birch log "
       ]
     },
     {
-      "LocalizationObjectID": "wood_t1_desription_id",
+      "LocalizationObjectID": "wood_t2_name_id",
       "Local": [
-        "Простое бревно.....",
-        "English localization...."
+        "Бревно лиственницы",
+        "Larch log "
       ]
     },
     {
-      "LocalizationObjectID": "item3_name_id",
+      "LocalizationObjectID": "plank_t1_name_id",
       "Local": [
-        "Русская локализация",
-        "English localization"
+        "Доска березовая",
+        "Birch plank"
       ]
     },
     {
-      "LocalizationObjectID": "item_4_name_id",
+      "LocalizationObjectID": "plank_t2_name_id",
       "Local": [
-        "Русская локализация4",
-        "English localization42232"
+        "Доска лиственницы",
+        "Larch plank"
       ]
     },
     {
-      "LocalizationObjectID": "item_5_name_id",
+      "LocalizationObjectID": "stone_t1_name_id",
       "Local": [
-        "Русская локализация4555",
-        "English localization4223255555"
+        "Камень",
+        "Stone"
+      ]
+    },
+    {
+      "LocalizationObjectID": "stone_t2_name_id",
+      "Local": [
+        "Глина",
+        "Clay"
+      ]
+    },
+    {
+      "LocalizationObjectID": "stone_block_t1_name_id",
+      "Local": [
+        "Каменный блок",
+        "Stone block "
+      ]
+    },
+    {
+      "LocalizationObjectID": "stone_block_t2_name_id",
+      "Local": [
+        "Кирпич",
+        "Brick "
+      ]
+    },
+    {
+      "LocalizationObjectID": "fur_t1_name_id",
+      "Local": [
+        "Шкура",
+        "Hide"
+      ]
+    },
+    {
+      "LocalizationObjectID": "fur_t2_name_id",
+      "Local": [
+        "Шкура крепкая",
+        "Strong hide"
+      ]
+    },
+    {
+      "LocalizationObjectID": "tanned_leather_t1_name_id",
+      "Local": [
+        "Кожа",
+        "Leather "
+      ]
+    },
+    {
+      "LocalizationObjectID": "tanned_leather_t2_name_id",
+      "Local": [
+        "Кожа крепкая",
+        "Ыекщтп leather "
+      ]
+    },
+    {
+      "LocalizationObjectID": "gear_t1_name_id",
+      "Local": [
+        "Шестеренка",
+        "Gear "
+      ]
+    },
+    {
+      "LocalizationObjectID": "spring_t1_name_id",
+      "Local": [
+        "Пружина",
+        "Spring"
+      ]
+    },
+    {
+      "LocalizationObjectID": "crystal_t1_name_id",
+      "Local": [
+        "Кристалл малый",
+        "Small crystal"
+      ]
+    },
+    {
+      "LocalizationObjectID": "crystal_t2_name_id",
+      "Local": [
+        "Кристалл погодный",
+        "Weather crystal "
+      ]
+    },
+    {
+      "LocalizationObjectID": "metal_t1_name_id",
+      "Local": [
+        "Бронза",
+        "Bronze "
+      ]
+    },
+    {
+      "LocalizationObjectID": "plant_t1_name_id",
+      "Local": [
+        "Топинамбур",
+        "Sunchokes "
+      ]
+    },
+    {
+      "LocalizationObjectID": "meat_t1_name_id",
+      "Local": [
+        "Мясо",
+        "Meat"
+      ]
+    },
+    {
+      "LocalizationObjectID": "fried_plant_t1_name_id",
+      "Local": [
+        "Топинамбур-гриль",
+        "Grilled sunchokes "
+      ]
+    },
+    {
+      "LocalizationObjectID": "fried_legs_t1_name_id",
+      "Local": [
+        "Жареные ножки",
+        "Fried legs "
+      ]
+    },
+    {
+      "LocalizationObjectID": "ragout_t1_name_id",
+      "Local": [
+        "Рагу наваристое",
+        "Rich stew"
       ]
     }
   ]
