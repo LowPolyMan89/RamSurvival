@@ -17,6 +17,8 @@ public class UiInventory : MonoBehaviour
     [SerializeField] private GameObject dropButton;
     public UiDropPanel UiDropPanel;
     public ItemUIElement SelectedItem;
+    public Inventory targetinventory;
+    public ChestInventoryUI ChestInventoryUI;
 
     [ContextMenu("CreateCells")]
     public void CreateCells()
@@ -43,6 +45,11 @@ public class UiInventory : MonoBehaviour
         HideButtons();
     }
 
+    public void OpenChestInventory(Inventory cur, ChestInventoryUI ui)
+    {
+        targetinventory = cur;
+        ChestInventoryUI = ui;
+    }
 
 private void OnDisable()
     {
@@ -146,6 +153,11 @@ private void OnDisable()
     
     public void SelectItem(ItemUIElement itemUIElement)
     {
+        if (ChestInventoryUI != null)
+        {
+            ChestInventoryUI.SelectItem(itemUIElement, Player.Instance.PlayerInventory, ChestInventoryUI.currentInventoryChest);
+        }
+        
         if (itemUIElement == null)
         {
             HideButtons();

@@ -2119,24 +2119,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a356139304aa604ea47ca0dc0860a08, type: 3}
---- !u!1 &3967075503267989635 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3967075503267989635, guid: 7737647c22c1fc64a88d5cd030c352ce, type: 3}
-  m_PrefabInstance: {fileID: 6700185321875470853}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &3967075503267989636
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3967075503267989635}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b257f338c6b12f44f932bf76d3c89714, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Sheme: {fileID: 11400000, guid: ee79721cc939f1a46ac1e230d91e510a, type: 2}
 --- !u!4 &4343214460069024313 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4343214460069024313, guid: 7737647c22c1fc64a88d5cd030c352ce, type: 3}
@@ -2680,15 +2662,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 408730, guid: 7737647c22c1fc64a88d5cd030c352ce, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 21.598362
+      value: 20.51
       objectReference: {fileID: 0}
     - target: {fileID: 408730, guid: 7737647c22c1fc64a88d5cd030c352ce, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.062000692
+      value: 0.44
       objectReference: {fileID: 0}
     - target: {fileID: 408730, guid: 7737647c22c1fc64a88d5cd030c352ce, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6.141556
+      value: 4.3
       objectReference: {fileID: 0}
     - target: {fileID: 408730, guid: 7737647c22c1fc64a88d5cd030c352ce, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2722,10 +2704,6 @@ PrefabInstance:
       propertyPath: UiInventory
       value: 
       objectReference: {fileID: 545269857}
-    - target: {fileID: 826835037052461837, guid: 7737647c22c1fc64a88d5cd030c352ce, type: 3}
-      propertyPath: playerCrafter
-      value: 
-      objectReference: {fileID: 3967075503267989636}
     - target: {fileID: 6122354053395604894, guid: 7737647c22c1fc64a88d5cd030c352ce, type: 3}
       propertyPath: shootPoint
       value: 

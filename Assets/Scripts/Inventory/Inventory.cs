@@ -77,7 +77,7 @@ public class Inventory : Entity
         return Items.Where(item => item.ItemId == id).ToList();
     }
 
-    public void AddItem(string ItemId, int value)
+    public virtual void AddItem(string ItemId, int value)
     {
         int count = value;
 
@@ -87,11 +87,10 @@ public class Inventory : Entity
 
         ItemDataSO data = DatabaseManager.GetItemData(ItemId);
 
-        for (int i = 0; i < count; i++)
-        {
+    
             if (v != null)
             {
-                v.Count++;
+                v.Count += value;
             }
             else
             {
@@ -100,11 +99,10 @@ public class Inventory : Entity
                 if (IsPlayerInventory)
                 {
                     Player.Instance.UiInventory.AddItem(newitemv);
-                    break;
                 }
             }
 
-        }
+        
     }
     
     public void AddItem(Item item)

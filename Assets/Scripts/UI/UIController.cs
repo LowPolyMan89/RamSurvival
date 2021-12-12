@@ -16,6 +16,7 @@ public class UIController : MonoBehaviour
 	public CrafterUi CrafterUi;
 	public ChestInventoryUI ChestInventoryUI;
 	public UiDropPanel UiDropPanel;
+	public UiMovePanel UiMovePanel;
 	public Transform MainInventory;
 	public EquipUISlot GetEqipSlot(string itemid)
 	{

@@ -9,10 +9,12 @@ public class ChestInventoryUI : MonoBehaviour
     public Chest currentInventoryChest;
     public Transform chestInventoryPanel;
     public GameObject inventoryCellPrefab;
-    [SerializeField] private Button moveButton;
+    public Button moveButton;
     [SerializeField] private Button infoButton;
     [SerializeField] private Button dropButton;
     [SerializeField] private ItemUIElement _itemUIElement;
+    public Inventory frominventory;
+    public Inventory toinventory;
     public List<InventoryCells> InventoryCellses = new List<InventoryCells>();
     
     public ItemUIElement SelectedItem { get; set; }
@@ -27,9 +29,11 @@ public class ChestInventoryUI : MonoBehaviour
     {
         StartCoroutine(CustomUpdate());
         HideButtons();
+        Player.Instance.UiInventory.OpenChestInventory(currentInventoryChest, this);
     }
     private void OnDisable()
     {
+        Player.Instance.UiInventory.OpenChestInventory(null, null);
         StopCoroutine(CustomUpdate());
     }
 
@@ -44,6 +48,35 @@ public class ChestInventoryUI : MonoBehaviour
             InventoryCellses.Add(chestInventoryPanel.GetChild(i).GetComponent<InventoryCells>());
         }
     }
+
+    public void SelectItem(ItemUIElement itemUIElement, Inventory from, Inventory to)
+    {
+        if (itemUIElement == null)
+        {
+            HideButtons();
+            return;
+        }
+
+        
+        
+        frominventory = from;
+        toinventory = to;
+        SelectedItem = itemUIElement;
+        
+        ShowButtons();
+        
+        if (to == currentInventoryChest)
+        {
+            bool test = !(currentInventoryChest.Items.Count >= currentInventoryChest.Sloots);
+
+            if (currentInventoryChest.FindContainsItem(itemUIElement.Item.ItemId) != null)
+            {
+                test = true;
+            }
+            
+            moveButton.gameObject.SetActive(test);
+        }
+    }
     
     public void SelectItem(ItemUIElement itemUIElement)
     {
@@ -52,6 +85,9 @@ public class ChestInventoryUI : MonoBehaviour
             HideButtons();
             return;
         }
+
+        frominventory = currentInventoryChest;
+        toinventory = Player.Instance.PlayerInventory;
         SelectedItem = itemUIElement;
         
         ShowButtons();
@@ -62,7 +98,18 @@ public class ChestInventoryUI : MonoBehaviour
         UIController.Instance.UiDropPanel.gameObject.SetActive(true);
         UIController.Instance.UiDropPanel.Init(SelectedItem, currentInventoryChest);
     }
+    
+    private void MoveButtonUse()
+    {
+        UIController.Instance.UiMovePanel.gameObject.SetActive(true);
+        InitMove(frominventory, toinventory);
+    }
 
+    public void InitMove(Inventory frominventory, Inventory toinventory)
+    {
+        UIController.Instance.UiMovePanel.Init(SelectedItem, frominventory, toinventory);
+    }
+    
     public void InfoButtonUse()
     {
         print(SelectedItem.Item.ItemId);
@@ -80,11 +127,15 @@ public class ChestInventoryUI : MonoBehaviour
         moveButton.gameObject.SetActive(true);
         infoButton.gameObject.SetActive(true);
         dropButton.gameObject.SetActive(true);
+        
+        
     }
     
     private IEnumerator CustomUpdate()
     {
         yield return new WaitForSeconds(0.1f);
+
+       // moveButton.gameObject.SetActive(currentInventoryChest.Items.Count < currentInventoryChest.Sloots);
 
         foreach (var cell in InventoryCellses)
         {
@@ -121,11 +172,6 @@ public class ChestInventoryUI : MonoBehaviour
         return null;
     }
     
-    
-    private void MoveButtonUse()
-    {
-        
-    }
 
     public void Open(Chest chest)
     {
