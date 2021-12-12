@@ -7,11 +7,15 @@ public class Crafter : MonoBehaviour
 {
     public CraftSheme Sheme;
     public CraftController _craftController;
+    public int CraftSlots;
+    public CraftersDataSO Data;
+    public int Level = 1;
     
     private void Start()
     {
         _craftController = new CraftController();
         _craftController.Init();
+        CraftSlots = Mathf.Clamp(CraftSlots, 0, 5);
     }
     
     public void OpenCraft()

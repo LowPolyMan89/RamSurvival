@@ -8,6 +8,7 @@ public static class DatabaseManager
 {
     private static ItemDBSO _itemsDatabase;
     public static readonly Dictionary<string, ItemDataSO> ItemsData = new Dictionary<string, ItemDataSO>();
+    public static OtherDataSO OtherData;
     
     [MenuItem("DatabaseManager/LoadDatabase")]
     public static void LoadItemsDatabase()
@@ -15,7 +16,11 @@ public static class DatabaseManager
        var result = AssetDatabase.FindAssets("ItemDatabase");
        var path = AssetDatabase.GUIDToAssetPath(result[0]);
        
+       var otherGUID = AssetDatabase.FindAssets("OtherDataSO");
+       var otherPath = AssetDatabase.GUIDToAssetPath(otherGUID[0]);
+       
        _itemsDatabase = (ItemDBSO)AssetDatabase.LoadAssetAtPath(path, typeof(ItemDBSO));
+       OtherData = (OtherDataSO)AssetDatabase.LoadAssetAtPath(otherPath, typeof(OtherDataSO));
 
        foreach (var data in _itemsDatabase.ItemsData)
        {
