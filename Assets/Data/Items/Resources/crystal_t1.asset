@@ -16,12 +16,12 @@ MonoBehaviour:
   DescriptionId: crystal_t1_description_id
   ItemType: 2
   equipType: 1
-  ItemRare: 1
+  ItemRare: 3
   Count: 0
-  IsStack: 1
-  MaxStack: 30
+  IsStack: 0
+  MaxStack: 0
   Sprite: {fileID: 21300000, guid: f853997c4644bc3429d4d016dc07f861, type: 3}
   ItemStats:
   - StatName: Mass
     StatValue: 1
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 1481852541583598238, guid: 7e18b1653ea4ec04eaa1502c8d0254d4, type: 3}

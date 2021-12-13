@@ -10,20 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 94dd1e8b6e023f644a132b89aef74ffb, type: 3}
-  m_Name: StarterBackpack
+  m_Name: stone_block_t2
   m_EditorClassIdentifier: 
-  ItemId: StarterBackpack_name_id
-  DescriptionId: StarterBackpack_description_id
-  ItemType: 0
-  equipType: 0
-  ItemRare: 1
+  ItemId: stone_block_t2_name_id
+  DescriptionId: stone_block_t2_description_id
+  ItemType: 2
+  equipType: 1
+  ItemRare: 2
   Count: 0
   IsStack: 0
-  MaxStack: 1
-  Sprite: {fileID: 21300000, guid: e7cea69c61aa4ba4ca2f15870dffd9a3, type: 3}
+  MaxStack: 0
+  Sprite: {fileID: 21300000, guid: a5287c80e2e6f0b4299e25e6728e9b7b, type: 3}
   ItemStats:
   - StatName: Mass
-    StatValue: 1
-  - StatName: MaxMass
-    StatValue: 50
-  Prefab: {fileID: 4946865384954191845, guid: 2699ed34b5862a74084d5a2e69a13cfa, type: 3}
+    StatValue: 2
+  Prefab: {fileID: 1528149535423254706, guid: 3226b5b47842e98478799f05bce935d3, type: 3}

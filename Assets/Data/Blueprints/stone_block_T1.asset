@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34c5118a57faf244a8d422cd142a996f, type: 3}
   m_Name: stone_block_T1
   m_EditorClassIdentifier: 
-  BlueprintId: stone_block_T1_name_id
+  BlueprintId: stone_block_t1_name_id
   Constrainses: []
   RequiredItems:
   - ItemId: stone_t1_name_id
     ItemValue: 5
   OutputItem:
-    ItemId: stone_block_T1_name_id
+    ItemId: stone_block_t1_name_id
     ItemValue: 1
   CraftTimeInSeconds: 30
   EnergyCost: 10

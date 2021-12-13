@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4946865384954191845
+--- !u!1 &4818043578232395043
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,48 +8,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6893795763665929613}
-  - component: {fileID: 3309149199192208902}
-  - component: {fileID: 8989775309400420859}
-  - component: {fileID: 6479799719001947198}
-  - component: {fileID: 4516966827054202658}
-  - component: {fileID: 7258509035089072599}
+  - component: {fileID: 7765571564651313181}
+  - component: {fileID: 1663028253965144430}
+  - component: {fileID: 351156723338851643}
+  - component: {fileID: 6782549033834201698}
+  - component: {fileID: 5838079655618036341}
+  - component: {fileID: 3950466464966376635}
   m_Layer: 7
-  m_Name: StarterBackpack
+  m_Name: tanned_leather_t2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6893795763665929613
+--- !u!4 &7765571564651313181
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4946865384954191845}
+  m_GameObject: {fileID: 4818043578232395043}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 20.184, y: 0.385, z: 8.218}
-  m_LocalScale: {x: 0.41784, y: 0.41784, z: 0.41784}
+  m_LocalPosition: {x: 24.36, y: 0.88, z: 7.632}
+  m_LocalScale: {x: 0.8, y: 0.1, z: 0.8}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &3309149199192208902
+--- !u!33 &1663028253965144430
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4946865384954191845}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &8989775309400420859
+  m_GameObject: {fileID: 4818043578232395043}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &351156723338851643
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4946865384954191845}
+  m_GameObject: {fileID: 4818043578232395043}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -84,27 +84,56 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &6479799719001947198
-CapsuleCollider:
+--- !u!65 &6782549033834201698
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4946865384954191845}
+  m_GameObject: {fileID: 4818043578232395043}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &4516966827054202658
+--- !u!114 &5838079655618036341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4818043578232395043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37b09050eb6b1834d8b270421fd442d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ItemId: tanned_leather_t2_name_id
+  DescriptionId: tanned_leather_t2_description_id
+  ItemType: 2
+  equipType: 1
+  ItemRare: 2
+  Count: 1
+  IsStack: 0
+  MaxStack: 0
+  Sprite: {fileID: 21300000, guid: 6a9f5ae0cf12ff54fab1f9cd848a7f04, type: 3}
+  colliders:
+  - {fileID: 6782549033834201698}
+  rendrers:
+  - {fileID: 351156723338851643}
+  itemStats:
+  - StatName: Mass
+    StatValue: 1
+  rigidbody: {fileID: 3950466464966376635}
+  Prefab: {fileID: 4818043578232395043}
+--- !u!54 &3950466464966376635
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4946865384954191845}
+  m_GameObject: {fileID: 4818043578232395043}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -114,35 +143,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &7258509035089072599
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4946865384954191845}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37b09050eb6b1834d8b270421fd442d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ItemId: StarterBackpack_name_id
-  DescriptionId: StarterBackpack_description_id
-  ItemType: 0
-  equipType: 0
-  ItemRare: 1
-  Count: 1
-  IsStack: 0
-  MaxStack: 1
-  Sprite: {fileID: 21300000, guid: e7cea69c61aa4ba4ca2f15870dffd9a3, type: 3}
-  colliders:
-  - {fileID: 6479799719001947198}
-  rendrers:
-  - {fileID: 8989775309400420859}
-  itemStats:
-  - StatName: Mass
-    StatValue: 1
-  - StatName: MaxMass
-    StatValue: 50
-  rigidbody: {fileID: 4516966827054202658}
-  Prefab: {fileID: 4946865384954191845}

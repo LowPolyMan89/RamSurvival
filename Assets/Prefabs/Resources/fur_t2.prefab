@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8978128084545615601
+--- !u!1 &8669300816824164074
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,48 +8,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3505946510683960525}
-  - component: {fileID: 813061003753117194}
-  - component: {fileID: 6429093865626127672}
-  - component: {fileID: 1719241938591887512}
-  - component: {fileID: 3768124804658182711}
-  - component: {fileID: 7684758921616650170}
+  - component: {fileID: 6816119405174972180}
+  - component: {fileID: 5803733084150017288}
+  - component: {fileID: 8090350949316240177}
+  - component: {fileID: 7078918520439449153}
+  - component: {fileID: 4117370498068012569}
+  - component: {fileID: 3622818229101225435}
   m_Layer: 7
-  m_Name: fried_legs_t1
+  m_Name: fur_t2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3505946510683960525
+--- !u!4 &6816119405174972180
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8978128084545615601}
+  m_GameObject: {fileID: 8669300816824164074}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 17.204, y: 0.42, z: 10.005214}
-  m_LocalScale: {x: 0.4, y: 0.2, z: 0.4}
+  m_LocalPosition: {x: 22.34, y: 0.7, z: 9.32}
+  m_LocalScale: {x: 1, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &813061003753117194
+--- !u!33 &5803733084150017288
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8978128084545615601}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &6429093865626127672
+  m_GameObject: {fileID: 8669300816824164074}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &8090350949316240177
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8978128084545615601}
+  m_GameObject: {fileID: 8669300816824164074}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -84,57 +84,56 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &1719241938591887512
-CapsuleCollider:
+--- !u!65 &7078918520439449153
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8978128084545615601}
+  m_GameObject: {fileID: 8669300816824164074}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
---- !u!114 &3768124804658182711
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4117370498068012569
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8978128084545615601}
+  m_GameObject: {fileID: 8669300816824164074}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37b09050eb6b1834d8b270421fd442d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemId: fried_legs_t1_name_id
-  DescriptionId: fried_legs_t1_description_id
+  ItemId: fur_t2_name_id
+  DescriptionId: fur_t2_description_id
   ItemType: 2
   equipType: 1
-  ItemRare: 1
+  ItemRare: 2
   Count: 1
-  IsStack: 1
-  MaxStack: 10
-  Sprite: {fileID: 21300000, guid: 993ca6ea597f4084b9aa841f4fb54385, type: 3}
+  IsStack: 0
+  MaxStack: 0
+  Sprite: {fileID: 21300000, guid: 0759cbbeff5fd6a45ba08ab719dcf157, type: 3}
   colliders:
-  - {fileID: 1719241938591887512}
+  - {fileID: 7078918520439449153}
   rendrers:
-  - {fileID: 6429093865626127672}
+  - {fileID: 8090350949316240177}
   itemStats:
   - StatName: Mass
     StatValue: 1
-  rigidbody: {fileID: 7684758921616650170}
-  Prefab: {fileID: 8978128084545615601}
---- !u!54 &7684758921616650170
+  rigidbody: {fileID: 3622818229101225435}
+  Prefab: {fileID: 8669300816824164074}
+--- !u!54 &3622818229101225435
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8978128084545615601}
+  m_GameObject: {fileID: 8669300816824164074}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0

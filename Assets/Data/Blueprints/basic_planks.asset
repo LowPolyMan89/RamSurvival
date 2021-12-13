@@ -15,7 +15,7 @@ MonoBehaviour:
   BlueprintId: plank_t1_name_id
   Constrainses: []
   RequiredItems:
-  - ItemId: wood_T1_name_id
+  - ItemId: wood_t1_name_id
     ItemValue: 5
   OutputItem:
     ItemId: plank_t1_name_id
