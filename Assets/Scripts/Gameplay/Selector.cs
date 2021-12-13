@@ -44,6 +44,11 @@ public class Selector : MonoBehaviour
                 print("Select Chest");
                 hitEntity.GetComponent<Chest>().Use(hitEntity.GetComponent<Chest>());
                 break;
+            case Crafter _:
+                print("Open Crafter");
+                Crafter cr = hitEntity.GetComponent<Crafter>();
+                UIController.Instance.OpenCraftPanel(cr.Sheme, Player.Instance.PlayerInventory, cr);
+                break;
             case Resource _:
                 _multitool.hitEntity = hitEntity;
                 _multitool.isCollectingActive = true;

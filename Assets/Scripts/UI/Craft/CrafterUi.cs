@@ -18,6 +18,7 @@ public class CrafterUi : MonoBehaviour
     public List<CraftBlueprintUi> CraftBlueprintUis = new List<CraftBlueprintUi>();
     public List<CraftSlotUI> CraftSlotsUi = new List<CraftSlotUI>();
     public Crafter CurrentCrafter;
+    public Inventory CurrentInventory;
     private CraftBlueprintUi currentBlueprint;
     private BlueprintItemsCollection blueprintItemsCollection;
     
@@ -36,6 +37,17 @@ public class CrafterUi : MonoBehaviour
         EventManager.Instance.OnTimerSecondAction -= OneSecondTick;
     }
 
+    private void Update()
+    {
+        if (CurrentCrafter != null)
+        {
+            if (CurrentCrafter._craftController.CraftProcesses.Count >= CurrentCrafter.Data.Levels[0].Slots)
+            {
+                StartCraftButton.interactable = false;
+            }
+        }
+    }
+
     private void OneSecondTick()
     {
         if (CurrentCrafter._craftController.CraftProcesses.Count > 0)
@@ -45,11 +57,8 @@ public class CrafterUi : MonoBehaviour
                 CraftProcess proc = CurrentCrafter._craftController.CraftProcesses.ToArray()[i];
                 CraftSlotsUi[i].Item = proc.OutputItem;
                 CraftSlotsUi[i].ItemImage.sprite = DatabaseManager.GetItemData(proc.OutputItem).Sprite;
-                
                 CraftSlotsUi[i].TimerText.text = proc.CraftTimeMax - proc.CurrentTime <= 0 ? "READY" : Support.ConvertTimeSecondsToString(proc.CraftTimeMax - proc.CurrentTime);
-                
                 CraftSlotsUi[i].IsActive = true;
-    
             }
             
             var p = CurrentCrafter._craftController.CraftProcesses[0];
@@ -66,8 +75,10 @@ public class CrafterUi : MonoBehaviour
             }
             
             CraftSlotsUi[0].Time = time;
+  
         }
     }
+    
     
     public void Refresh()
     {
@@ -78,13 +89,21 @@ public class CrafterUi : MonoBehaviour
     {
         CraftBlueprintUis.Clear();
         CurrentCrafter = crafter;
+        CurrentInventory = inventory;
         for (int i = 0; i < crafterBlueprintPanel.childCount; i++)
         {
             Destroy(crafterBlueprintPanel.GetChild(i).gameObject, 0.1f);
         }
         CreateBlueprints(sheme);
         BlueprintSelect(CraftBlueprintUis[0], 1);
-
+        CreateSlots();
+        crafter.OpenCraft(sheme, inventory, crafter);
+        OneSecondTick();
+    }
+    
+    
+    private void CreateSlots()
+    {
         foreach (var slot in CraftSlotsUi)
         {
             slot.gameObject.SetActive(false);
@@ -97,13 +116,12 @@ public class CrafterUi : MonoBehaviour
             slo.Init(DatabaseManager.OtherData.emptySprite, null);
             slo.TimerText.text = "";
         }
-        
-        crafter.OpenCraft(sheme, inventory, crafter);
     }
     
     private void StartCraftButtonClick()
     {
         CurrentCrafter.StartCraft(blueprintItemsCollection);
+        OneSecondTick();
     }
 
     public void CreateBlueprints(CraftSheme sheme)
@@ -216,4 +234,8 @@ public class CrafterUi : MonoBehaviour
     }
 
 
+    public void GetButtonClick()
+    {
+        Open(CurrentCrafter.Sheme, CurrentInventory, CurrentCrafter);
+    }
 }

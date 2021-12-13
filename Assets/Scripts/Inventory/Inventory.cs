@@ -118,12 +118,12 @@ public class Inventory : Entity
         for (int i = 0; i < count; i++)
         {
 
-            play = TryToAddItem(item.ItemId);
+            //play = TryToAddItem(item.ItemId);
 
-            if (!play)
-            {
-                break;
-            }
+           // if (!play)
+           // {
+              //  break;
+           // }
             
             if (v != null)
             {

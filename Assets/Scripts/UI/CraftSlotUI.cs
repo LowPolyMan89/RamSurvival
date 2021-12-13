@@ -13,12 +13,15 @@ public class CraftSlotUI : MonoBehaviour
     public string Item;
     public bool IsActive = false;
     public bool IsComplite = false;
+    public bool IsGet = false;
     public float Time;
     public Crafter processCrafter;
+    public CrafterUi UI;
 
     private void Start()
     {
         GetButton.onClick.AddListener(GetButtonClick);
+        UI = FindObjectOfType<CrafterUi>();
     }
 
     public void Init(Sprite itemSprite, string item)
@@ -35,7 +38,9 @@ public class CraftSlotUI : MonoBehaviour
             GetButton.interactable = false;
             IsActive = false;
             IsComplite = false;
+            IsGet = true;
             processCrafter._craftController.CollectItem();
+            UI.GetButtonClick();
         }
     }
     

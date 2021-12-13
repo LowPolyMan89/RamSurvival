@@ -2258,6 +2258,7 @@ MonoBehaviour:
   chestUi: {fileID: 113634927330379386}
   UiInventory: {fileID: 545453797071005295}
   CrafterUi: {fileID: 648721609985411263}
+  craftPanel: {fileID: 2428094448349550044}
   ChestInventoryUI: {fileID: 6459289641075222780}
   UiDropPanel: {fileID: 8116742934127983530}
   UiMovePanel: {fileID: 4434847924077285362}
@@ -9871,6 +9872,7 @@ MonoBehaviour:
   - {fileID: 1540233883890384144}
   - {fileID: 6825141363552062359}
   CurrentCrafter: {fileID: 0}
+  CurrentInventory: {fileID: 0}
 --- !u!1 &7008114006799188586
 GameObject:
   m_ObjectHideFlags: 0
@@ -15472,6 +15474,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slot (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6448916223876171752, guid: 52c56d1e8c59d2d48a419dcbcd44f6d4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52c56d1e8c59d2d48a419dcbcd44f6d4, type: 3}
 --- !u!224 &3086411358984559614 stripped
@@ -15746,6 +15752,10 @@ PrefabInstance:
     - target: {fileID: 5792132795792413391, guid: 52c56d1e8c59d2d48a419dcbcd44f6d4, type: 3}
       propertyPath: m_Name
       value: Slot (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6448916223876171752, guid: 52c56d1e8c59d2d48a419dcbcd44f6d4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52c56d1e8c59d2d48a419dcbcd44f6d4, type: 3}
@@ -19070,6 +19080,10 @@ PrefabInstance:
     - target: {fileID: 5792132795792413391, guid: 52c56d1e8c59d2d48a419dcbcd44f6d4, type: 3}
       propertyPath: m_Name
       value: Slot (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6448916223876171752, guid: 52c56d1e8c59d2d48a419dcbcd44f6d4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52c56d1e8c59d2d48a419dcbcd44f6d4, type: 3}
@@ -23480,6 +23494,10 @@ PrefabInstance:
     - target: {fileID: 5792132795792413391, guid: 52c56d1e8c59d2d48a419dcbcd44f6d4, type: 3}
       propertyPath: m_Name
       value: Slot (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6448916223876171752, guid: 52c56d1e8c59d2d48a419dcbcd44f6d4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52c56d1e8c59d2d48a419dcbcd44f6d4, type: 3}

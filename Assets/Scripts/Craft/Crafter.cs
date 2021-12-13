@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Crafter : MonoBehaviour
+public class Crafter : Entity
 {
     public CraftSheme Sheme;
     public CraftController _craftController;
