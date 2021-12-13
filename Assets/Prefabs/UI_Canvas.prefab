@@ -2258,6 +2258,7 @@ MonoBehaviour:
   chestUi: {fileID: 113634927330379386}
   UiInventory: {fileID: 545453797071005295}
   CrafterUi: {fileID: 648721609985411263}
+  craftPanel: {fileID: 2428094448349550044}
   ChestInventoryUI: {fileID: 6459289641075222780}
   UiDropPanel: {fileID: 8116742934127983530}
   UiMovePanel: {fileID: 4434847924077285362}
@@ -9871,6 +9872,7 @@ MonoBehaviour:
   - {fileID: 1540233883890384144}
   - {fileID: 6825141363552062359}
   CurrentCrafter: {fileID: 0}
+  CurrentInventory: {fileID: 0}
 --- !u!1 &7008114006799188586
 GameObject:
   m_ObjectHideFlags: 0
