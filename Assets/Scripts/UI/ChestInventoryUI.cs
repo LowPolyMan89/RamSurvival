@@ -34,6 +34,15 @@ public class ChestInventoryUI : MonoBehaviour
     private void OnDisable()
     {
         Player.Instance.UiInventory.OpenChestInventory(null, null);
+        
+        foreach (var cell in InventoryCellses)
+        {
+            if (cell.transform.childCount > 0)
+            {
+                Destroy(cell.transform.GetChild(0).gameObject, 0.01f);
+            }
+        }
+        
         StopCoroutine(CustomUpdate());
     }
 
@@ -45,6 +54,7 @@ public class ChestInventoryUI : MonoBehaviour
         {
             InventoryCells cell = Instantiate(inventoryCellPrefab, chestInventoryPanel).GetComponent<InventoryCells>();
             cell.transform.localPosition = Vector3.zero;
+            cell.chestUI = this;
             InventoryCellses.Add(chestInventoryPanel.GetChild(i).GetComponent<InventoryCells>());
         }
     }
@@ -56,15 +66,10 @@ public class ChestInventoryUI : MonoBehaviour
             HideButtons();
             return;
         }
-
-        
-        
         frominventory = from;
         toinventory = to;
         SelectedItem = itemUIElement;
-        
         ShowButtons();
-        
         if (to == currentInventoryChest)
         {
             bool test = !(currentInventoryChest.Items.Count >= currentInventoryChest.Sloots);
@@ -160,6 +165,17 @@ public class ChestInventoryUI : MonoBehaviour
         itemUIElement.Item = item;
     }
     
+    public void AddItem(ItemView item, Inventory iteminventory)
+    {
+        //create item ui
+        ItemUIElement itemUIElement = Instantiate(_itemUIElement);
+        itemUIElement.transform.SetParent(GetEmptyCell());
+        itemUIElement.transform.localPosition = Vector3.zero;
+        itemUIElement.Item = item;
+        itemUIElement.ItemInventory = iteminventory;
+
+    }
+    
     public Transform GetEmptyCell()
     {
         foreach (var v in InventoryCellses)
@@ -195,7 +211,7 @@ public class ChestInventoryUI : MonoBehaviour
         {
             foreach (var item in chest.Items)
             {
-                AddItem(item);
+                AddItem(item, chest);
             }
         }
 

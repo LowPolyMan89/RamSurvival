@@ -12,7 +12,7 @@ public class Inventory : Entity
     public float CurrentCapacity { get; set; }
     public int Sloots;
     public float MaxMass;
-
+    public int MaxCapacity;
     public void RemoveItem(string item)
     {
         ItemView i = GetItem(item);
@@ -39,7 +39,7 @@ public class Inventory : Entity
 
         ItemView newitemv = new ItemView(id, 1);
         Items.Add(newitemv);
-        Player.Instance.UiInventory.AddItem(newitemv);
+        Player.Instance.UiInventory.AddItem(newitemv, this);
 
     }
 
@@ -98,7 +98,7 @@ public class Inventory : Entity
                 Items.Add(newitemv);
                 if (IsPlayerInventory)
                 {
-                    Player.Instance.UiInventory.AddItem(newitemv);
+                    Player.Instance.UiInventory.AddItem(newitemv, this);
                 }
             }
 
@@ -115,20 +115,10 @@ public class Inventory : Entity
 
         ItemDataSO data = DatabaseManager.GetItemData(item.ItemId);
 
-        for (int i = 0; i < count; i++)
-        {
-
-            //play = TryToAddItem(item.ItemId);
-
-           // if (!play)
-           // {
-              //  break;
-           // }
-            
+ 
             if (v != null)
             {
-                item.Count--;
-                v.Count++;
+                v.Count += count;
             }
             else
             {
@@ -136,23 +126,11 @@ public class Inventory : Entity
                 Items.Add(newitemv);
                 if (IsPlayerInventory)
                 {
-                    Player.Instance.UiInventory.AddItem(newitemv);
-                    break;
+                    Player.Instance.UiInventory.AddItem(newitemv, this);
                 }
             }
-
-        }
-
-        if (play)
-        {
+            
             Destroy(item.gameObject);
-        }
-
-        if (item.Count == 0)
-        {
-            Destroy(item.gameObject);
-        }
-
     }
 
     public ItemView FindContainsItem(string id)
@@ -259,4 +237,24 @@ public class Inventory : Entity
     }
 
 
+    public virtual bool CheckToAdd(ItemView item)
+    {
+        bool check = false;
+        
+        if (FindContainsItem(item.ItemId) != null)
+        {
+            check = true;
+            return check;
+        }
+
+        if (MaxCapacity > Items.Count)
+        {
+            check = true;
+            return check;
+        }
+
+        return check;
+    }
+
+ 
 }

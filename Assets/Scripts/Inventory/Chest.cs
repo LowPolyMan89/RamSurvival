@@ -29,9 +29,27 @@ public class Chest : Inventory, IInteractive<Chest>
         {
             ItemView newitemv = new ItemView(ItemId, count);
             Items.Add(newitemv);
- 
-            UIController.Instance.ChestInventoryUI.AddItem(newitemv);
+            UIController.Instance.ChestInventoryUI.AddItem(newitemv, this);
         }
 
+    }
+
+    public override bool CheckToAdd(ItemView item)
+    {
+        bool check = false;
+        
+        if (FindContainsItem(item.ItemId) != null)
+        {
+            check = true;
+            return check;
+        }
+
+        if (Sloots > Items.Count)
+        {
+            check = true;
+            return check;
+        }
+
+        return check;
     }
 }
