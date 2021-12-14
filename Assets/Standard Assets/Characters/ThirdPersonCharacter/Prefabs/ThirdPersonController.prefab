@@ -3069,6 +3069,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 572a35ba97e2a9240bfaa3faf6d64657, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EntityID: 
   Items: []
   IsPlayerInventory: 1
   Sloots: 0
@@ -3086,6 +3087,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Sheme: {fileID: 11400000, guid: ee79721cc939f1a46ac1e230d91e510a, type: 2}
+  CraftSlots: 0
+  Data: {fileID: 11400000, guid: 1a3a3cc1d1e0e50469e309fe43d21c83, type: 2}
+  Level: 1
 --- !u!1 &4239862501015867163
 GameObject:
   m_ObjectHideFlags: 0

@@ -115,8 +115,8 @@ MonoBehaviour:
   equipType: 1
   ItemRare: 1
   Count: 1
-  IsStack: 1
-  MaxStack: 10
+  IsStack: 0
+  MaxStack: 0
   Sprite: {fileID: 21300000, guid: 0533417d27dd4a449aeb1ec86e1bffb9, type: 3}
   colliders:
   - {fileID: 8839622374880628693}

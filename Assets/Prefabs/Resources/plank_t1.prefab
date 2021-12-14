@@ -126,14 +126,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37b09050eb6b1834d8b270421fd442d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemId: BasicPlank_name_id
-  DescriptionId: BasicPlank_description_id
+  ItemId: plank_t1_name_id
+  DescriptionId: plank_t1_description_id
   ItemType: 2
   equipType: 1
   ItemRare: 1
   Count: 1
-  IsStack: 1
-  MaxStack: 20
+  IsStack: 0
+  MaxStack: 0
   Sprite: {fileID: 21300000, guid: 11307cef70ab9f8439f76b2389ade7f3, type: 3}
   colliders:
   - {fileID: 3064551741890125926}
@@ -141,6 +141,6 @@ MonoBehaviour:
   - {fileID: 2412021423782227544}
   itemStats:
   - StatName: Mass
-    StatValue: 1
+    StatValue: 2
   rigidbody: {fileID: 8934673471676562982}
   Prefab: {fileID: 6554397708101141748}

@@ -14,6 +14,7 @@ public class UIController : MonoBehaviour
 	[SerializeField] private Transform chestUi;
 	public UiInventory UiInventory;
 	public CrafterUi CrafterUi;
+	public Transform craftPanel;
 	public ChestInventoryUI ChestInventoryUI;
 	public UiDropPanel UiDropPanel;
 	public UiMovePanel UiMovePanel;
@@ -101,6 +102,7 @@ public class UIController : MonoBehaviour
 	
 	public void OpenCraftPanel(CraftSheme sheme, Inventory inventoryToGetItems, Crafter currentcrafter)
 	{
+		craftPanel.gameObject.SetActive(true);
 		CrafterUi.Open(sheme, inventoryToGetItems, currentcrafter);
 	}
 

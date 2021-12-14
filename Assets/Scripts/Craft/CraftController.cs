@@ -6,7 +6,7 @@ public class CraftController
 {
     public CraftSheme Sheme;
     public Inventory InventoryToGetItems;
-    public readonly Queue<CraftProcess> CraftProcesses = new Queue<CraftProcess>();
+    public readonly List<CraftProcess> CraftProcesses = new List<CraftProcess>();
 
     public void Init()
     {
@@ -21,32 +21,46 @@ public class CraftController
 
     public void StartCraft(CrafterUi.BlueprintItemsCollection blueprintItemsCollection)
     {
+        float nexttime = 0;
+        
         Player.Instance.PlayerStats.Energy -= blueprintItemsCollection.Energy;
 
         foreach (var removeitem in blueprintItemsCollection.Items)
         {
             InventoryToGetItems.MassRemoveItem(removeitem.Item.ItemId, removeitem.Count);
         }
+        UIController.Instance.CrafterUi.Refresh();
+
+        if (CraftProcesses.Count > 0)
+        {
+            foreach (var p in CraftProcesses)
+            {
+                nexttime += Sheme.GetBlueprint(p.OutputItem).CraftTimeInSeconds;
+            }
+        }
         
-        CraftProcesses.Enqueue(new CraftProcess(blueprintItemsCollection.Time, blueprintItemsCollection.OutputItemId, blueprintItemsCollection.OutputItemValue));
+        CraftProcesses.Add(new CraftProcess(blueprintItemsCollection.Time + nexttime, blueprintItemsCollection.OutputItemId, blueprintItemsCollection.OutputItemValue));
     }
 
     private void CraftTick()
     {
         if(CraftProcesses.Count < 1) return;
-        CraftProcess process = CraftProcesses.Peek();
-        process.CurrentTime += 1;
-        if (process.CurrentTime >= process.CraftTimeMax)
+        
+        foreach (var process in CraftProcesses)
         {
-            process.CurrentTime = process.CraftTimeMax;
+            process.Tick(1);;
+            if (process.CurrentTime >= process.CraftTimeMax)
+            {
+                process.CurrentTime = process.CraftTimeMax;
+            }
         }
     }
 
     public void CollectItem()
     {
-        CraftProcess process = CraftProcesses.Peek();
+        CraftProcess process = CraftProcesses[0];
         InventoryToGetItems.AddItem(process.OutputItem, process.OutputValue);
-        CraftProcesses.Dequeue();
+        CraftProcesses.Remove(process);
     }
 
     public void DeInit()
@@ -64,8 +78,18 @@ public class CraftProcess
         OutputValue = outputValue;
     }
 
+    public bool IsComplite = false;
     public float CurrentTime;
     public float CraftTimeMax;
     public string OutputItem;
     public int OutputValue;
+
+    public void Tick(float time)
+    {
+        CurrentTime += time;
+        if (CurrentTime >= CraftTimeMax)
+        {
+            IsComplite = true;
+        }
+    }
 }

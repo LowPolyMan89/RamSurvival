@@ -6,4 +6,15 @@ using UnityEngine;
 public class CraftSheme : ScriptableObject
 {
     public List<CraftBlueprint> Blueprints = new List<CraftBlueprint>();
+
+    public CraftBlueprint GetBlueprint(string itemid)
+    {
+        foreach (var b in Blueprints)
+        {
+            if (b.OutputItem.ItemId == itemid)
+                return b;
+        }
+
+        return null;
+    }
 }

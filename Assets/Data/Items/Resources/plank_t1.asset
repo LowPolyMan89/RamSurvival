@@ -18,10 +18,10 @@ MonoBehaviour:
   equipType: 1
   ItemRare: 1
   Count: 0
-  IsStack: 1
-  MaxStack: 20
+  IsStack: 0
+  MaxStack: 0
   Sprite: {fileID: 21300000, guid: 11307cef70ab9f8439f76b2389ade7f3, type: 3}
   ItemStats:
   - StatName: Mass
-    StatValue: 1
+    StatValue: 2
   Prefab: {fileID: 6554397708101141748, guid: a7bdca6b934b2224aaf5d774cbbe80c8, type: 3}
