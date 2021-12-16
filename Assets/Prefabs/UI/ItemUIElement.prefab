@@ -90,9 +90,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0efd944e9237f034cb80cf7f8760d4a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Item: {fileID: 0}
+  Item:
+    ItemId: 
+    Count: 0
   Image: {fileID: 901132232233419713}
   CountText: {fileID: 67943261261289398}
+  startRoot: {fileID: 0}
+  ItemInventory: {fileID: 0}
 --- !u!1 &6673873326465360614
 GameObject:
   m_ObjectHideFlags: 0
@@ -152,7 +156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:

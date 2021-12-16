@@ -19,7 +19,7 @@ public class UiInventory : MonoBehaviour
     public ItemUIElement SelectedItem;
     public Inventory targetinventory;
     public ChestInventoryUI ChestInventoryUI;
-
+    public Inventory chestInventory;
     [ContextMenu("CreateCells")]
     public void CreateCells()
     {
@@ -41,6 +41,20 @@ public class UiInventory : MonoBehaviour
     private void OnEnable()
     {
         _player = Player.Instance;
+        
+        foreach (var cell in InventoryCellses)
+        {
+            if (cell.transform.childCount > 0)
+            {
+                Destroy(cell.transform.GetChild(0).gameObject, 0.01f);
+            }
+        }
+        
+        foreach (var item in _player.PlayerInventory.Items)
+        {
+            AddItem(item, _player.PlayerInventory);
+        }
+        
         StartCoroutine(CustomUpdate());
         HideButtons();
     }
@@ -51,9 +65,17 @@ public class UiInventory : MonoBehaviour
         ChestInventoryUI = ui;
     }
 
-private void OnDisable()
+    private void OnDisable()
     {
         StopCoroutine(CustomUpdate());
+
+        foreach (var cell in InventoryCellses)
+        {
+            if (cell.transform.childCount > 0)
+            {
+                Destroy(cell.transform.GetChild(0).gameObject, 0.01f);
+            }
+        }
     }
 
     private IEnumerator CustomUpdate()
@@ -77,15 +99,24 @@ private void OnDisable()
         StartCoroutine(CustomUpdate());
     }
     
-
     public void AddItem(ItemView item)
+    {
+        //create item ui
+        ItemUIElement itemUIElement = Instantiate(_itemUIElement);
+        itemUIElement.transform.SetParent(GetEmptyCell());
+        itemUIElement.transform.localPosition = Vector3.zero;
+        itemUIElement.Item = item;
+    }
+    
+    public void AddItem(ItemView item, Inventory iteminventory)
     {
         //create item ui
        ItemUIElement itemUIElement = Instantiate(_itemUIElement);
        itemUIElement.transform.SetParent(GetEmptyCell());
        itemUIElement.transform.localPosition = Vector3.zero;
        itemUIElement.Item = item;
-       
+       itemUIElement.ItemInventory = iteminventory;
+
     }
 
     public Transform GetEmptyCell()

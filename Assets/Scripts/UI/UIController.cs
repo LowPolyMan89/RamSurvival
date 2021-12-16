@@ -111,5 +111,6 @@ public class UIController : MonoBehaviour
 		MainInventory.gameObject.SetActive(true);
 		chestUi.gameObject.SetActive(true);
 		ChestInventoryUI.Open(value);
+		UiInventory.chestInventory = value;
 	}
 }

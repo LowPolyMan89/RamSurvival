@@ -8,8 +8,8 @@ public class InventoryCells : MonoBehaviour
 {
     public ItemUIElement ItemUIElement;
     public Button Button;
-    public UiInventory UiInventory;
-    public ChestInventoryUI chestUI;
+    public UiInventory UiInventory = null;
+    public ChestInventoryUI chestUI = null;
     public bool IsChest = false;
     
     private void Start()

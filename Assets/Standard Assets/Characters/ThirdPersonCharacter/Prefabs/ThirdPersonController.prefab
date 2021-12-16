@@ -3070,10 +3070,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EntityID: 
-  Items: []
+  Items:
+  - ItemId: wood_t1_name_id
+    Count: 3
   IsPlayerInventory: 1
   Sloots: 0
   MaxMass: 0
+  MaxCapacity: 30
 --- !u!114 &5096545120776810662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3086,6 +3089,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b257f338c6b12f44f932bf76d3c89714, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EntityID: 
   Sheme: {fileID: 11400000, guid: ee79721cc939f1a46ac1e230d91e510a, type: 2}
   CraftSlots: 0
   Data: {fileID: 11400000, guid: 1a3a3cc1d1e0e50469e309fe43d21c83, type: 2}
