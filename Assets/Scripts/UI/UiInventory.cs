@@ -114,6 +114,7 @@ public class UiInventory : MonoBehaviour
        ItemUIElement itemUIElement = Instantiate(_itemUIElement);
        itemUIElement.transform.SetParent(GetEmptyCell());
        itemUIElement.transform.localPosition = Vector3.zero;
+       itemUIElement.transform.localScale = Vector3.one;
        itemUIElement.Item = item;
        itemUIElement.ItemInventory = iteminventory;
 
