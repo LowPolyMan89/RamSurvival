@@ -19,7 +19,7 @@ public class CraftBlueprintUi : MonoBehaviour
 
     public void Create(CraftBlueprint blueprint)
     {
-        ItemDataSO itemdats = DatabaseManager.GetItemData(blueprint.BlueprintId);
+        ItemDataSO itemdats = DatabaseManager.Instance.GetItemData(blueprint.BlueprintId);
         if(!itemdats) return;
         
         ItemImage.sprite = itemdats.Sprite;

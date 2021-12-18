@@ -28,7 +28,7 @@ public class Inventory : Entity
     {
         bool play = false;
 
-        ItemDataSO data = DatabaseManager.GetItemData(id);
+        ItemDataSO data = DatabaseManager.Instance.GetItemData(id);
 
         play = TryToAddItem(id);
 
@@ -85,7 +85,7 @@ public class Inventory : Entity
 
         ItemView v = FindContainsItem(ItemId);
 
-        ItemDataSO data = DatabaseManager.GetItemData(ItemId);
+        ItemDataSO data = DatabaseManager.Instance.GetItemData(ItemId);
 
     
             if (v != null)
@@ -113,7 +113,7 @@ public class Inventory : Entity
 
         ItemView v = FindContainsItem(item.ItemId);
 
-        ItemDataSO data = DatabaseManager.GetItemData(item.ItemId);
+        ItemDataSO data = DatabaseManager.Instance.GetItemData(item.ItemId);
 
  
             if (v != null)
@@ -179,7 +179,7 @@ public class Inventory : Entity
     public float GetCurrentInventoryMass()
     {
         float val = 0;
-        Items.ForEach(x => { val += DatabaseManager.GetItemData(x.ItemId).GetStat("Mass") * x.Count; });
+        Items.ForEach(x => { val += DatabaseManager.Instance.GetItemData(x.ItemId).GetStat("Mass") * x.Count; });
         return val;
     }
 
@@ -188,7 +188,7 @@ public class Inventory : Entity
         bool check = true;
 
         float curentMass = GetCurrentInventoryMass();
-        float newItemMass = DatabaseManager.GetItemData(id).GetStat("Mass");
+        float newItemMass = DatabaseManager.Instance.GetItemData(id).GetStat("Mass");
 
         if (curentMass + newItemMass > GetMaxInventoryMass())
         {

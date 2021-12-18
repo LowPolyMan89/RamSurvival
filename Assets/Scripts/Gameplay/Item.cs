@@ -28,10 +28,10 @@ public class Item : Entity
     {
 
     }
-    
+    #if UNITY_EDITOR
     public void LoadData()
     {
-        ItemDataSO data = DatabaseManager.GetItemData(ItemId);
+        ItemDataSO data = DatabaseManager.Instance.GetItemData(ItemId);
         
         if (!data)
         {
@@ -100,7 +100,7 @@ public class Item : Entity
         Prefab = AssetDatabase.LoadAssetAtPath<GameObject>(localPath);
         data.Prefab = Prefab;
     }
-    
+    #endif
     public Item CloneItem(Item item)
     {
         
@@ -207,7 +207,7 @@ public enum EquipType
 {
     Backpack, none
 }
-
+#if UNITY_EDITOR
 [CustomEditor(typeof(Item))]
 public class ItemEditor : Editor
 {
@@ -222,5 +222,6 @@ public class ItemEditor : Editor
         }
     }
 }
+#endif
 
 

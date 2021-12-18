@@ -23,9 +23,10 @@ public class UIController : MonoBehaviour
 	public UiDropPanel UiDropPanel;
 	public UiMovePanel UiMovePanel;
 	public Transform MainInventory;
+	public GameObject LoadingPanel;
 	public EquipUISlot GetEqipSlot(string itemid)
 	{
-		ItemDataSO data = DatabaseManager.GetItemData(itemid);
+		ItemDataSO data = DatabaseManager.Instance.GetItemData(itemid);
 		
 		EquipType type = data.equipType;
 		
@@ -167,5 +168,8 @@ public class UIController : MonoBehaviour
 	}
 
 
-	
+	public void LoadingComplite()
+	{
+		LoadingPanel.SetActive(false);
+	}
 }

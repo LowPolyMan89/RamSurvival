@@ -56,7 +56,7 @@ public class CrafterUi : MonoBehaviour
             {
                 CraftProcess proc = CurrentCrafter._craftController.CraftProcesses.ToArray()[i];
                 CraftSlotsUi[i].Item = proc.OutputItem;
-                CraftSlotsUi[i].ItemImage.sprite = DatabaseManager.GetItemData(proc.OutputItem).Sprite;
+                CraftSlotsUi[i].ItemImage.sprite = DatabaseManager.Instance.GetItemData(proc.OutputItem).Sprite;
                 CraftSlotsUi[i].TimerText.text = proc.CraftTimeMax - proc.CurrentTime <= 0 ? "READY" : Support.ConvertTimeSecondsToString(proc.CraftTimeMax - proc.CurrentTime);
                 CraftSlotsUi[i].IsActive = true;
             }
@@ -113,7 +113,7 @@ public class CrafterUi : MonoBehaviour
         {
             CraftSlotsUi[i].gameObject.SetActive(true);
             CraftSlotUI slo = CraftSlotsUi[i];
-            slo.Init(DatabaseManager.OtherData.emptySprite, null);
+            slo.Init(DatabaseManager.Instance.OtherData.emptySprite, null);
             slo.TimerText.text = "";
         }
     }
@@ -184,8 +184,8 @@ public class CrafterUi : MonoBehaviour
 
         print("Select Blueprint" + craftBlueprintUi.currentBlueprint.BlueprintId.ToLower());
         craftInfoPanel.ItemNameText.text = craftBlueprintUi.currentBlueprint.BlueprintId.ToLower();
-        craftInfoPanel.DescriptionText.text = DatabaseManager.GetItemData(craftBlueprintUi.currentBlueprint.OutputItem.ItemId).DescriptionId;
-        craftInfoPanel.ItemImage.sprite = DatabaseManager.GetItemData(craftBlueprintUi.currentBlueprint.OutputItem.ItemId).Sprite;
+        craftInfoPanel.DescriptionText.text = DatabaseManager.Instance.GetItemData(craftBlueprintUi.currentBlueprint.OutputItem.ItemId).DescriptionId;
+        craftInfoPanel.ItemImage.sprite = DatabaseManager.Instance.GetItemData(craftBlueprintUi.currentBlueprint.OutputItem.ItemId).Sprite;
 
         crafterRequiredPanel.EnergySlot.Text.text = energycost.ToString() + "/" + Player.Instance.PlayerStats.Energy;
         crafterRequiredPanel.TimerSlot.Text.text = Support.ConvertTimeSecondsToString(time);
@@ -197,7 +197,7 @@ public class CrafterUi : MonoBehaviour
         
         foreach (var reqitem in craftBlueprintUi.currentBlueprint.RequiredItems)
         {
-            var item = DatabaseManager.GetItemData(reqitem.ItemId);
+            var item = DatabaseManager.Instance.GetItemData(reqitem.ItemId);
             int itemcount = reqitem.ItemValue * craftitemcount;
             blueprintItemsCollection.Items.Add(new BlueprintItemsCollection.ItemsToCraft(Player.Instance.PlayerInventory.GetItem(reqitem.ItemId), itemcount));
             crafterRequiredPanel.AddSlot(item.Sprite, itemcount, Player.Instance.PlayerInventory.GetContainsItemCount(reqitem.ItemId));

@@ -18,7 +18,7 @@ public class Chest : Inventory, IInteractive<Chest>
 
         ItemView v = FindContainsItem(ItemId);
 
-        ItemDataSO data = DatabaseManager.GetItemData(ItemId);
+        ItemDataSO data = DatabaseManager.Instance.GetItemData(ItemId);
 
     
         if (v != null)

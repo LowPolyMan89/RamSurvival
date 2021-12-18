@@ -34,7 +34,7 @@ public class CraftSlotUI : MonoBehaviour
     {
         if (processCrafter != null)
         {
-            ItemImage.sprite = DatabaseManager.OtherData.emptySprite;
+            ItemImage.sprite = DatabaseManager.Instance.OtherData.emptySprite;
             GetButton.interactable = false;
             IsActive = false;
             IsComplite = false;

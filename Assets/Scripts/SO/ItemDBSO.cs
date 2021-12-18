@@ -6,7 +6,7 @@ using UnityEngine;
 public class ItemDBSO : ScriptableObject
 {
     public List<ItemDataSO> ItemsData = new List<ItemDataSO>();
-
+#if UNITY_EDITOR 
     public void RefreshDatabase()
     {
         ItemsData.Clear();
@@ -19,8 +19,10 @@ public class ItemDBSO : ScriptableObject
             Debug.Log("Add item to data base: " + path);
         }
     }
+    #endif
 }
 
+#if UNITY_EDITOR
 [CustomEditor(typeof(ItemDBSO))]
 public class ItemDbsoEditor : Editor
 {
@@ -35,3 +37,4 @@ public class ItemDbsoEditor : Editor
         }
     }
 }
+#endif

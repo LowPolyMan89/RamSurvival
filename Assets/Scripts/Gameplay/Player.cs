@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
 
     public void EqipBackpack(string backpackItemId)
     {
-        EqippedBackpack = DatabaseManager.GetItemData(backpackItemId);
+        EqippedBackpack = DatabaseManager.Instance.GetItemData(backpackItemId);
     }
     
     private void Start()

@@ -149,7 +149,7 @@ public class UiInventory : MonoBehaviour
 
     public void EqipButtonUse()
     {
-        switch (DatabaseManager.GetItemData(SelectedItem.Item.ItemId).equipType)
+        switch (DatabaseManager.Instance.GetItemData(SelectedItem.Item.ItemId).equipType)
         {
             case EquipType.Backpack:
                 if (SelectedItem.IsEqipped)
@@ -203,7 +203,7 @@ public class UiInventory : MonoBehaviour
         SelectedItem = itemUIElement;
         useButton.SetActive(false);
 
-        ItemDataSO data = DatabaseManager.GetItemData(itemUIElement.Item.ItemId);
+        ItemDataSO data = DatabaseManager.Instance.GetItemData(itemUIElement.Item.ItemId);
 
        if (data.ItemType == ItemType.Resource)
        {

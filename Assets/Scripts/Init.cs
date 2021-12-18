@@ -7,12 +7,15 @@ public class Init : MonoBehaviour
     private void Start()
     {
         DontDestroyOnLoad(this.gameObject);
-        Initilize();
+        StartCoroutine(Initilize());
     }
 
-    private void Initilize()
+    private IEnumerator Initilize()
     {
-        DatabaseManager.LoadItemsDatabase();
+        yield return new WaitForSeconds(1f);
+        DatabaseManager.Instance.LoadItemsDatabase();
+        yield return new WaitForSeconds(1f);
         gameObject.AddComponent<GameTime>();
+        UIController.Instance.LoadingComplite();
     }
 }

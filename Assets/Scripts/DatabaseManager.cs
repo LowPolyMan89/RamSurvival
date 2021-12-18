@@ -4,67 +4,47 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-public static class DatabaseManager
+public class DatabaseManager :MonoBehaviour
 {
-    private static ItemDBSO _itemsDatabase;
+    [SerializeField] private ItemDBSO _itemsDatabase;
     public static readonly Dictionary<string, ItemDataSO> ItemsData = new Dictionary<string, ItemDataSO>();
-    public static OtherDataSO OtherData;
-    
-    [MenuItem("DatabaseManager/LoadDatabase")]
-    public static void LoadItemsDatabase()
-    {
-       var result = AssetDatabase.FindAssets("ItemDatabase");
-       var path = AssetDatabase.GUIDToAssetPath(result[0]);
-       
-       var otherGUID = AssetDatabase.FindAssets("OtherDataSO");
-       var otherPath = AssetDatabase.GUIDToAssetPath(otherGUID[0]);
-       
-       _itemsDatabase = (ItemDBSO)AssetDatabase.LoadAssetAtPath(path, typeof(ItemDBSO));
-       OtherData = (OtherDataSO)AssetDatabase.LoadAssetAtPath(otherPath, typeof(OtherDataSO));
+    [SerializeField] private OtherDataSO _otherData;
+    public static DatabaseManager Instance;
 
-       foreach (var data in _itemsDatabase.ItemsData)
-       {
-           string id = data.ItemId.ToLower();
-           data.DescriptionId = data.DescriptionId.ToLower();
-           data.ItemId = id;
-           
-           ItemsData.Add(id, data);
-       }
-       
-       Debug.Log("Item data loaded!");
-    }
+    public OtherDataSO OtherData => _otherData;
 
-    [MenuItem("DatabaseManager/LoadingTest")]
-    public static void Test()
+    private void Start()
     {
-        try
-        {
-            ItemDataSO value;
-            ItemsData.TryGetValue("Wood_T1_name_id", out value);
-            if (value)
-            {
-                Debug.Log(value.DescriptionId);
-                Debug.Log("Database Manager is now loaded");
-            }
-            
-        }
-        catch (Exception e)
-        {
-            Debug.LogError("Database Manager is not loaded!");
-        }
         
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else if (Instance == this)
+        {
+            Destroy(this);
+        }
     }
 
-    public static ItemDataSO GetItemData(string itemId)
+    public void LoadItemsDatabase()
+    { 
+        foreach (var data in _itemsDatabase.ItemsData)
+        {
+            string id = data.ItemId.ToLower();
+            data.DescriptionId = data.DescriptionId.ToLower();
+            data.ItemId = id;
+           
+            ItemsData.Add(id, data);
+        }
+       
+        Debug.Log("Item data loaded!");
+    }
+    
+    
+    public ItemDataSO GetItemData(string itemId)
     {
         
         string id = itemId.ToLower();
-        
-        if (_itemsDatabase == null)
-        {
-            LoadItemsDatabase();
-            Test();
-        }
 
         if (ItemsData.TryGetValue(id, out var value))
         {

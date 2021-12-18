@@ -28,7 +28,7 @@ public class UiDropPanel : MonoBehaviour
                 DropItem = itemToDrop.Item;
                 DropSlider.maxValue = DropItem.Count;
                 countToDrop = DropItem.Count;
-                Image.sprite = DatabaseManager.GetItemData(DropItem.ItemId).Sprite;
+                Image.sprite = DatabaseManager.Instance.GetItemData(DropItem.ItemId).Sprite;
                 DropSlider.value = countToDrop;
                 ToDropCount.text = countToDrop.ToString();
                 InventoryCount.text = (DropItem.Count - countToDrop).ToString();
@@ -52,7 +52,7 @@ public class UiDropPanel : MonoBehaviour
                 {
                         
 
-                        ItemDataSO data = DatabaseManager.GetItemData(DropItem.ItemId);
+                        ItemDataSO data = DatabaseManager.Instance.GetItemData(DropItem.ItemId);
                         Item item = Instantiate(data.Prefab).GetComponent<Item>();
                         item.transform.position = Player.Instance.dropPoint.position;
                         item.Visualize(true);
@@ -63,7 +63,7 @@ public class UiDropPanel : MonoBehaviour
                 }
                 else
                 {
-                        ItemDataSO data = DatabaseManager.GetItemData(DropItem.ItemId);
+                        ItemDataSO data = DatabaseManager.Instance.GetItemData(DropItem.ItemId);
                         Item item = Instantiate(data.Prefab).GetComponent<Item>();
                         item.transform.position = Player.Instance.dropPoint.position;
                         item.Visualize(true);

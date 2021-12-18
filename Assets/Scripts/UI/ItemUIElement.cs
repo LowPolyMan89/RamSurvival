@@ -31,7 +31,7 @@ public class ItemUIElement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     private IEnumerator CustomUpdate()
     {
         yield return new WaitForSeconds(0.1f);
-        Image.sprite = DatabaseManager.GetItemData(Item.ItemId).Sprite;
+        Image.sprite = DatabaseManager.Instance.GetItemData(Item.ItemId).Sprite;
         CountText.text = Item.Count.ToString();
         StartCoroutine(CustomUpdate());
     }

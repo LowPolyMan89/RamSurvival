@@ -6,8 +6,9 @@ using UnityEngine;
 
 public static class Support
 {
-
+#if UNITY_EDITOR 
     [MenuItem("SupportTools/TestTime")]
+    #endif
     public static void TestTime()
     {
         Debug.Log(ConvertTimeSecondsToString(3600));

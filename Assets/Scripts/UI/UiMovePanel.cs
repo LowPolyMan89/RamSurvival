@@ -29,7 +29,7 @@ public class UiMovePanel : MonoBehaviour
                 MoveItem = itemToMove.Item;
                 MoveSlider.maxValue = MoveItem.Count;
                 countToMove = MoveItem.Count;
-                Image.sprite = DatabaseManager.GetItemData(MoveItem.ItemId).Sprite;
+                Image.sprite = DatabaseManager.Instance.GetItemData(MoveItem.ItemId).Sprite;
                 MoveSlider.value = countToMove;
                 ToDropCount.text = countToMove.ToString();
                 InventoryCount.text = (MoveItem.Count - countToMove).ToString();
