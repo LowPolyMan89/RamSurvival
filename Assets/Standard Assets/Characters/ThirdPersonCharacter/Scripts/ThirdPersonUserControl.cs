@@ -12,8 +12,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private Vector3 m_CamForward;             // The current forward direction of the camera
         private Vector3 m_Move;
         private bool m_Jump;                      // the world-relative desired move direction, calculated from the camForward and user input.
-
-        
+        public Vector2 move;
         private void Start()
         {
             // get the transform of the main camera
@@ -46,14 +45,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private void FixedUpdate()
         {
             // read inputs
-#if !UNITY_EDITOR
-            float h = CrossPlatformInputManager.GetAxis("Horizontal");
-            float v = CrossPlatformInputManager.GetAxis("Vertical");
-#elif UNITY_EDITOR
-            float h = Input.GetAxis("Horizontal");
-            float v = Input.GetAxis("Vertical");
-           // bool crouch = Input.GetKey(KeyCode.C);
-#endif
+
+         //   float h = CrossPlatformInputManager.GetAxis("Horizontal");
+         //   float v = CrossPlatformInputManager.GetAxis("Vertical");
+
+            float h = move.x;
+            float v = move.y;
+
         // calculate move direction to pass to character
         if (m_Cam != null)
             {

@@ -435,6 +435,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7230427cae4982f439b0aeae7e8e48c9, type: 3}
+--- !u!114 &571561884 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 11400000, guid: 49a0e923d39ec3c4c8bb97699e2f2903, type: 3}
+  m_PrefabInstance: {fileID: 649033717}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e44af8091779fcb40801d5b284353dbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &580011335
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1412,6 +1423,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 82e6fa35f3217ff45ad34b5a1ff3d623, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1539989164 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 11444856, guid: 7737647c22c1fc64a88d5cd030c352ce, type: 3}
+  m_PrefabInstance: {fileID: 6700185321875470853}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 521b611700410be45810047f0a74e899, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1616940693
@@ -3082,6 +3104,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5051728103220321420, guid: 32e8040a3d597dc4c8879c94878aba8d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5395891650546765019, guid: 32e8040a3d597dc4c8879c94878aba8d, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6554090949628046079, guid: 32e8040a3d597dc4c8879c94878aba8d, type: 3}
+      propertyPath: _cam
+      value: 
+      objectReference: {fileID: 571561884}
+    - target: {fileID: 6554090949628046079, guid: 32e8040a3d597dc4c8879c94878aba8d, type: 3}
+      propertyPath: _control
+      value: 
+      objectReference: {fileID: 1539989164}
+    - target: {fileID: 7104611825640491835, guid: 32e8040a3d597dc4c8879c94878aba8d, type: 3}
+      propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

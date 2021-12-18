@@ -1,4 +1,7 @@
+using System;
 using UnityEngine;
+using UnityStandardAssets.Cameras;
+using UnityStandardAssets.Characters.ThirdPerson;
 
 namespace StarterAssets
 {
@@ -7,7 +10,15 @@ namespace StarterAssets
         public Vector2 InputVectorMove;
         public Vector2 InputVectorLook;
         public bool InputBool;
-        
+        [SerializeField]private ThirdPersonUserControl _control;
+        [SerializeField] private FreeLookCam _cam;
+
+        private void Update()
+        {
+            _control.move = InputVectorMove;
+            _cam.look = InputVectorLook;
+        }
+
         public void VirtualMoveInput(Vector2 virtualMoveDirection)
         {
             InputVectorMove = virtualMoveDirection;
