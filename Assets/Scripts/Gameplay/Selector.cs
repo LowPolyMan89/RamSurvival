@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using StarterAssets;
 using UnityEngine;
 
@@ -30,11 +31,33 @@ public class Selector : MonoBehaviour
         _eventManager = EventManager.Instance;
 
         _uiController = FindObjectOfType<UIController>();
+        _uiController.UseButton.onClick.AddListener(Use);
         _uiController.GrabButton.onClick.AddListener(Grab);
         isRedy = true;
     }
 
-    public void Grab()
+    private void Grab()
+    {
+        if (_uiController.nearestItems.Count > 0)
+        {
+            List<Item> toremove = new List<Item>();
+            
+            foreach (var i in _uiController.nearestItems)
+            {
+                Item getitem = i;
+                Player.Instance.PlayerInventory.AddItem(getitem);
+                toremove.Add(i);
+            }
+
+            foreach (var i in toremove)
+            {
+                _uiController.RemoveNearestItem(i);
+                Destroy(i, 0.001f);
+            }
+        }
+    }
+
+    public void Use()
     {
         if (!hitEntity) return;
         
@@ -55,36 +78,17 @@ public class Selector : MonoBehaviour
                 break;
         }
 
-        if (hitEntity is Item && !hitEntity.CompareTag("Resource"))
-        {
-            var item = hitEntity.GetComponent<Item>();
-
-            switch (item.ItemType)
-            {
-                case ItemType.Loot:
-                    Player.Instance.PlayerInventory.AddItem(item);
-                    break;
-                case ItemType.Equip:
-                    Player.Instance.PlayerInventory.AddItem(item);
-                    break;
-                case ItemType.Resource:
-                    Player.Instance.PlayerInventory.AddItem(item);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-        }
-
     }
     
     private void Update()
     {
         if(!isRedy)
             return;
-        _uiController.isGrabObjectFind = hitEntity ? true : false;
+        _uiController.isUseObjectFind = hitEntity ? true : false;
 
         if (Input.GetKeyDown(KeyCode.E))
         {
+            Use();
             Grab();
         }
     }
@@ -101,8 +105,21 @@ public class Selector : MonoBehaviour
         if (Physics.Raycast(ray, out var hit, 20, layerMask))
         {
             Debug.DrawLine(ray.origin, hit.point);
-            AddSelectionEntity(hit.collider.GetComponent<Entity>());
+            Entity entity = hit.collider.GetComponent<Entity>();
+            Item item = entity.gameObject.GetComponent<Item>();
 
+            if (item)
+            {
+                if (item.ItemType == ItemType.Item || item.ItemType == ItemType.Equip || item.ItemType == ItemType.Loot)
+                {
+                    AddSelectionEntity(null);
+                }
+            }
+            else
+            {
+                AddSelectionEntity(entity);
+            }
+           
         }
         else
         {
@@ -117,5 +134,23 @@ public class Selector : MonoBehaviour
 
         _eventManager.OnResorceSelect(entity);
         hitEntity = entity;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Item item = other.gameObject.GetComponent<Item>();
+        if (item)
+        {
+            _uiController.AddNearestItem(item);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        Item item = other.gameObject.GetComponent<Item>();
+        if (item)
+        {
+            _uiController.RemoveNearestItem(item);
+        }
     }
 }

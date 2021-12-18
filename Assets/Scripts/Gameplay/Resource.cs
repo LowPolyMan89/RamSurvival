@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Resource : Item, IDamagable
+public class Resource : Entity, IDamagable
 {
     [SerializeField] private int count;
     [SerializeField] private float hitPoint;
@@ -13,7 +13,7 @@ public class Resource : Item, IDamagable
     public float HitPoint => hitPoint;
     public float MaxHitPoint => _maxHitPoint;
 
-    protected override void Start()
+    private void Start()
     {
         _maxHitPoint = hitPoint;
     }
@@ -23,20 +23,11 @@ public class Resource : Item, IDamagable
         return hitPoint;
     }
 
-    public override int GetCount()
+    public  int GetCount()
     {
         return count;
     }
-
-    public override string GetName()
-    {
-        return ItemId;
-    }
-
-    public override int GetRare()
-    {
-        return ItemRare;
-    }
+    
 
     public void TakeDamage(float value)
     {
