@@ -200,7 +200,7 @@ public class Item : Entity
 
 public enum ItemType
 {
-    Equip,Loot,Resource
+    Equip,Loot,Resource,Item
 }
 
 public enum EquipType

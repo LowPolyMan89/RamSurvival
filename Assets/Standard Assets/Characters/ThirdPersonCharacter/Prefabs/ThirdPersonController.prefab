@@ -2954,6 +2954,7 @@ GameObject:
   - component: {fileID: 6122354053395604894}
   - component: {fileID: 3967075503267989636}
   - component: {fileID: 5096545120776810662}
+  - component: {fileID: 3336851977580022516}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -3094,6 +3095,19 @@ MonoBehaviour:
   CraftSlots: 0
   Data: {fileID: 11400000, guid: 1a3a3cc1d1e0e50469e309fe43d21c83, type: 2}
   Level: 1
+--- !u!135 &3336851977580022516
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3967075503267989635}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4239862501015867163
 GameObject:
   m_ObjectHideFlags: 0
@@ -3389,11 +3403,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 489e028b2eb69c7439711f7f4c260343, type: 3}
---- !u!1 &5511496991083183319 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1909202626250993066, guid: 489e028b2eb69c7439711f7f4c260343, type: 3}
-  m_PrefabInstance: {fileID: 6197547801649041789}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1129088879586502639 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6460775100522411666, guid: 489e028b2eb69c7439711f7f4c260343, type: 3}
@@ -3402,5 +3411,10 @@ GameObject:
 --- !u!4 &7271255619339264849 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3668934605585314348, guid: 489e028b2eb69c7439711f7f4c260343, type: 3}
+  m_PrefabInstance: {fileID: 6197547801649041789}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5511496991083183319 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1909202626250993066, guid: 489e028b2eb69c7439711f7f4c260343, type: 3}
   m_PrefabInstance: {fileID: 6197547801649041789}
   m_PrefabAsset: {fileID: 0}
