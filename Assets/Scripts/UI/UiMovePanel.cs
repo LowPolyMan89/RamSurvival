@@ -35,6 +35,7 @@ public class UiMovePanel : MonoBehaviour
                 InventoryCount.text = (MoveItem.Count - countToMove).ToString();
                 _frominventory = frominventory;
                 _toinventory = toinventory;
+                Destroy(ItemUIElement.gameObject);
         }
         
         private void ValueChangeCheck(float arg0)
@@ -44,7 +45,11 @@ public class UiMovePanel : MonoBehaviour
                 ToDropCount.text = countToMove.ToString();  
         }
 
-        
+        public void Close()
+        { 
+                _frominventory.AddItem(MoveItem.ItemId, MoveItem.Count);
+                gameObject.SetActive(false);
+        }
 
         public void Move()
         {
@@ -52,23 +57,21 @@ public class UiMovePanel : MonoBehaviour
                 {
                         _toinventory.AddItem(MoveItem.ItemId, countToMove);
                         MoveItem.Count -= countToMove;
+                        _frominventory.AddItem(MoveItem.ItemId, MoveItem.Count);
                         print($@"Part of Item {MoveItem.ItemId} moved ");
+                        
                 }
                 else
                 {
                         Destroy(ItemUIElement);
                         _toinventory.AddItem(MoveItem.ItemId, countToMove);
                         MoveItem.Count = countToMove;
-                        _frominventory.RemoveItem(MoveItem.ItemId);
                         print($@"Item {MoveItem.ItemId} moved ");
                         if(_frominventory is Inventory)
                                 UIController.Instance.UiInventory.HideButtons();
-                        if(_frominventory is Chest)
-                                UIController.Instance.ChestInventoryUI.HideButtons();
-                        Destroy(ItemUIElement.gameObject);
+
                 }
                 UIController.Instance.UiInventory.HideButtons();
-                UIController.Instance.ChestInventoryUI.HideButtons();
                 gameObject.SetActive(false);
         }
         

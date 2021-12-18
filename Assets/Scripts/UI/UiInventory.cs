@@ -89,6 +89,10 @@ public class UiInventory : MonoBehaviour
         {
             if (cell.transform.childCount > 0)
             {
+                ItemUIElement element = cell.transform.GetChild(0).GetComponent<ItemUIElement>();
+                
+                if(!element) continue;
+                
                 if (cell.transform.GetChild(0).GetComponent<ItemUIElement>().Item.Count < 1)
                 {
                     Destroy(cell.transform.GetChild(0).gameObject, 0.01f);
@@ -114,6 +118,7 @@ public class UiInventory : MonoBehaviour
        ItemUIElement itemUIElement = Instantiate(_itemUIElement);
        itemUIElement.transform.SetParent(GetEmptyCell());
        itemUIElement.transform.localPosition = Vector3.zero;
+       itemUIElement.transform.localScale = Vector3.one;
        itemUIElement.Item = item;
        itemUIElement.ItemInventory = iteminventory;
 
@@ -184,9 +189,10 @@ public class UiInventory : MonoBehaviour
     
     public void SelectItem(ItemUIElement itemUIElement)
     {
+        
         if (ChestInventoryUI != null)
         {
-            ChestInventoryUI.SelectItem(itemUIElement, Player.Instance.PlayerInventory, ChestInventoryUI.currentInventoryChest);
+            ChestInventoryUI.SelectItem(itemUIElement, Player.Instance.PlayerInventory, ChestInventoryUI.currentInventoryChest, true);
         }
         
         if (itemUIElement == null)

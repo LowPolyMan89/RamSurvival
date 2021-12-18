@@ -12,7 +12,7 @@ public class UiComponentsSwitcher : MonoBehaviour
         swichObject.ForEach((o => o.enabled = !o.enabled));
         foreach (var obj in swichObjectGameObjects)
         {
-            obj.SetActive(false);
+            obj.SetActive(!obj.activeInHierarchy);
         }
     }
 
@@ -21,7 +21,7 @@ public class UiComponentsSwitcher : MonoBehaviour
         swichObject.ForEach((o => o.enabled = !o.enabled));
         foreach (var obj in swichObjectGameObjects)
         {
-            obj.SetActive(true);
+            obj.SetActive(!obj.activeInHierarchy);
         }
     }
 }
