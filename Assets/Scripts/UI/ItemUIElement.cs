@@ -57,19 +57,21 @@ public class ItemUIElement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             if (h.gameObject.CompareTag("Cell"))
             {
                 InventoryCells cell = h.gameObject.GetComponent<InventoryCells>();
-                
+
                 if (!cell.IsChest)
                 {
+                    if(Player.Instance.PlayerInventory == ItemInventory)
+                        break;
                     if (!Player.Instance.PlayerInventory.CheckToAdd(Item)) continue;
-                    Player.Instance.PlayerInventory.AddItem(this.Item.ItemId, this.Item.Count);
-                    Destroy(this.gameObject, 0.01f);
+                    MoveButtonUse(Player.Instance.PlayerInventory);
                     return;
                 }
                 else
                 {
+                    if(cell.chestUI.currentInventoryChest == ItemInventory)
+                        break;
                     if (!UIController.Instance.UiInventory.chestInventory.CheckToAdd(Item)) continue;
-                    UIController.Instance.UiInventory.chestInventory.AddItem(this.Item.ItemId, this.Item.Count);
-                    Destroy(this.gameObject, 0.01f);
+                    MoveButtonUse(UIController.Instance.UiInventory.chestInventory);
                     return;
                 }
             }
@@ -81,6 +83,17 @@ public class ItemUIElement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         Destroy(this.gameObject, 0.01f);
     }
     
+    
+    private void MoveButtonUse(Inventory target)
+    {
+        UIController.Instance.UiMovePanel.gameObject.SetActive(true);
+        InitMove(ItemInventory, target);
+    }
+
+    public void InitMove(Inventory frominventory, Inventory toinventory)
+    {
+        UIController.Instance.UiMovePanel.Init(this, frominventory, toinventory);
+    }
     
     //Gets all event system raycast results of current mouse or touch position.
     static List<RaycastResult> GetEventSystemRaycastResults()

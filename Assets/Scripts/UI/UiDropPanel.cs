@@ -33,6 +33,8 @@ public class UiDropPanel : MonoBehaviour
                 ToDropCount.text = countToDrop.ToString();
                 InventoryCount.text = (DropItem.Count - countToDrop).ToString();
                 dropinvent = dropinventory;
+                dropinvent.RemoveItem(DropItem.ItemId);
+                Destroy(itemToDrop.gameObject);
         }
         
         private void ValueChangeCheck(float arg0)
@@ -48,31 +50,28 @@ public class UiDropPanel : MonoBehaviour
         {
                 if (countToDrop < DropItem.Count)
                 {
+                        
+
                         ItemDataSO data = DatabaseManager.GetItemData(DropItem.ItemId);
                         Item item = Instantiate(data.Prefab).GetComponent<Item>();
                         item.transform.position = Player.Instance.dropPoint.position;
                         item.Visualize(true);
                         item.Count = countToDrop;
                         DropItem.Count -= countToDrop;
+                        dropinvent.AddItem(DropItem.ItemId, DropItem.Count);
                         print($@"Part of Item {DropItem.ItemId} dropped ");
                 }
                 else
                 {
-                        Destroy(ItemUIElement);
                         ItemDataSO data = DatabaseManager.GetItemData(DropItem.ItemId);
                         Item item = Instantiate(data.Prefab).GetComponent<Item>();
                         item.transform.position = Player.Instance.dropPoint.position;
                         item.Visualize(true);
                         item.Count = countToDrop;
-                        dropinvent.RemoveItem(DropItem.ItemId);
                         print($@"Item {DropItem.ItemId} dropped ");
                         
                         if(dropinvent is Inventory)
                                 UIController.Instance.UiInventory.HideButtons();
-                        if(dropinvent is Chest)
-                                UIController.Instance.ChestInventoryUI.HideButtons();
-                        
-                        Destroy(ItemUIElement.gameObject);
                 }
                 gameObject.SetActive(false);
         }
