@@ -13,10 +13,24 @@ namespace StarterAssets
         [SerializeField]private ThirdPersonUserControl _control;
         [SerializeField] private FreeLookCam _cam;
 
+        private void Start()
+        {
+           
+        }
+
         private void Update()
         {
             _control.move = InputVectorMove;
             _cam.look = InputVectorLook;
+        }
+
+        public void Jump()
+        {
+            DoJump();
+        }
+        private bool DoJump()
+        {
+            return _control.m_Jump = true;
         }
 
         public void VirtualMoveInput(Vector2 virtualMoveDirection)

@@ -10,6 +10,8 @@ public class EventManager : MonoBehaviour
 	public event Func<Entity, Entity> OnResorceSelectAction;
 	public event Func<ItemUIElement, ItemUIElement> OnStartDragAction;
 	public event Func<ItemUIElement, ItemUIElement> OnEndDragAction;
+	public event Func<bool> OnJumpAction;
+	
 	public Action OnUpdateUIAction;
 
 	private void Start()
@@ -56,6 +58,16 @@ public class EventManager : MonoBehaviour
 	public ItemUIElement OnOnEndDrag(ItemUIElement arg)
 	{
 		OnEndDragAction?.Invoke(arg);
+		return arg;
+	}
+	
+	public bool OnJump(bool arg)
+	{
+		if (OnJumpAction != null)
+		{
+			OnJumpAction();
+		}
+
 		return arg;
 	}
 }
