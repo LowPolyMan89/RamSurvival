@@ -32,16 +32,14 @@
   <component name="ChangeListManager">
     <list default="true" id="7be855d3-bc60-4a48-aeff-eaa341bc0760" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.RamSurv/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RamSurv/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Data/Items/Food/meat_t1.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Data/Items/Food/meat_t1.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Data/Items/Items/starter_backpack_lv1.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Data/Items/Items/starter_backpack_lv1.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI_Canvas.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI_Canvas.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Island_1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Island_1.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Gameplay/Events/EventManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Gameplay/Events/EventManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Gameplay/Item.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Gameplay/Item.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SO/ItemDataSO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SO/ItemDataSO.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Standard Assets/Characters/ThirdPersonCharacter/Scripts/ThirdPersonUserControl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Standard Assets/Characters/ThirdPersonCharacter/Scripts/ThirdPersonUserControl.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StarterAssets/Mobile/Scripts/CanvasInputs/UICanvasControllerInput.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StarterAssets/Mobile/Scripts/CanvasInputs/UICanvasControllerInput.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StarterAssets/Mobile/Scripts/VirtualInputs/UIVirtualButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StarterAssets/Mobile/Scripts/VirtualInputs/UIVirtualButton.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DatabaseManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DatabaseManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Editor/LocalizationCreator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Editor/LocalizationCreator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Init.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Init.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Craft/CraftBlueprintUi.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Craft/CraftBlueprintUi.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Craft/CrafterUi.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Craft/CrafterUi.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/UIController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/UIController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/UiInventory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/UiInventory.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +48,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/SO/ItemDBSO.cs" root0="FORCE_HIGHLIGHTING" />
@@ -229,7 +235,7 @@
       <workItem from="1639685121350" duration="1097000" />
       <workItem from="1639687099314" duration="16000" />
       <workItem from="1639833707570" duration="11553000" />
-      <workItem from="1639919354780" duration="3928000" />
+      <workItem from="1639919354780" duration="7856000" />
     </task>
     <servers />
   </component>
