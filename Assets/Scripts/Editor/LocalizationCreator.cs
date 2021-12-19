@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class LocalizationCreator : MonoBehaviour
 {
+#if UNITY_EDITOR
     [MenuItem("Tools/Localization/Create Draft Json")]
     public static void CreateDraftLocalizationJson()
     {
@@ -70,17 +71,5 @@ public class LocalizationCreator : MonoBehaviour
         }
 
     }
-}
-
-[System.Serializable]
-public class LocalizationData
-{
-    public List<LocalizationObject> Locals = new List<LocalizationObject>();
-    
-    [System.Serializable]
-    public class LocalizationObject
-    {
-        public string LocalizationObjectID;
-        public List<string> Local = new List<string>();
-    }
+#endif
 }

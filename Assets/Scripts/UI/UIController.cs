@@ -24,6 +24,7 @@ public class UIController : MonoBehaviour
 	public UiMovePanel UiMovePanel;
 	public Transform MainInventory;
 	public GameObject LoadingPanel;
+	public UiInfoPanel UiInfoPanel;
 	public EquipUISlot GetEqipSlot(string itemid)
 	{
 		ItemDataSO data = DatabaseManager.Instance.GetItemData(itemid);
@@ -69,6 +70,13 @@ public class UIController : MonoBehaviour
 		
 	}
 
+	public void OpenInfoPanel(ItemView selectedItemItem)
+	{
+		UiInfoPanel.gameObject.SetActive(true);
+		ItemDataSO itemd = DatabaseManager.Instance.GetItemData(selectedItemItem.ItemId);
+		UiInfoPanel.Init(itemd);
+	}
+	
 	private Entity ShowSelectedPanel(Entity entity)
 	{
 		if(entity != null)
@@ -172,4 +180,5 @@ public class UIController : MonoBehaviour
 	{
 		LoadingPanel.SetActive(false);
 	}
+	
 }

@@ -14,6 +14,7 @@ public class Init : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         DatabaseManager.Instance.LoadItemsDatabase();
+        DatabaseManager.Instance.LoadLocalizationData();
         yield return new WaitForSeconds(1f);
         gameObject.AddComponent<GameTime>();
         UIController.Instance.LoadingComplite();

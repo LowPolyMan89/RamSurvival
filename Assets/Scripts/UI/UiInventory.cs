@@ -144,7 +144,7 @@ public class UiInventory : MonoBehaviour
 
     public void InfoButtonUse()
     {
-        print(SelectedItem.Item.ItemId);
+        UIController.Instance.OpenInfoPanel(SelectedItem.Item);
     }
 
     public void EqipButtonUse()

@@ -23,7 +23,7 @@ public class CraftBlueprintUi : MonoBehaviour
         if(!itemdats) return;
         
         ItemImage.sprite = itemdats.Sprite;
-        ItemName.text = itemdats.ItemId;
+        ItemName.text = DatabaseManager.Instance.Localization.GetLocalization(itemdats.ItemId);
         currentBlueprint = blueprint;
     }
     
