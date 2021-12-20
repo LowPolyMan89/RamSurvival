@@ -23,7 +23,7 @@ public class CraftController
     {
         float nexttime = 0;
         
-        Player.Instance.PlayerStats.Energy -= blueprintItemsCollection.Energy;
+        EventManager.Instance.OnPlayerGetEnergy(-blueprintItemsCollection.Energy);
 
         foreach (var removeitem in blueprintItemsCollection.Items)
         {

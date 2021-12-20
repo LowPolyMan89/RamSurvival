@@ -29,4 +29,9 @@ public class Player : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public void Init()
+    {
+        PlayerStats.Init();
+    }
 }
