@@ -23,7 +23,7 @@ public class CraftController
     {
         float nexttime = 0;
         
-        Player.Instance.PlayerStats.Energy -= blueprintItemsCollection.Energy;
+        EventManager.Instance.OnPlayerGetEnergy(-blueprintItemsCollection.Energy);
 
         foreach (var removeitem in blueprintItemsCollection.Items)
         {
@@ -89,6 +89,11 @@ public class CraftProcess
         CurrentTime += time;
         if (CurrentTime >= CraftTimeMax)
         {
+            if (!IsComplite)
+            {
+                EventManager.Instance.AddLog(3,
+                    "Завершено:  " + DatabaseManager.Instance.Localization.GetLocalization(OutputItem), Color.green);
+            }
             IsComplite = true;
         }
     }

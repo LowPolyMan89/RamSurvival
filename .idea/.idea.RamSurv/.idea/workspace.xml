@@ -33,13 +33,11 @@
     <list default="true" id="7be855d3-bc60-4a48-aeff-eaa341bc0760" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.RamSurv/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.RamSurv/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI_Canvas.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI_Canvas.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/DatabaseManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/DatabaseManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Editor/LocalizationCreator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Editor/LocalizationCreator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Init.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Init.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Craft/CraftBlueprintUi.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Craft/CraftBlueprintUi.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/Craft/CrafterUi.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/Craft/CrafterUi.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Island_1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Island_1.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Craft/CraftController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Craft/CraftController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Gameplay/Events/EventManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Gameplay/Events/EventManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/UIController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/UIController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/UiInventory.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/UiInventory.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +63,6 @@
     <setting file="file://C:/Program Files/Unity/2020.3.9f1/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/InputModules/StandaloneInputModule.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Inventory/Chest.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://C:/Program Files/Unity/2020.3.9f1/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/UI/Core/Button.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://F:/Projects/RamSurv/Assets/Scripts/DatabaseManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://C:/Program Files/Unity/2020.3.9f1/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.ugui/Runtime/EventSystem/EventSystem.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Craft/Crafter.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/EventSystem/InputModules/StandaloneInputModule.cs" root0="SKIP_HIGHLIGHTING" />
@@ -75,7 +72,6 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/UiMovePanel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F98083CB-C97E-4FA0-A4EF-2F523FEFF5E1/8b/85bc3f1a/Object.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Craft/CraftSheme.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://F:/Projects/RamSurv/Assets/Scripts/DatabaseManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F98083CB-C97E-4FA0-A4EF-2F523FEFF5E1/51/f40ecc0c/Component.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/cafb29d5233847fbb4edcf8d7c32b1e3299c90/05/671be71c/List`1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/f98083cbc97e4fa0a4ef2f523feff5e113bc00/3a/a2bd147c/MonoBehaviour.cs" root0="SKIP_HIGHLIGHTING" />
@@ -236,6 +232,7 @@
       <workItem from="1639687099314" duration="16000" />
       <workItem from="1639833707570" duration="11553000" />
       <workItem from="1639919354780" duration="7856000" />
+      <workItem from="1640111616658" duration="3449000" />
     </task>
     <servers />
   </component>

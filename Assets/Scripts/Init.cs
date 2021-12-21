@@ -18,5 +18,6 @@ public class Init : MonoBehaviour
         yield return new WaitForSeconds(1f);
         gameObject.AddComponent<GameTime>();
         UIController.Instance.LoadingComplite();
+        Player.Instance.Init();
     }
 }

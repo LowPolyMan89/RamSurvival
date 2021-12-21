@@ -179,7 +179,7 @@ public class CrafterUi : MonoBehaviour
         crafterRequiredPanel.Slots.Clear();
 
         float energycost = craftitemcount * craftBlueprintUi.currentBlueprint.EnergyCost;
-        float playerenergy = Player.Instance.PlayerStats.Energy;
+        float playerenergy = Player.Instance.PlayerStats.CurrentEnergy;
         float time = craftBlueprintUi.currentBlueprint.CraftTimeInSeconds * craftitemcount;
 
         print("Select Blueprint" + craftBlueprintUi.currentBlueprint.BlueprintId.ToLower());
@@ -188,7 +188,7 @@ public class CrafterUi : MonoBehaviour
         craftInfoPanel.DescriptionText.text = DatabaseManager.Instance.Localization.GetLocalization(DatabaseManager.Instance.GetItemData(craftBlueprintUi.currentBlueprint.OutputItem.ItemId).DescriptionId);
         craftInfoPanel.ItemImage.sprite = DatabaseManager.Instance.GetItemData(craftBlueprintUi.currentBlueprint.OutputItem.ItemId).Sprite;
 
-        crafterRequiredPanel.EnergySlot.Text.text = energycost.ToString() + "/" + Player.Instance.PlayerStats.Energy;
+        crafterRequiredPanel.EnergySlot.Text.text = energycost.ToString("0") + "/" + Player.Instance.PlayerStats.CurrentEnergy.ToString("0");
         crafterRequiredPanel.TimerSlot.Text.text = Support.ConvertTimeSecondsToString(time);
 
         if (energycost > playerenergy)

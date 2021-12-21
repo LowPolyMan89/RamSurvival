@@ -15,5 +15,16 @@ MonoBehaviour:
   HitPoint: 500
   Food: 100
   Energy: 100
+  Exp: 0
   MimimalInventoryCells: 2
   MinimalInventoryCapacity: 10
+  expStats:
+    PlayerLevelStats:
+    - Level: 1
+      ExpToNextLevel: 500
+    - Level: 2
+      ExpToNextLevel: 1500
+    - Level: 3
+      ExpToNextLevel: 2500
+    - Level: 4
+      ExpToNextLevel: 5000
