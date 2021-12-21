@@ -15,6 +15,7 @@ public class EventManager : MonoBehaviour
 	public event Func<float, float> OnPlayerGetHPAction;
 	public event Func<float, float> OnPlayerGetFoodAction;
 	public event Func<float, float> OnPlayerGetEnergyAction;
+	public event Action<float, string, Color> OnAddLogEvent;
 	
 	public Action OnUpdateUIAction;
 	
@@ -115,4 +116,16 @@ public class EventManager : MonoBehaviour
 		
 		return arg;
 	}
+	
+	public string AddLog(float time, string message, Color color)
+	{
+		if (OnAddLogEvent != null)
+		{
+			OnAddLogEvent(time, message, color);
+		}
+		
+		return message;
+	}
+
+	
 }

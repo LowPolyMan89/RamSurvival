@@ -3110,10 +3110,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5395891650546765019, guid: 32e8040a3d597dc4c8879c94878aba8d, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6554090949628046079, guid: 32e8040a3d597dc4c8879c94878aba8d, type: 3}
       propertyPath: _cam
       value: 
@@ -3122,9 +3118,5 @@ PrefabInstance:
       propertyPath: _control
       value: 
       objectReference: {fileID: 1539989164}
-    - target: {fileID: 7104611825640491835, guid: 32e8040a3d597dc4c8879c94878aba8d, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32e8040a3d597dc4c8879c94878aba8d, type: 3}

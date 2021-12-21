@@ -89,6 +89,11 @@ public class CraftProcess
         CurrentTime += time;
         if (CurrentTime >= CraftTimeMax)
         {
+            if (!IsComplite)
+            {
+                EventManager.Instance.AddLog(3,
+                    "Завершено:  " + DatabaseManager.Instance.Localization.GetLocalization(OutputItem), Color.green);
+            }
             IsComplite = true;
         }
     }
