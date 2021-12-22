@@ -58,7 +58,18 @@ public class UIController : MonoBehaviour
 		var st = Player.Instance.PlayerStats;
 		if (st)
 		{
-			StatsUI.Update(new Vector2(st.CurrentHitPoint, st.MAXHitPoint), new Vector2(st.CurrentFood,st.MAXFood), new Vector2(st.CurrentEnergy, st.MAXEnergy));
+			int currentXp = Player.Instance.PlayerStats.CurrentXp;
+			var exp = new Vector3();
+			exp.x = currentXp;
+			var stat = Player.Instance.PlayerStats.PlayerStatsDataSo.expStats;
+			if (Player.Instance.PlayerStats.CurrentLvl > 1)
+			{
+				exp.x -= 
+					stat.PlayerLevelStats[Player.Instance.PlayerStats.CurrentLvl - 2].ExpToNextLevel;
+			}
+			exp.y = stat.PlayerLevelStats[Player.Instance.PlayerStats.CurrentLvl - 1].ExpToNextLevel;
+			exp.z = currentXp;
+			StatsUI.Update(new Vector2(st.CurrentHitPoint, st.MAXHitPoint), new Vector2(st.CurrentFood,st.MAXFood), new Vector3(st.CurrentEnergy, st.MAXEnergy), exp);
 		}
 		
 		LogPanel.UpdateLogger();
@@ -207,19 +218,25 @@ public class StatsUI
 	[SerializeField] private Image HPimage;
 	[SerializeField] private Image FoodImage;
 	[SerializeField] private Image EnergyImage;
+	[SerializeField] private Image ExpImage;
 	[SerializeField] private TMP_Text HPtext;
 	[SerializeField] private TMP_Text ENERGYtext;
 	[SerializeField] private TMP_Text FOODtext;
+	[SerializeField] private TMP_Text EXPtext;
+	
 
-	public void Update(Vector2 HP, Vector2 FOOD, Vector2 ENERGY)
+	public void Update(Vector2 HP, Vector2 FOOD, Vector2 ENERGY, Vector3 EXP)
 	{
 		HPimage.fillAmount = HP.x / HP.y;
 		FoodImage.fillAmount = FOOD.x / FOOD.y;
 		EnergyImage.fillAmount = ENERGY.x / ENERGY.y;
+		ExpImage.fillAmount = EXP.x / EXP.y;
 
-		HPtext.text = HP.x.ToString("0");
-		ENERGYtext.text = ENERGY.x.ToString("0");
-		FOODtext.text = FOOD.x.ToString("0");
+		HPtext.text = $@"HP: {HP.x.ToString("0")}";
+		ENERGYtext.text = $@"Energy: {ENERGY.x.ToString("0")}";
+		FOODtext.text =$@"Food: {FOOD.x.ToString("0")}";
+		EXPtext.text =
+			$@"Level: {Player.Instance.PlayerStats.CurrentLvl}  {EXP.z.ToString("0")} / {EXP.y.ToString("0")}";
 	}
 	
 }

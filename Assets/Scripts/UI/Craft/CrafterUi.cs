@@ -181,7 +181,7 @@ public class CrafterUi : MonoBehaviour
         float energycost = craftitemcount * craftBlueprintUi.currentBlueprint.EnergyCost;
         float playerenergy = Player.Instance.PlayerStats.CurrentEnergy;
         float time = craftBlueprintUi.currentBlueprint.CraftTimeInSeconds * craftitemcount;
-
+        int exp = craftBlueprintUi.currentBlueprint.Exp;
         print("Select Blueprint" + craftBlueprintUi.currentBlueprint.BlueprintId.ToLower());
         craftInfoPanel.ItemNameText.text =
             DatabaseManager.Instance.Localization.GetLocalization(craftBlueprintUi.currentBlueprint.BlueprintId);
@@ -213,6 +213,7 @@ public class CrafterUi : MonoBehaviour
         blueprintItemsCollection.OutputItemValue = craftitemcount;
         blueprintItemsCollection.Energy = energycost;
         blueprintItemsCollection.Time = time;
+        blueprintItemsCollection.exp = exp;
     }
     
     public class BlueprintItemsCollection
@@ -222,6 +223,7 @@ public class CrafterUi : MonoBehaviour
         public List<ItemsToCraft> Items = new List<ItemsToCraft>();
         public string OutputItemId;
         public int OutputItemValue;
+        public int exp;
         public struct ItemsToCraft
         {
             public ItemView Item;

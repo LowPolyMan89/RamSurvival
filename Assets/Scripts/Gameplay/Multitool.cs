@@ -40,6 +40,14 @@ public class Multitool : MonoBehaviour
     {
         if (!isRedy) return;
 
+        if (hitEntity is Resource)
+        {
+            if (hitEntity.GetComponent<Resource>().IsCollect)
+            {
+                hitEntity = null;
+            }
+        }
+        
         if (hitEntity)
         {
             multitoolBody.transform.LookAt(hitEntity.transform);
@@ -72,6 +80,7 @@ public class Multitool : MonoBehaviour
             multitoolBody.transform.LookAt(shootPoint);
             StopCoroutine(DooDamage());
         }
+        
     }
 
     private float CalculateDistance(Transform target)

@@ -39,7 +39,7 @@ public class CraftController
             }
         }
         
-        CraftProcesses.Add(new CraftProcess(blueprintItemsCollection.Time + nexttime, blueprintItemsCollection.OutputItemId, blueprintItemsCollection.OutputItemValue));
+        CraftProcesses.Add(new CraftProcess(blueprintItemsCollection.Time + nexttime, blueprintItemsCollection.OutputItemId, blueprintItemsCollection.OutputItemValue, blueprintItemsCollection.exp));
     }
 
     private void CraftTick()
@@ -71,11 +71,12 @@ public class CraftController
 [System.Serializable]
 public class CraftProcess
 {
-    public CraftProcess(float craftTime, string outputItem, int outputValue)
+    public CraftProcess(float craftTime, string outputItem, int outputValue, int exp)
     {
         CraftTimeMax = craftTime;
         OutputItem = outputItem;
         OutputValue = outputValue;
+        Exp = exp;
     }
 
     public bool IsComplite = false;
@@ -83,6 +84,7 @@ public class CraftProcess
     public float CraftTimeMax;
     public string OutputItem;
     public int OutputValue;
+    public int Exp;
 
     public void Tick(float time)
     {
