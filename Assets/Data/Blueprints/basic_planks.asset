@@ -22,3 +22,4 @@ MonoBehaviour:
     ItemValue: 1
   CraftTimeInSeconds: 10
   EnergyCost: 5
+  Exp: 20

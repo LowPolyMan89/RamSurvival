@@ -39,6 +39,7 @@ public class CraftSlotUI : MonoBehaviour
             IsActive = false;
             IsComplite = false;
             IsGet = true;
+            EventManager.Instance.OnPlayerGetXP(processCrafter._craftController.CraftProcesses[0].Exp);
             processCrafter._craftController.CollectItem();
             UI.GetButtonClick();
         }
