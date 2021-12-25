@@ -56,7 +56,7 @@ public class UIController : MonoBehaviour
 		grabButton.gameObject.SetActive(nearestItems.Count > 0);
 		
 		var st = Player.Instance.PlayerStats;
-		if (st)
+		if (st != null)
 		{
 			int currentXp = Player.Instance.PlayerStats.CurrentXp;
 			var exp = new Vector3();
@@ -232,9 +232,9 @@ public class StatsUI
 		EnergyImage.fillAmount = ENERGY.x / ENERGY.y;
 		ExpImage.fillAmount = EXP.x / EXP.y;
 
-		HPtext.text = $@"HP: {HP.x.ToString("0")}";
-		ENERGYtext.text = $@"Energy: {ENERGY.x.ToString("0")}";
-		FOODtext.text =$@"Food: {FOOD.x.ToString("0")}";
+		HPtext.text = $@"HP: {HP.x.ToString("0")} / {HP.y}";
+		ENERGYtext.text = $@"Energy: {ENERGY.x.ToString("0")} / {ENERGY.y}";
+		FOODtext.text =$@"Food: {FOOD.x.ToString("0")} / {FOOD.y}";
 		EXPtext.text =
 			$@"Level: {Player.Instance.PlayerStats.CurrentLvl}  {EXP.z.ToString("0")} / {EXP.y.ToString("0")}";
 	}

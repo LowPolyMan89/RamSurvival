@@ -12,8 +12,9 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float maxFood;
     [FormerlySerializedAs("energy")] [SerializeField] private float currentEnergy;
     [SerializeField] private float maxEnergy;
+    public BuffController BuffController;
 
-    public float MAXHitPoint => maxHitPoint;
+    public float MAXHitPoint => GetMaxHitPoints();
 
     public float CurrentHitPoint => currentHitPoint;
 
@@ -52,6 +53,9 @@ public class PlayerStats : MonoBehaviour
         currentEnergy = maxEnergy;
         minimumMass = _playerStatsDataSo.MinimalInventoryCapacity;
         minimumCells = _playerStatsDataSo.MimimalInventoryCells;
+
+        BuffController = new BuffController();
+        BuffController.Init();
         EventManager.Instance.OnPlayerGetXPAction += AddExp;
         EventManager.Instance.OnPlayerGetHPAction += AddHP;
         EventManager.Instance.OnPlayerGetFoodAction += AddFood;
@@ -61,6 +65,32 @@ public class PlayerStats : MonoBehaviour
         print("Player stats is ready!");
     }
 
+    [ContextMenu("TestPerkHp")]
+    public void TestPerkHp()
+    {
+        BuffController.CreateNewBuff("add_max_hp_perk_1");
+    }
+    
+    [ContextMenu("TestBuffHp")]
+    public void TestBuffHp()
+    {
+        BuffController.CreateNewBuff("add_max_hp_buff_1");
+    }
+    
+    [ContextMenu("RemovePerkHp")]
+    public void RemovePerkHp()
+    {
+        BuffController.RemoveBuff("add_max_hp_perk_1");
+    }
+    
+    public float GetMaxHitPoints()
+    {
+        if (BuffController == null) return _playerStatsDataSo.HitPoint;
+        
+        float hp = BuffController.GetMaxHitPoint(_playerStatsDataSo.HitPoint);
+        return hp;
+    }
+    
     private void OneSecondTick()
     {
         EventManager.Instance.OnPlayerGetEnergy(0.1f);

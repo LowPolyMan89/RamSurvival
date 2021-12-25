@@ -1052,6 +1052,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemsDatabase: {fileID: 11400000, guid: d58cb55a593f5df49a03d6cf67e323d4, type: 2}
   _otherData: {fileID: 11400000, guid: b7bb8555f410e5d4cae3b66a397f8c0d, type: 2}
+  _buffsDatabase: {fileID: 11400000, guid: 65583e729c5400241beb99298d90d91d, type: 2}
 --- !u!1001 &1269718477
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3041,6 +3042,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5395891650546765019, guid: 32e8040a3d597dc4c8879c94878aba8d, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6554090949628046079, guid: 32e8040a3d597dc4c8879c94878aba8d, type: 3}
       propertyPath: _cam
       value: 
@@ -3049,5 +3054,9 @@ PrefabInstance:
       propertyPath: _control
       value: 
       objectReference: {fileID: 1539989164}
+    - target: {fileID: 7104611825640491835, guid: 32e8040a3d597dc4c8879c94878aba8d, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32e8040a3d597dc4c8879c94878aba8d, type: 3}
