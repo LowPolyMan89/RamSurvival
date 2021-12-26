@@ -1,4 +1,6 @@
 
+using UnityEngine;
+
 public interface IBuffs
 {
    public float GetTime();
@@ -11,8 +13,12 @@ public interface IBuffs
    public void StartBuff();
    public void EndBuff();
    public float GetValue();
-   public void CreateBuff(FunctionType functionType, BuffType buffType, BuffModificator buffModificator, float buffTime, string buffId, float value);
+   public ValueType GetValueType();
+   public StackType GetStackType();
+   public void CreateBuff(FunctionType functionType, BuffType buffType, BuffModificator buffModificator, ValueChangeType valueChangeType, ValueType valueType, StackType stackType, bool isStack, float buffTime, string buffId, float value, Sprite sprite, bool isHide);
    bool IsFinish { get; set; }
+   bool IsStack { get; set; }
+   bool IsHide { get; set; }
 }
 
 public enum FunctionType
@@ -26,4 +32,19 @@ public enum BuffType
 public enum BuffModificator
 {
    HitPoint, Mass, Armor, Speed, CraftSpeed, Damage, Exp, Food
+}
+
+public enum ValueChangeType
+{
+   OneTime, PerSecond
+}
+
+public enum ValueType
+{
+   Maximum, Current
+}
+
+public enum StackType
+{
+   Set, Add
 }

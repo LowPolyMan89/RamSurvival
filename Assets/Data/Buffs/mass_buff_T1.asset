@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 893270156052e98459ce81c0f028eda1, type: 3}
-  m_Name: MaxHP_1_buff
+  m_Name: mass_buff_T1
   m_EditorClassIdentifier: 
   FunctionType: 0
-  BuffType: 0
+  BuffType: 1
   BuffModificator: 0
-  BuffId: add_max_hp_buff_1
-  BuffTime: 10
-  Value: 600
+  BuffId: add_max_hp_perk_1
+  BuffTime: 0
+  Value: 100
