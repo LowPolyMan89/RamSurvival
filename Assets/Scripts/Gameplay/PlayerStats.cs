@@ -12,14 +12,16 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private float maxFood;
     [FormerlySerializedAs("energy")] [SerializeField] private float currentEnergy;
     [SerializeField] private float maxEnergy;
+    public BuffController BuffController;
+    [SerializeField] private List<BuffView> ActiveBuffs = new List<BuffView>();
 
-    public float MAXHitPoint => maxHitPoint;
+    public float MAXHitPoint => GetMaxHitPoints();
 
     public float CurrentHitPoint => currentHitPoint;
 
     public float CurrentFood => currentFood;
 
-    public float MAXFood => maxFood;
+    public float MAXFood => GetMaxFood();
 
     public float CurrentEnergy => currentEnergy;
 
@@ -28,6 +30,8 @@ public class PlayerStats : MonoBehaviour
     public int CurrentXp => currentXp;
 
     public int CurrentLvl => currentLvl;
+
+    public float MaxMass => GetMaxMass();
 
     public PlayerStatsDataSO PlayerStatsDataSo => _playerStatsDataSo;
 
@@ -52,6 +56,9 @@ public class PlayerStats : MonoBehaviour
         currentEnergy = maxEnergy;
         minimumMass = _playerStatsDataSo.MinimalInventoryCapacity;
         minimumCells = _playerStatsDataSo.MimimalInventoryCells;
+
+        BuffController = new BuffController();
+        BuffController.Init();
         EventManager.Instance.OnPlayerGetXPAction += AddExp;
         EventManager.Instance.OnPlayerGetHPAction += AddHP;
         EventManager.Instance.OnPlayerGetFoodAction += AddFood;
@@ -61,15 +68,114 @@ public class PlayerStats : MonoBehaviour
         print("Player stats is ready!");
     }
 
+    
+    [ContextMenu("xp_perk_T1")]
+    public void xp_perk_T1()
+    {
+        Buff b = BuffController.CreateNewBuff("xp_perk_T1");
+        BuffView view = new BuffView();
+        view.BuffId = b.GetId();
+        view.BuffTime = b.GetTime();
+        view.Buff = b;
+        ActiveBuffs.Add(view);
+    }
+    
+    [ContextMenu("mass_buff_T1")]
+    public void mass_buff_T1()
+    {
+        Buff  b = BuffController.CreateNewBuff("mass_buff_T1");
+        BuffView view = new BuffView();
+        view.BuffId = b.GetId();
+        view.BuffTime = b.GetTime();
+        view.Buff = b;
+        ActiveBuffs.Add(view);
+    }
+        
+    [ContextMenu("TestPerkHp")]
+    public void TestPerkHp()
+    { 
+        Buff  b = BuffController.CreateNewBuff("add_max_hp_perk_1");
+       BuffView view = new BuffView();
+       view.BuffId = b.GetId();
+       view.BuffTime = b.GetTime();
+       view.Buff = b;
+       ActiveBuffs.Add(view);
+    }
+    
+    [ContextMenu("TestBuffHp")]
+    public void TestBuffHp()
+    {
+        Buff  b = BuffController.CreateNewBuff("add_max_hp_buff_1");
+        BuffView view = new BuffView();
+        view.BuffId = b.GetId();
+        view.BuffTime = b.GetTime();
+        view.Buff = b;
+        ActiveBuffs.Add(view);
+    }
+    
+    [ContextMenu("TestfoodBuffT1")]
+    public void TestfoodBuffT1()
+    {
+        Buff  b = BuffController.CreateNewBuff("food_buff_T1");
+        BuffView view = new BuffView();
+        view.BuffId = b.GetId();
+        view.BuffTime = b.GetTime();
+        view.Buff = b;
+        ActiveBuffs.Add(view);
+    }
+    
+    [ContextMenu("RemovePerkHp")]
+    public void RemovePerkHp()
+    {
+        BuffController.RemoveBuff("add_max_hp_perk_1");
+    }
+    
+    public float GetMaxHitPoints()
+    {
+        if (BuffController == null) return _playerStatsDataSo.HitPoint;
+        
+        float hp = BuffController.GetMaxHitPoint(_playerStatsDataSo.HitPoint);
+        return hp;
+    }
+    
+    public float GetMaxMass()
+    {
+        float mass = Player.Instance.PlayerInventory.GetMaxInventoryMass();
+        if (BuffController == null) return mass;
+        
+        mass = BuffController.GetMaxMass(mass);
+        return mass;
+    }
+    
+    public float GetMaxFood()
+    {
+        if (BuffController == null) return _playerStatsDataSo.Food;
+        
+        float hp = BuffController.GetMaxFood(_playerStatsDataSo.Food);
+        return hp;
+    }
+    
     private void OneSecondTick()
     {
         EventManager.Instance.OnPlayerGetEnergy(0.1f);
         EventManager.Instance.OnPlayerGetFood(-0.2f);
+
+        if (currentHitPoint > BuffController.GetMaxHitPoint(maxHitPoint))
+        {
+            currentHitPoint = BuffController.GetMaxHitPoint(maxHitPoint);
+        }
+        
+        foreach (var b in ActiveBuffs)
+        {
+            b.Update();
+        }
+
+        ActiveBuffs.RemoveAll(item => item.Buff.IsFinish == true);
     }
     
     public int AddExp(int expToAdd)
     {
-        currentXp += expToAdd;
+        currentXp += (int)BuffController.GetBuffedExpValue(expToAdd);
         currentLvl = _playerStatsDataSo.GetPlayerLevel(currentXp);
         return expToAdd;
     }
@@ -119,5 +225,18 @@ public class PlayerStats : MonoBehaviour
         EventManager.Instance.OnPlayerGetFoodAction -= AddFood;
         EventManager.Instance.OnPlayerGetEnergyAction -= AddEnergy;
         EventManager.Instance.OnTimerSecondAction -= OneSecondTick;
+    }
+    
+    [System.Serializable]
+    public class BuffView
+    {
+        public string BuffId;
+        public float BuffTime;
+        public Buff Buff;
+
+        public void Update()
+        {
+            BuffTime = Buff.GetTime();
+        }
     }
 }

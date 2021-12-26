@@ -82,8 +82,8 @@ public class UiInventory : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
         
-        capacityText.text = _player.PlayerInventory.GetCurrentInventoryMass().ToString("00") + "/" + _player.PlayerInventory.GetMaxInventoryMass();
-        capacityImage.fillAmount = (_player.PlayerInventory.GetCurrentInventoryMass() + 0.001f) / _player.PlayerInventory.GetMaxInventoryMass();
+        capacityText.text = _player.PlayerInventory.GetCurrentInventoryMass().ToString("00") + "/" + _player.PlayerStats.MaxMass;
+        capacityImage.fillAmount = (_player.PlayerInventory.GetCurrentInventoryMass() + 0.001f) / _player.PlayerStats.MaxMass;
 
         foreach (var cell in InventoryCellses)
         {

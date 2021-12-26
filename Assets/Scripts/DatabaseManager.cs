@@ -9,12 +9,13 @@ public class DatabaseManager :MonoBehaviour
     [SerializeField] private ItemDBSO _itemsDatabase;
     public static readonly Dictionary<string, ItemDataSO> ItemsData = new Dictionary<string, ItemDataSO>();
     [SerializeField] private OtherDataSO _otherData;
+    [SerializeField] private BuffsDatabase _buffsDatabase;
     public static DatabaseManager Instance;
     public Localization Localization;
 
     public OtherDataSO OtherData => _otherData;
-
-    private void Start()
+    public BuffsDatabase BuffsDatabase => _buffsDatabase;
+    public void Init()
     {
         
         if (Instance == null)
@@ -25,6 +26,8 @@ public class DatabaseManager :MonoBehaviour
         {
             Destroy(this);
         }
+
+        _buffsDatabase.Init();
     }
 
     public void LoadItemsDatabase()
