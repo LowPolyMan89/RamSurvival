@@ -15,7 +15,8 @@ MonoBehaviour:
   ItemId: wood_t1_name_id
   DescriptionId: wood_t1_description_id
   ItemType: 2
-  equipType: 1
+  equipType: 4
+  WeponType: 0
   ItemRare: 1
   Count: 0
   Sprite: {fileID: 21300000, guid: d4ed52019683d714ca1b782cf9847660, type: 3}
@@ -23,3 +24,8 @@ MonoBehaviour:
   - StatName: Mass
     StatValue: 2
   Prefab: {fileID: 4727572581050396682, guid: 85c61040f1c7f3449b06d6623cf74b08, type: 3}
+  IsDurabilityItem: 0
+  ItemDurability: 0
+  MaxItemDurability: 0
+  IsUsableItem: 0
+  IsStack: 1
