@@ -1,4 +1,5 @@
 
+using System;
 using UnityEditor;
 using UnityEngine;
 [CreateAssetMenu(fileName = "BuffsDataSO", menuName = "Data/Buffs/Create Buf Data", order = 4)]
@@ -17,9 +18,10 @@ public class BuffsDataSO : ScriptableObject
     public float Value;
     public Sprite BuffSprite;
 
-    public void Set()
+    public void Save()
     {
-        throw new System.NotImplementedException();
+        EditorUtility.SetDirty(this);
+        AssetDatabase.SaveAssets();
     }
 }
 
@@ -27,9 +29,11 @@ public class BuffsDataSO : ScriptableObject
 [CustomEditor(typeof(BuffsDataSO))]
 public class BuffsDataSOEditor : Editor
 {
+    private BuffsDataSO myScript;
+
     public override void OnInspectorGUI()
     {
-        BuffsDataSO myScript = (BuffsDataSO)target;
+        myScript = (BuffsDataSO)target;
 
         GUILayout.Label("Настройки баффа");
         GUILayout.Space(10f);
@@ -69,6 +73,10 @@ public class BuffsDataSOEditor : Editor
         {
             GUILayout.Space(10f);
             myScript.StackType = (StackType)EditorGUILayout.EnumPopup("Как стакаются?", myScript.StackType);
+        }
+        if(GUILayout.Button("Save"))
+        {
+            myScript.Save();
         }
     }
 }

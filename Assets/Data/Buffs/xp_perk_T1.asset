@@ -12,9 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 893270156052e98459ce81c0f028eda1, type: 3}
   m_Name: xp_perk_T1
   m_EditorClassIdentifier: 
-  FunctionType: 0
+  FunctionType: 1
   BuffType: 1
-  BuffModificator: 0
-  BuffId: add_max_hp_perk_1
+  BuffModificator: 6
+  ValueChangeType: 0
+  ValueType: 1
+  StackType: 0
+  IsStack: 0
+  IsHide: 0
+  BuffId: xp_perk_T1
   BuffTime: 0
-  Value: 100
+  Value: 200
+  BuffSprite: {fileID: 0}

@@ -13,8 +13,14 @@ MonoBehaviour:
   m_Name: mass_buff_T1
   m_EditorClassIdentifier: 
   FunctionType: 0
-  BuffType: 1
-  BuffModificator: 0
-  BuffId: add_max_hp_perk_1
-  BuffTime: 0
+  BuffType: 0
+  BuffModificator: 1
+  ValueChangeType: 0
+  ValueType: 0
+  StackType: 0
+  IsStack: 0
+  IsHide: 0
+  BuffId: mass_buff_T1
+  BuffTime: 50
   Value: 100
+  BuffSprite: {fileID: 0}
