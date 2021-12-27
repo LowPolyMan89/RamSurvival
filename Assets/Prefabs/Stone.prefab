@@ -230,3 +230,4 @@ MonoBehaviour:
   RestoreTime: 300
   brokenObj: {fileID: 6736212186012401865}
   normalObj: {fileID: 3563838335097894995}
+  Energy: 5

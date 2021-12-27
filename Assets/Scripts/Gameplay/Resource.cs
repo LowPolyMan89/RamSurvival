@@ -15,6 +15,7 @@ public class Resource : Entity, IDamagable
     [SerializeField] private float RestoreTime;
     [SerializeField] private GameObject brokenObj;
     [SerializeField] private GameObject normalObj;
+    [SerializeField] private int Energy;
     private float currRestoreTime;
 
     private float  _maxHitPoint;
@@ -84,6 +85,7 @@ public class Resource : Entity, IDamagable
         item.transform.position = transform.position;
         item.Count = Random.Range((int)countMinMax.x, (int)countMinMax.y + 1);
         EventManager.Instance.OnPlayerGetXP(Exp);
+        EventManager.Instance.OnPlayerGetEnergy(-Energy);
         isCollect = true;
         
         string m = LayerMask.LayerToName(2);
