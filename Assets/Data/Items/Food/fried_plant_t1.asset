@@ -14,14 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemId: fried_plant_t1_name_id
   DescriptionId: fried_plant_t1_description_id
-  ItemType: 2
-  equipType: 1
+  ItemType: 4
+  equipType: 0
+  WeponType: 0
   ItemRare: 1
   Count: 0
-  IsStack: 0
-  MaxStack: 0
   Sprite: {fileID: 21300000, guid: 99f560bf9178459478af35ee42781eaa, type: 3}
   ItemStats:
   - StatName: Mass
     StatValue: 1
-  Prefab: {fileID: 6250982305396813739, guid: 899d5e9e7b2ed404580c422e32a59145, type: 3}
+  Prefab: {fileID: 575298724891846619, guid: 0ea96b97257b1d747a53c899ed22365d, type: 3}
+  IsDurabilityItem: 0
+  ItemDurability: 0
+  MaxItemDurability: 0
+  IsUsableItem: 1
+  IsStack: 1
+  ItemsBuffs: []

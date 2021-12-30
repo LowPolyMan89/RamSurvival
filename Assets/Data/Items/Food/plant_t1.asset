@@ -14,14 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemId: plant_t1_name_id
   DescriptionId: plant_t1_description_id
-  ItemType: 2
-  equipType: 1
+  ItemType: 4
+  equipType: 0
+  WeponType: 0
   ItemRare: 1
   Count: 0
-  IsStack: 0
-  MaxStack: 0
   Sprite: {fileID: 21300000, guid: b02bb07ec4b001244b387b8fae8a63f9, type: 3}
   ItemStats:
   - StatName: Mass
     StatValue: 1
-  Prefab: {fileID: 8710306226609076228, guid: 0ae8860487341aa48aa18e3a1f39273a, type: 3}
+  Prefab: {fileID: 1364567478389190932, guid: dfbaa0f9f95f5e64ca00f7b2a87bbb0b, type: 3}
+  IsDurabilityItem: 0
+  ItemDurability: 0
+  MaxItemDurability: 0
+  IsUsableItem: 1
+  IsStack: 1
+  ItemsBuffs: []

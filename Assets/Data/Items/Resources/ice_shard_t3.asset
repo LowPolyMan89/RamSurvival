@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94dd1e8b6e023f644a132b89aef74ffb, type: 3}
+  m_Name: ice_shard_t3
+  m_EditorClassIdentifier: 
+  ItemId: ice_shard_t3_name_id
+  DescriptionId: ice_shard_t3_description_id
+  ItemType: 2
+  equipType: 0
+  WeponType: 0
+  ItemRare: 3
+  Count: 0
+  Sprite: {fileID: 21300000, guid: f31a71507e306b84da9e45b15fde3f20, type: 3}
+  ItemStats:
+  - StatName: Mass
+    StatValue: 1
+  Prefab: {fileID: 1258296618597626589, guid: 02efa6b7e7e2fee4f8de363a0441205d, type: 3}
+  IsDurabilityItem: 0
+  ItemDurability: 0
+  MaxItemDurability: 0
+  IsUsableItem: 0
+  IsStack: 1
+  ItemsBuffs: []

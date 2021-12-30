@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94dd1e8b6e023f644a132b89aef74ffb, type: 3}
+  m_Name: stone_t3
+  m_EditorClassIdentifier: 
+  ItemId: stone_t3_name_id
+  DescriptionId: stone_t3_description_id
+  ItemType: 2
+  equipType: 0
+  WeponType: 0
+  ItemRare: 3
+  Count: 0
+  Sprite: {fileID: 21300000, guid: 7077ce2d31f81cc4199cafde25da8e98, type: 3}
+  ItemStats:
+  - StatName: Mass
+    StatValue: 2
+  Prefab: {fileID: 4590304685840062671, guid: b7ddc87af4317d5498357500cc8a745e, type: 3}
+  IsDurabilityItem: 0
+  ItemDurability: 0
+  MaxItemDurability: 0
+  IsUsableItem: 0
+  IsStack: 1
+  ItemsBuffs: []

@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94dd1e8b6e023f644a132b89aef74ffb, type: 3}
+  m_Name: plant_t3
+  m_EditorClassIdentifier: 
+  ItemId: plant_t3_name_id
+  DescriptionId: plant_t3_description_id
+  ItemType: 4
+  equipType: 0
+  WeponType: 0
+  ItemRare: 3
+  Count: 0
+  Sprite: {fileID: 21300000, guid: 729186d4355223243883d829c6a8259b, type: 3}
+  ItemStats:
+  - StatName: Mass
+    StatValue: 1
+  Prefab: {fileID: 1416833531504001213, guid: 984e05092ba84574397a1ca2eba8a29d, type: 3}
+  IsDurabilityItem: 0
+  ItemDurability: 0
+  MaxItemDurability: 0
+  IsUsableItem: 1
+  IsStack: 1
+  ItemsBuffs: []
