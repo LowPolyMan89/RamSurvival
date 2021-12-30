@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2150905881752871466}
   - component: {fileID: 5355041377535411626}
   m_Layer: 7
-  m_Name: Tree
+  m_Name: tree_t1
   m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63,7 +63,7 @@ MonoBehaviour:
   EntityID: 
   countMinMax: {x: 2, y: 5}
   hitPoint: 35
-  lootItem: {fileID: 4727572581050396681, guid: 85c61040f1c7f3449b06d6623cf74b08, type: 3}
+  lootItem: {fileID: 7969908391964607041, guid: 364e5b2d967130a44aeb4b922638bfe2, type: 3}
   Exp: 5
   isCollect: 0
   RestoreTime: 300

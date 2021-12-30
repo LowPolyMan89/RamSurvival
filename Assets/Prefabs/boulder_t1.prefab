@@ -174,7 +174,7 @@ GameObject:
   - component: {fileID: 4746832713494941167}
   - component: {fileID: 1517257709899755419}
   m_Layer: 7
-  m_Name: Stone
+  m_Name: boulder_t1
   m_TagString: Resource
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -224,7 +224,7 @@ MonoBehaviour:
   EntityID: 
   countMinMax: {x: 1, y: 5}
   hitPoint: 50
-  lootItem: {fileID: 4727572581050396681, guid: 512e8f4c6ba90fa4bac48f05b38e27bc, type: 3}
+  lootItem: {fileID: 6330534435854832021, guid: a83744ecc6e0aa140a92d29ceb52e1af, type: 3}
   Exp: 5
   isCollect: 0
   RestoreTime: 300
