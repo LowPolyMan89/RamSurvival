@@ -16,6 +16,9 @@ public class EventManager : MonoBehaviour
 	public event Func<float, float> OnPlayerGetFoodAction;
 	public event Func<float, float> OnPlayerGetEnergyAction;
 	public event Action<float, string, Color> OnAddLogEvent;
+	public event Func<string, string> OnAddBuffEvent;
+	
+	public event Func<string, string> OnRemoveBuffEvent;
 	
 	public Action OnUpdateUIAction;
 	
@@ -127,5 +130,23 @@ public class EventManager : MonoBehaviour
 		return message;
 	}
 
+	public string AddBuff(string buffID)
+	{
+		if (OnAddBuffEvent != null)
+		{
+			OnAddBuffEvent(buffID);
+		}
+		
+		return buffID;
+	}
 	
+	public string RemoveBuff(string buffID)
+	{
+		if (OnRemoveBuffEvent != null)
+		{
+			OnRemoveBuffEvent(buffID);
+		}
+		
+		return buffID;
+	}
 }

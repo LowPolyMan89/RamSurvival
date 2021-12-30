@@ -12,4 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 360eb7498ac34b7596754e5619c882f3, type: 3}
   m_Name: BuffsDatabase
   m_EditorClassIdentifier: 
-  AllBuffs: []
+  allBuffs:
+  - {fileID: 11400000, guid: 81a29460225354e459383bd6296cac69, type: 2}
+  - {fileID: 11400000, guid: 41c42fa88002b7f4e8cc1018b2400a66, type: 2}
+  - {fileID: 11400000, guid: 5c777bcf70cb4f749b452d2cc371a161, type: 2}
+  - {fileID: 11400000, guid: 05cb29681a5483d49bfbff60d81a1ab2, type: 2}
+  - {fileID: 11400000, guid: 2d3db02567d28834bb3b9c812d4fb5f4, type: 2}

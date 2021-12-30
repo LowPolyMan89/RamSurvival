@@ -161,7 +161,7 @@ public class UiInventory : MonoBehaviour
                 break;
             case EquipType.Boots:
                 break;
-            case EquipType.none:
+            case EquipType.None:
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
@@ -170,7 +170,21 @@ public class UiInventory : MonoBehaviour
     
     public void EqipButtonUse()
     {
-        switch (DatabaseManager.Instance.GetItemData(SelectedItem.Item.ItemId).equipType)
+        ItemDataSO data = DatabaseManager.Instance.GetItemData(SelectedItem.Item.ItemId);
+
+        if (data.IsUsableItem)
+        {
+            foreach (var buf in data.ItemsBuffs)
+            {
+                EventManager.Instance.AddBuff(buf.BuffId);
+            }
+
+            SelectedItem.Item.Count--;
+
+            return;
+        }
+        
+        switch (data.equipType)
         {
             case EquipType.Backpack:
                 if (SelectedItem.IsEqipped)
@@ -194,7 +208,7 @@ public class UiInventory : MonoBehaviour
                     HideButtons();
                 }
                 break;
-            case EquipType.none:
+            case EquipType.None:
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
@@ -228,7 +242,7 @@ public class UiInventory : MonoBehaviour
                     HideButtons();
                 }
                 break;
-            case EquipType.none:
+            case EquipType.None:
                 break;
             default:
                 throw new ArgumentOutOfRangeException();
@@ -265,7 +279,7 @@ public class UiInventory : MonoBehaviour
            infoButton.SetActive(true);
            dropButton.SetActive(true);
        }
-       if (data.ItemType == ItemType.Equip)
+       if (data.ItemType == ItemType.Equip || data.ItemType == ItemType.Food || data.ItemType == ItemType.Weapons)
        {
            useButton.SetActive(true);
            infoButton.SetActive(true);

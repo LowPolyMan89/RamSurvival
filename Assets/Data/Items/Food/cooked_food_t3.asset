@@ -15,7 +15,7 @@ MonoBehaviour:
   ItemId: cooked_food_t3_name_id
   DescriptionId: cooked_food_t3_description_id
   ItemType: 4
-  equipType: 0
+  equipType: 4
   WeponType: 0
   ItemRare: 3
   Count: 0
@@ -29,4 +29,5 @@ MonoBehaviour:
   MaxItemDurability: 0
   IsUsableItem: 1
   IsStack: 1
-  ItemsBuffs: []
+  ItemsBuffs:
+  - {fileID: 11400000, guid: 81a29460225354e459383bd6296cac69, type: 2}

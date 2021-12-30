@@ -64,70 +64,27 @@ public class PlayerStats : MonoBehaviour
         EventManager.Instance.OnPlayerGetFoodAction += AddFood;
         EventManager.Instance.OnPlayerGetEnergyAction += AddEnergy;
         EventManager.Instance.OnTimerSecondAction += OneSecondTick;
-        
+        EventManager.Instance.OnAddBuffEvent += AddNewBuff;
+        EventManager.Instance.OnRemoveBuffEvent += RemoveBuff;
         print("Player stats is ready!");
     }
 
-    
-    [ContextMenu("xp_perk_T1")]
-    public void xp_perk_T1()
+
+    public string AddNewBuff(string buffId)
     {
-        Buff b = BuffController.CreateNewBuff("xp_perk_T1");
+        Buff b = BuffController.CreateNewBuff(buffId);
         BuffView view = new BuffView();
         view.BuffId = b.GetId();
         view.BuffTime = b.GetTime();
         view.Buff = b;
         ActiveBuffs.Add(view);
+        return buffId;
     }
     
-    [ContextMenu("mass_buff_T1")]
-    public void mass_buff_T1()
+    public string RemoveBuff(string buffId)
     {
-        Buff  b = BuffController.CreateNewBuff("mass_buff_T1");
-        BuffView view = new BuffView();
-        view.BuffId = b.GetId();
-        view.BuffTime = b.GetTime();
-        view.Buff = b;
-        ActiveBuffs.Add(view);
-    }
-        
-    [ContextMenu("TestPerkHp")]
-    public void TestPerkHp()
-    { 
-        Buff  b = BuffController.CreateNewBuff("add_max_hp_perk_1");
-       BuffView view = new BuffView();
-       view.BuffId = b.GetId();
-       view.BuffTime = b.GetTime();
-       view.Buff = b;
-       ActiveBuffs.Add(view);
-    }
-    
-    [ContextMenu("TestBuffHp")]
-    public void TestBuffHp()
-    {
-        Buff  b = BuffController.CreateNewBuff("add_max_hp_buff_1");
-        BuffView view = new BuffView();
-        view.BuffId = b.GetId();
-        view.BuffTime = b.GetTime();
-        view.Buff = b;
-        ActiveBuffs.Add(view);
-    }
-    
-    [ContextMenu("TestfoodBuffT1")]
-    public void TestfoodBuffT1()
-    {
-        Buff  b = BuffController.CreateNewBuff("food_buff_T1");
-        BuffView view = new BuffView();
-        view.BuffId = b.GetId();
-        view.BuffTime = b.GetTime();
-        view.Buff = b;
-        ActiveBuffs.Add(view);
-    }
-    
-    [ContextMenu("RemovePerkHp")]
-    public void RemovePerkHp()
-    {
-        BuffController.RemoveBuff("add_max_hp_perk_1");
+        BuffController.RemoveBuff(buffId);
+        return buffId;
     }
     
     public float GetMaxHitPoints()
@@ -225,6 +182,8 @@ public class PlayerStats : MonoBehaviour
         EventManager.Instance.OnPlayerGetFoodAction -= AddFood;
         EventManager.Instance.OnPlayerGetEnergyAction -= AddEnergy;
         EventManager.Instance.OnTimerSecondAction -= OneSecondTick;
+        EventManager.Instance.OnAddBuffEvent -= AddNewBuff;
+        EventManager.Instance.OnAddBuffEvent -= RemoveBuff;
     }
     
     [System.Serializable]

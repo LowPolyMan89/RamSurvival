@@ -39,6 +39,8 @@ public class BuffsDatabase : ScriptableObject
             BuffsDataSO so = AssetDatabase.LoadAssetAtPath<BuffsDataSO>(path);
             allBuffs.Add(so);
             AllBuffs.Add(so.BuffId, so);
+            EditorUtility.SetDirty(this);
+            AssetDatabase.SaveAssets();
             Debug.Log("Add item to data base: " + path);
         }
     }

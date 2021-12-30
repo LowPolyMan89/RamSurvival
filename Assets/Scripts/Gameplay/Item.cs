@@ -271,12 +271,12 @@ public enum ItemType
 
 public enum EquipType
 {
-    Backpack, Helmet, Chest, Boots, none
+    Backpack, Helmet, Chest, Boots, None
 }
 
 public enum WeaponType
 {
-    Mele, Range, Trap
+    None,Mele, Range, Trap
 }
 
 #if UNITY_EDITOR

@@ -3,9 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class BuffController
 {
-    private List<IBuffs> HitPointBuffs = new List<IBuffs>();
+    private List<IBuffs> HitPointBuffs = new List<IBuffs>(); 
     private List<IBuffs> FoodBuffs = new List<IBuffs>();
     private List<IBuffs> MassBuffs = new List<IBuffs>();
     private List<IBuffs> EXPBuffs = new List<IBuffs>();
@@ -131,6 +132,7 @@ public class BuffController
         {
             if(foods.GetType() == BuffType.Perk)
                 continue;
+            
             foods.Tick();
 
             if (foods.IsFinish)

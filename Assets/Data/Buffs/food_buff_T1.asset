@@ -22,5 +22,5 @@ MonoBehaviour:
   IsHide: 0
   BuffId: food_buff_T1
   BuffTime: 10
-  Value: 2
+  Value: 10
   BuffSprite: {fileID: 0}

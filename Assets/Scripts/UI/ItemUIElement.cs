@@ -80,7 +80,7 @@ public class ItemUIElement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
                 }
             }
 
-            if (h.gameObject.name.Contains("Dropzone") && DatabaseManager.Instance.GetItemData(Item.ItemId).equipType != EquipType.none)
+            if (h.gameObject.name.Contains("Dropzone") && DatabaseManager.Instance.GetItemData(Item.ItemId).equipType != EquipType.None)
             {
                 UIController.Instance.UiInventory.EqipButtonUse(this);
                 isEquip = true;
