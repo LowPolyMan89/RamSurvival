@@ -13,9 +13,12 @@ public class Init : MonoBehaviour
     private IEnumerator Initilize()
     {
         yield return new WaitForSeconds(1f);
+        FindObjectOfType<DatabaseManager>().Init();
         DatabaseManager.Instance.LoadItemsDatabase();
+        DatabaseManager.Instance.LoadLocalizationData();
         yield return new WaitForSeconds(1f);
         gameObject.AddComponent<GameTime>();
         UIController.Instance.LoadingComplite();
+        Player.Instance.Init();
     }
 }

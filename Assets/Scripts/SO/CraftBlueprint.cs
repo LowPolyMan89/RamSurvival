@@ -10,6 +10,7 @@ public class CraftBlueprint : ScriptableObject
     public BlueprintItem OutputItem;
     public float CraftTimeInSeconds;
     public float EnergyCost;
+    public int Exp;
 }
 
 

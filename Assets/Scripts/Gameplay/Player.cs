@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -12,9 +13,9 @@ public class Player : MonoBehaviour
     public Crafter playerCrafter;
     public Transform dropPoint;
 
-    public void EqipBackpack(string backpackItemId)
+    public void EqipBackpack([CanBeNull] string backpackItemId)
     {
-        EqippedBackpack = DatabaseManager.Instance.GetItemData(backpackItemId);
+        EqippedBackpack = string.IsNullOrEmpty(backpackItemId) ? null : DatabaseManager.Instance.GetItemData(backpackItemId);
     }
     
     private void Start()
@@ -28,5 +29,10 @@ public class Player : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void Init()
+    {
+        PlayerStats.Init();
     }
 }

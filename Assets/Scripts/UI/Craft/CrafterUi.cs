@@ -179,15 +179,16 @@ public class CrafterUi : MonoBehaviour
         crafterRequiredPanel.Slots.Clear();
 
         float energycost = craftitemcount * craftBlueprintUi.currentBlueprint.EnergyCost;
-        float playerenergy = Player.Instance.PlayerStats.Energy;
+        float playerenergy = Player.Instance.PlayerStats.CurrentEnergy;
         float time = craftBlueprintUi.currentBlueprint.CraftTimeInSeconds * craftitemcount;
-
+        int exp = craftBlueprintUi.currentBlueprint.Exp;
         print("Select Blueprint" + craftBlueprintUi.currentBlueprint.BlueprintId.ToLower());
-        craftInfoPanel.ItemNameText.text = craftBlueprintUi.currentBlueprint.BlueprintId.ToLower();
-        craftInfoPanel.DescriptionText.text = DatabaseManager.Instance.GetItemData(craftBlueprintUi.currentBlueprint.OutputItem.ItemId).DescriptionId;
+        craftInfoPanel.ItemNameText.text =
+            DatabaseManager.Instance.Localization.GetLocalization(craftBlueprintUi.currentBlueprint.BlueprintId);
+        craftInfoPanel.DescriptionText.text = DatabaseManager.Instance.Localization.GetLocalization(DatabaseManager.Instance.GetItemData(craftBlueprintUi.currentBlueprint.OutputItem.ItemId).DescriptionId);
         craftInfoPanel.ItemImage.sprite = DatabaseManager.Instance.GetItemData(craftBlueprintUi.currentBlueprint.OutputItem.ItemId).Sprite;
 
-        crafterRequiredPanel.EnergySlot.Text.text = energycost.ToString() + "/" + Player.Instance.PlayerStats.Energy;
+        crafterRequiredPanel.EnergySlot.Text.text = energycost.ToString("0") + "/" + Player.Instance.PlayerStats.CurrentEnergy.ToString("0");
         crafterRequiredPanel.TimerSlot.Text.text = Support.ConvertTimeSecondsToString(time);
 
         if (energycost > playerenergy)
@@ -212,6 +213,7 @@ public class CrafterUi : MonoBehaviour
         blueprintItemsCollection.OutputItemValue = craftitemcount;
         blueprintItemsCollection.Energy = energycost;
         blueprintItemsCollection.Time = time;
+        blueprintItemsCollection.exp = exp;
     }
     
     public class BlueprintItemsCollection
@@ -221,6 +223,7 @@ public class CrafterUi : MonoBehaviour
         public List<ItemsToCraft> Items = new List<ItemsToCraft>();
         public string OutputItemId;
         public int OutputItemValue;
+        public int exp;
         public struct ItemsToCraft
         {
             public ItemView Item;

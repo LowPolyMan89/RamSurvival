@@ -46,7 +46,7 @@ public class UiInventory : MonoBehaviour
         {
             if (cell.transform.childCount > 0)
             {
-                Destroy(cell.transform.GetChild(0).gameObject, 0.01f);
+                Destroy(cell.transform.GetChild(0).gameObject);
             }
         }
         
@@ -82,8 +82,8 @@ public class UiInventory : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
         
-        capacityText.text = _player.PlayerInventory.GetCurrentInventoryMass().ToString("00") + "/" + _player.PlayerInventory.GetMaxInventoryMass();
-        capacityImage.fillAmount = (_player.PlayerInventory.GetCurrentInventoryMass() + 0.001f) / _player.PlayerInventory.GetMaxInventoryMass();
+        capacityText.text = _player.PlayerInventory.GetCurrentInventoryMass().ToString("00") + "/" + _player.PlayerStats.MaxMass;
+        capacityImage.fillAmount = (_player.PlayerInventory.GetCurrentInventoryMass() + 0.001f) / _player.PlayerStats.MaxMass;
 
         foreach (var cell in InventoryCellses)
         {
@@ -144,9 +144,30 @@ public class UiInventory : MonoBehaviour
 
     public void InfoButtonUse()
     {
-        print(SelectedItem.Item.ItemId);
+        UIController.Instance.OpenInfoPanel(SelectedItem.Item);
     }
 
+    public void StartDragEqipFromPlayer(ItemUIElement itemUI)
+    {
+        SelectedItem = itemUI;
+        switch (DatabaseManager.Instance.GetItemData(SelectedItem.Item.ItemId).equipType)
+        {
+            case EquipType.Backpack:
+                Player.Instance.EqipBackpack(null);
+                break;
+            case EquipType.Helmet:
+                break;
+            case EquipType.Chest:
+                break;
+            case EquipType.Boots:
+                break;
+            case EquipType.none:
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+    }
+    
     public void EqipButtonUse()
     {
         switch (DatabaseManager.Instance.GetItemData(SelectedItem.Item.ItemId).equipType)
@@ -180,6 +201,40 @@ public class UiInventory : MonoBehaviour
         }
     }
 
+    public void EqipButtonUse(ItemUIElement itemUI)
+    {
+        SelectedItem = itemUI;
+        switch (DatabaseManager.Instance.GetItemData(SelectedItem.Item.ItemId).equipType)
+        {
+            case EquipType.Backpack:
+                if (SelectedItem.IsEqipped)
+                {
+                    Player.Instance.EqipBackpack(null);
+                    Player.Instance.PlayerInventory.AddEqipItem(SelectedItem.Item.ItemId);
+                    Destroy(SelectedItem.gameObject);
+                    SelectedItem = null;
+                    HideButtons();
+                }
+                else
+                {
+                    Player.Instance.EqipBackpack(SelectedItem.Item.ItemId);
+                    SelectedItem.IsEqipped = true;
+                    var tr = UIController.Instance.GetEqipSlot(SelectedItem.Item.ItemId);
+                    tr.Item = SelectedItem.Item;
+                    SelectedItem.transform.SetParent(tr.transform);
+                    SelectedItem.transform.localPosition = Vector3.zero;
+                    Player.Instance.PlayerInventory.RemoveItem(SelectedItem.Item.ItemId);
+                    SelectedItem = null;
+                    HideButtons();
+                }
+                break;
+            case EquipType.none:
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+    }
+    
     public void HideButtons()
     {
         useButton.SetActive(false);

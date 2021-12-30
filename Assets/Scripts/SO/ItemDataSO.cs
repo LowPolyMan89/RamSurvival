@@ -24,6 +24,8 @@ public class ItemDataSO : ScriptableObject
     [Header("Собирается ли в кучки")]
     public bool IsStack = true;
 
+    public List<BuffsDataSO> ItemsBuffs = new List<BuffsDataSO>();
+
     public float GetStat(string statName)
     {
         float value = 0;

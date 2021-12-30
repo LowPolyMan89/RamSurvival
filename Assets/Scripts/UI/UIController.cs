@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,6 +25,9 @@ public class UIController : MonoBehaviour
 	public UiMovePanel UiMovePanel;
 	public Transform MainInventory;
 	public GameObject LoadingPanel;
+	public UiInfoPanel UiInfoPanel;
+	public StatsUI StatsUI;
+	public LogPanel LogPanel;
 	public EquipUISlot GetEqipSlot(string itemid)
 	{
 		ItemDataSO data = DatabaseManager.Instance.GetItemData(itemid);
@@ -50,8 +54,32 @@ public class UIController : MonoBehaviour
 	{
 		useButton.gameObject.SetActive(isUseObjectFind);
 		grabButton.gameObject.SetActive(nearestItems.Count > 0);
+		
+		var st = Player.Instance.PlayerStats;
+		if (st != null)
+		{
+			int currentXp = Player.Instance.PlayerStats.CurrentXp;
+			var exp = new Vector3();
+			exp.x = currentXp;
+			var stat = Player.Instance.PlayerStats.PlayerStatsDataSo.expStats;
+			if (Player.Instance.PlayerStats.CurrentLvl > 1)
+			{
+				exp.x -= 
+					stat.PlayerLevelStats[Player.Instance.PlayerStats.CurrentLvl - 2].ExpToNextLevel;
+			}
+			exp.y = stat.PlayerLevelStats[Player.Instance.PlayerStats.CurrentLvl - 1].ExpToNextLevel;
+			exp.z = currentXp;
+			StatsUI.Update(new Vector2(st.CurrentHitPoint, st.MAXHitPoint), new Vector2(st.CurrentFood,st.MAXFood), new Vector3(st.CurrentEnergy, st.MAXEnergy), exp);
+		}
+		
+		LogPanel.UpdateLogger();
 	}
 
+	public void AddLogs(float time, string message, Color color)
+	{
+		LogPanel.AddLogs(time, message, color);
+	} 
+	
 	void Start()
 	{
 
@@ -66,9 +94,17 @@ public class UIController : MonoBehaviour
 		
 		eventManager = EventManager.Instance;
 		eventManager.OnResorceSelectAction += ShowSelectedPanel;
-		
+		eventManager.OnAddLogEvent += AddLogs;
+
 	}
 
+	public void OpenInfoPanel(ItemView selectedItemItem)
+	{
+		UiInfoPanel.gameObject.SetActive(true);
+		ItemDataSO itemd = DatabaseManager.Instance.GetItemData(selectedItemItem.ItemId);
+		UiInfoPanel.Init(itemd);
+	}
+	
 	private Entity ShowSelectedPanel(Entity entity)
 	{
 		if(entity != null)
@@ -159,6 +195,7 @@ public class UIController : MonoBehaviour
 					break;
 				}
 			}
+
 			if (toremove)
 			{
 				elements.Remove(toremove);
@@ -172,4 +209,82 @@ public class UIController : MonoBehaviour
 	{
 		LoadingPanel.SetActive(false);
 	}
+
 }
+
+[System.Serializable]
+public class StatsUI
+{
+	[SerializeField] private Image HPimage;
+	[SerializeField] private Image FoodImage;
+	[SerializeField] private Image EnergyImage;
+	[SerializeField] private Image ExpImage;
+	[SerializeField] private TMP_Text HPtext;
+	[SerializeField] private TMP_Text ENERGYtext;
+	[SerializeField] private TMP_Text FOODtext;
+	[SerializeField] private TMP_Text EXPtext;
+	
+
+	public void Update(Vector2 HP, Vector2 FOOD, Vector2 ENERGY, Vector3 EXP)
+	{
+		HPimage.fillAmount = HP.x / HP.y;
+		FoodImage.fillAmount = FOOD.x / FOOD.y;
+		EnergyImage.fillAmount = ENERGY.x / ENERGY.y;
+		ExpImage.fillAmount = EXP.x / EXP.y;
+
+		HPtext.text = $@"HP: {HP.x.ToString("0")} / {HP.y}";
+		ENERGYtext.text = $@"Energy: {ENERGY.x.ToString("0")} / {ENERGY.y}";
+		FOODtext.text =$@"Food: {FOOD.x.ToString("0")} / {FOOD.y}";
+		EXPtext.text =
+			$@"Level: {Player.Instance.PlayerStats.CurrentLvl}  {EXP.z.ToString("0")} / {EXP.y.ToString("0")}";
+	}
+	
+}
+
+[System.Serializable]
+public class LogPanel
+{
+	[SerializeField] private TMP_Text LogText;
+	private Queue<LogElement> LogElements = new Queue<LogElement>();
+	private LogElement inProcess;
+	
+	public void UpdateLogger()
+	{
+		if (LogElements.Count < 1)
+		{
+			LogText.text = "";
+			return;
+		}
+		
+		inProcess = LogElements.Peek();
+		LogText.text = inProcess.Message;
+		inProcess.Time -= Time.deltaTime;
+		LogText.alpha = inProcess.Time;
+		LogText.color = inProcess.Color;
+		
+		if (inProcess.Time <= 0)
+		{
+			LogText.text = "";
+			LogElements.Dequeue();
+			inProcess = null;
+		}
+	}
+	
+	public void AddLogs(float time, string message, Color color)
+	{
+		LogElement el = new LogElement();
+		el.Message = message;
+		el.Time = time;
+		el.Color = color;
+		LogElements.Enqueue(el);	
+	}
+	
+	[System.Serializable]
+	public class LogElement
+	{
+		public float Time;
+		public string Message;
+		public Color Color;
+	}
+}
+

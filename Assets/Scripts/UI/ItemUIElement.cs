@@ -41,6 +41,9 @@ public class ItemUIElement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         startRoot = transform.parent;
         transform.SetParent(transform.root);
         ItemInventory.RemoveItem(Item);
+        UIController.Instance.UiInventory.HideButtons();
+        if(IsEqipped)
+            UIController.Instance.UiInventory.StartDragEqipFromPlayer(this);
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -51,7 +54,8 @@ public class ItemUIElement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public void OnEndDrag(PointerEventData eventData)
     {
-
+        bool isEquip = false;
+        
         foreach (var h in GetEventSystemRaycastResults())
         {
             if (h.gameObject.CompareTag("Cell"))
@@ -75,8 +79,14 @@ public class ItemUIElement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
                     return;
                 }
             }
+
+            if (h.gameObject.name.Contains("Dropzone") && DatabaseManager.Instance.GetItemData(Item.ItemId).equipType != EquipType.none)
+            {
+                UIController.Instance.UiInventory.EqipButtonUse(this);
+                isEquip = true;
+                return;
+            }
             
-  
         }
         
         ItemInventory.AddItem(this.Item.ItemId, this.Item.Count);
