@@ -44,7 +44,6 @@ GameObject:
   - component: {fileID: 6270046554570287548}
   - component: {fileID: 6270046554570287536}
   - component: {fileID: 6270046554570287538}
-  - component: {fileID: 6270046554570287537}
   m_Layer: 7
   m_Name: Chest
   m_TagString: Storage
@@ -154,32 +153,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 6270046554570287547}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a797efdcecc7f17449276239ea975fdd, type: 3}
+  m_Script: {fileID: 11500000, guid: 203723b63701e494f8f21e061ab71755, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Sprite: {fileID: 21300000, guid: 3fcc561986559224eb5d744fbaf730bf, type: 3}
-  Tier: 1
-  Name: Wood Chest
-  Info: Wood Chest standart
---- !u!114 &6270046554570287537
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6270046554570287547}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d15aeb382249fa4b9e729d559575be9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isPlayerInventory: 0
-  items: []
-  eqipeditems: []
-  inventoryStorage: {fileID: 6270046554570287551}
-  currentCapacity: 0
-  inventoryBackpackPrefab: {fileID: 0}
-  InventoryUI: {fileID: 0}
-  capacity: 100
-  slots: 5
-  dropPoint: {fileID: 6270046554525927336}
+  EntityID: 
+  Items:
+  - ItemId: stone_block_t1_name_id
+    Count: 20
+  IsPlayerInventory: 0
+  Sloots: 20
+  MaxMass: 1000
+  MaxCapacity: 20
