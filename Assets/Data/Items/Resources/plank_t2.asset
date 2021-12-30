@@ -15,13 +15,18 @@ MonoBehaviour:
   ItemId: plank_t2_name_id
   DescriptionId: plank_t2_description_id
   ItemType: 2
-  equipType: 1
+  equipType: 0
+  WeponType: 0
   ItemRare: 2
   Count: 0
-  IsStack: 0
-  MaxStack: 0
   Sprite: {fileID: 21300000, guid: 03d160f9589da414fa0d7d02ad076b1b, type: 3}
   ItemStats:
   - StatName: Mass
     StatValue: 2
-  Prefab: {fileID: 188845022191747606, guid: d0e363657fbc0744d98ba371010fa0f8, type: 3}
+  Prefab: {fileID: 4793088158684069574, guid: 4193bd20a4cb7bc4ebd283824352505f, type: 3}
+  IsDurabilityItem: 0
+  ItemDurability: 0
+  MaxItemDurability: 0
+  IsUsableItem: 0
+  IsStack: 1
+  ItemsBuffs: []

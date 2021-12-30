@@ -15,13 +15,18 @@ MonoBehaviour:
   ItemId: stone_block_t2_name_id
   DescriptionId: stone_block_t2_description_id
   ItemType: 2
-  equipType: 1
+  equipType: 0
+  WeponType: 0
   ItemRare: 2
   Count: 0
-  IsStack: 0
-  MaxStack: 0
   Sprite: {fileID: 21300000, guid: a5287c80e2e6f0b4299e25e6728e9b7b, type: 3}
   ItemStats:
   - StatName: Mass
     StatValue: 2
-  Prefab: {fileID: 1528149535423254706, guid: 3226b5b47842e98478799f05bce935d3, type: 3}
+  Prefab: {fileID: 3771415230916455436, guid: 551e9578f8a8e104aa03d0c1d6910194, type: 3}
+  IsDurabilityItem: 0
+  ItemDurability: 0
+  MaxItemDurability: 0
+  IsUsableItem: 0
+  IsStack: 1
+  ItemsBuffs: []
