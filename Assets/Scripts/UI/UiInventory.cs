@@ -33,9 +33,9 @@ public class UiInventory : MonoBehaviour
 
     private void Start()
     {
-        useButton.GetComponent<Button>().onClick.AddListener(EqipButtonUse);
-        infoButton.GetComponent<Button>().onClick.AddListener(InfoButtonUse);
-        dropButton.GetComponent<Button>().onClick.AddListener(DropButtonUse);
+       if(useButton) useButton.GetComponent<Button>().onClick.AddListener(EqipButtonUse);
+       if(infoButton) infoButton.GetComponent<Button>().onClick.AddListener(InfoButtonUse);
+       if(dropButton) dropButton.GetComponent<Button>().onClick.AddListener(DropButtonUse);
     }
 
     private void OnEnable()
@@ -82,8 +82,8 @@ public class UiInventory : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
         
-        capacityText.text = _player.PlayerInventory.GetCurrentInventoryMass().ToString("00") + "/" + _player.PlayerStats.MaxMass;
-        capacityImage.fillAmount = (_player.PlayerInventory.GetCurrentInventoryMass() + 0.001f) / _player.PlayerStats.MaxMass;
+       if(capacityText) capacityText.text = _player.PlayerInventory.GetCurrentInventoryMass().ToString("00") + "/" + _player.PlayerStats.MaxMass;
+       if(capacityImage) capacityImage.fillAmount = (_player.PlayerInventory.GetCurrentInventoryMass() + 0.001f) / _player.PlayerStats.MaxMass;
 
         foreach (var cell in InventoryCellses)
         {
@@ -251,9 +251,9 @@ public class UiInventory : MonoBehaviour
     
     public void HideButtons()
     {
-        useButton.SetActive(false);
-        infoButton.SetActive(false);
-        dropButton.SetActive(false);
+       if(useButton) useButton.SetActive(false);
+       if(infoButton) infoButton.SetActive(false);
+       if(dropButton) dropButton.SetActive(false);
     }
     
     public void SelectItem(ItemUIElement itemUIElement)
@@ -270,20 +270,20 @@ public class UiInventory : MonoBehaviour
             return;
         }
         SelectedItem = itemUIElement;
-        useButton.SetActive(false);
+       if(useButton) useButton.SetActive(false);
 
         ItemDataSO data = DatabaseManager.Instance.GetItemData(itemUIElement.Item.ItemId);
 
        if (data.ItemType == ItemType.Resource)
        {
-           infoButton.SetActive(true);
-           dropButton.SetActive(true);
+         if(infoButton)  infoButton.SetActive(true);
+         if(dropButton)  dropButton.SetActive(true);
        }
        if (data.ItemType == ItemType.Equip || data.ItemType == ItemType.Food || data.ItemType == ItemType.Weapons)
        {
-           useButton.SetActive(true);
-           infoButton.SetActive(true);
-           dropButton.SetActive(true);
+          if(useButton)  useButton.SetActive(true);
+          if(infoButton) infoButton.SetActive(true);
+          if(dropButton) dropButton.SetActive(true);
        }
     }
 }

@@ -19,6 +19,25 @@ public class CraftController
         InventoryToGetItems = inventoryToGetItems;
     }
 
+    public void StartBuild(CraftBlueprint blueprint, Building building)
+    {
+
+        EventManager.Instance.OnPlayerGetEnergy(-blueprint.EnergyCost);
+
+        foreach (var removeitem in blueprint.RequiredItems)
+        {
+            InventoryToGetItems.MassRemoveItem(removeitem.ItemId, removeitem.ItemValue);
+        }
+
+        CraftProcess proc = new CraftProcess(blueprint.CraftTimeInSeconds, blueprint.OutputItem.ItemId,
+            blueprint.OutputItem.ItemValue, blueprint.Exp);
+        
+        proc.IsBuilding = true;
+        proc.Building = building;
+        
+        CraftProcesses.Add(proc);
+    }
+    
     public void StartCraft(CrafterUi.BlueprintItemsCollection blueprintItemsCollection)
     {
         float nexttime = 0;
@@ -52,6 +71,10 @@ public class CraftController
             if (process.CurrentTime >= process.CraftTimeMax)
             {
                 process.CurrentTime = process.CraftTimeMax;
+                if (process.IsBuilding)
+                {
+                    FinishBuild();
+                }
             }
         }
     }
@@ -60,6 +83,13 @@ public class CraftController
     {
         CraftProcess process = CraftProcesses[0];
         InventoryToGetItems.AddItem(process.OutputItem, process.OutputValue);
+        CraftProcesses.Remove(process);
+    }
+
+    public void FinishBuild()
+    {
+        CraftProcess process = CraftProcesses[0];
+        process.Building.Upgrade();
         CraftProcesses.Remove(process);
     }
 
@@ -79,6 +109,8 @@ public class CraftProcess
         Exp = exp;
     }
 
+    public bool IsBuilding;
+    public Building Building;
     public bool IsComplite = false;
     public float CurrentTime;
     public float CraftTimeMax;
@@ -97,6 +129,7 @@ public class CraftProcess
                     "Завершено:  " + DatabaseManager.Instance.Localization.GetLocalization(OutputItem), Color.green);
             }
             IsComplite = true;
+            
         }
     }
 }

@@ -76,6 +76,10 @@ public class Selector : MonoBehaviour
                 _multitool.hitEntity = hitEntity;
                 _multitool.isCollectingActive = true;
                 break;
+            case BuildingTrigger _:
+                BuildingTrigger trigger = hitEntity.GetComponent<BuildingTrigger>();
+                UIController.Instance.OpenBuildingsUi(trigger);
+                break;
         }
 
     }
