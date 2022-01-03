@@ -18,6 +18,7 @@ public class UIController : MonoBehaviour
 	[SerializeField] private Transform chestUi;
 	public List<Item> nearestItems = new List<Item>();
 	public UiInventory UiInventory;
+	public UiBuildings UiBuildings;
 	public CrafterUi CrafterUi;
 	public Transform craftPanel;
 	public ChestInventoryUI ChestInventoryUI;
@@ -141,6 +142,12 @@ public class UIController : MonoBehaviour
 	public void OpenCraftPlayer()
 	{
 		OpenCraftPanel(Player.Instance.playerCrafter.Sheme, Player.Instance.PlayerInventory, Player.Instance.playerCrafter);
+	}
+
+	public void OpenBuildingsUi(BuildingTrigger trigger)
+	{
+		UiBuildings.gameObject.SetActive(true);
+		UiBuildings.Open(trigger.Crafter.Sheme, Player.Instance.PlayerInventory, trigger.Crafter, trigger.Building);
 	}
 	
 	public void OpenCraftPanel(CraftSheme sheme, Inventory inventoryToGetItems, Crafter currentcrafter)

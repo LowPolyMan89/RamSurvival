@@ -87,6 +87,7 @@ public class DatabaseManager :MonoBehaviour
         else
         {
             Debug.LogError("Cant find Item in Database: " + id);
+            return null;
         }
         return value;
     }
