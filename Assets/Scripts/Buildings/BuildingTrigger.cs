@@ -6,7 +6,6 @@ public class BuildingTrigger : Entity
 {
    [SerializeField] private Building building;
    [SerializeField] private BuildingUpgradeSO upgradeToNextLevel;
-   public Crafter Crafter;
 
    public Building Building
    {

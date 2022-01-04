@@ -10,13 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f7c4b186144f40dfb18a5ed23e4a17a6, type: 3}
-  m_Name: Workbench_T1
+  m_Name: workbench_upgrade_t0-t1
   m_EditorClassIdentifier: 
   BlueprintId: workbench_t1
-  Constrainses: []
-  RequiredItems:
-  - ItemId: wood_t1_name_id
-    ItemValue: 1
+  ItemsToUpgrade:
+  - item: {fileID: 11400000, guid: db40650088faade49b3c564e00267d7e, type: 2}
+    ItemValue: 5
   CraftTimeInSeconds: 20
   EnergyCost: 20
   Exp: 100

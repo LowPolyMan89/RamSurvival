@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 8020623645661564385}
   - component: {fileID: 5627596045077301706}
   - component: {fileID: 7989142462838567879}
-  - component: {fileID: 3351308086210584329}
   m_Layer: 7
   m_Name: Trigger
   m_TagString: Untagged
@@ -113,24 +112,6 @@ MonoBehaviour:
   EntityID: 
   building: {fileID: 9105801508486902523}
   upgradeToNextLevel: {fileID: 11400000, guid: d25c6103177bfe7449914a0ae593c6b2, type: 2}
-  Crafter: {fileID: 3351308086210584329}
---- !u!114 &3351308086210584329
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 640034831261550872}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b257f338c6b12f44f932bf76d3c89714, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EntityID: 
-  Sheme: {fileID: 11400000, guid: 6614aba92152e0a43a64a1f196ddf0eb, type: 2}
-  CraftSlots: 0
-  Data: {fileID: 11400000, guid: 91348974dfb47864b9f9bb020ccdf702, type: 2}
-  Level: 1
 --- !u!1 &652106397851167930
 GameObject:
   m_ObjectHideFlags: 0
@@ -4514,7 +4495,6 @@ GameObject:
   - component: {fileID: 4452099415523188393}
   - component: {fileID: 2062312900533656194}
   - component: {fileID: 4348455086612095119}
-  - component: {fileID: 6242585261671504266}
   m_Layer: 7
   m_Name: Trigger
   m_TagString: Untagged
@@ -4614,24 +4594,6 @@ MonoBehaviour:
   EntityID: 
   building: {fileID: 9105801508486902523}
   upgradeToNextLevel: {fileID: 11400000, guid: d25c6103177bfe7449914a0ae593c6b2, type: 2}
-  Crafter: {fileID: 6242585261671504266}
---- !u!114 &6242585261671504266
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6513944663911733840}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b257f338c6b12f44f932bf76d3c89714, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EntityID: 
-  Sheme: {fileID: 11400000, guid: 6614aba92152e0a43a64a1f196ddf0eb, type: 2}
-  CraftSlots: 0
-  Data: {fileID: 11400000, guid: 91348974dfb47864b9f9bb020ccdf702, type: 2}
-  Level: 1
 --- !u!1 &6596450953096331250
 GameObject:
   m_ObjectHideFlags: 0

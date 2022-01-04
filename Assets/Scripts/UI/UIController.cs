@@ -146,8 +146,9 @@ public class UIController : MonoBehaviour
 
 	public void OpenBuildingsUi(BuildingTrigger trigger)
 	{
+		MainInventory.gameObject.SetActive(true);
 		UiBuildings.gameObject.SetActive(true);
-		UiBuildings.Open(trigger.Crafter.Sheme, Player.Instance.PlayerInventory, trigger.Crafter, trigger.Building);
+		UiBuildings.Open(trigger.Building);
 	}
 	
 	public void OpenCraftPanel(CraftSheme sheme, Inventory inventoryToGetItems, Crafter currentcrafter)

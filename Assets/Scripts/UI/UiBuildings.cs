@@ -11,16 +11,14 @@ using UnityEngine.UI;
     {
         public Button StartCraftButton;
         public Transform CraftPanel;
-        public CrafterRequiredPanel crafterRequiredPanel;
-        public CraftInfoPanel craftInfoPanel;
-        public Crafter CurrentCrafter;
         public Inventory CurrentInventory;
-        private CraftBlueprintUi currentBlueprint;
-        private BlueprintItemsCollection blueprintItemsCollection;
+        public GameObject RequireUiSlotPrefab;
         [SerializeField] private GameObject processPanel;
         [SerializeField] private Image processImage;
         [SerializeField] private Building currentBuilding;
-        
+
+        public Building CurrentBuilding => currentBuilding;
+
         private void Start()
         {
             StartCraftButton.onClick.AddListener(StartCraftButtonClick);
@@ -38,167 +36,57 @@ using UnityEngine.UI;
 
         private void Update()
         {
-            if (CurrentCrafter != null)
-            {
-                if (CurrentCrafter._craftController.CraftProcesses.Count >= CurrentCrafter.Data.Levels[0].Slots)
-                {
-                    StartCraftButton.interactable = false;
-                }
-            }
+           
         }
 
         private void OneSecondTick()
         {
-            if (CurrentCrafter._craftController.CraftProcesses.Count > 0)
-            {
-                CraftProcess proc = CurrentCrafter._craftController.CraftProcesses[0];
-                processImage.fillAmount = proc.CurrentTime / proc.CraftTimeMax;
-            }
+           
         }
 
 
         public void Refresh()
         {
-          
+            bool check = true;
+            
+            if(!currentBuilding) return;
+            
+            foreach (Transform child in CraftPanel) 
+            {
+                Destroy(child.gameObject);
+            }
+            
+            foreach (var KeyValue in currentBuilding.Inventory.Items)
+            {
+                CraftReqSlot slot = Instantiate(RequireUiSlotPrefab).GetComponent<CraftReqSlot>();
+                slot.transform.SetParent(CraftPanel);
+                slot.transform.localPosition = Vector3.zero;
+                slot.transform.localScale = Vector3.one;
+                slot.gameObject.name = "building_cell";
+                slot.Image.sprite = DatabaseManager.Instance.GetItemData(KeyValue.Key).Sprite;
+                slot.Text.text = $@"{KeyValue.Value.Current} / {KeyValue.Value.Need}";
+                
+                if (KeyValue.Value.Current < KeyValue.Value.Need)
+                {
+                    check = false;
+                }
+            }
+
+            StartCraftButton.interactable = check;
         }
 
-        public void Open(CraftSheme sheme, Inventory inventory, Crafter crafter, Building building)
+        public void Open(Building triggerBuilding)
         {
-            CurrentCrafter = crafter;
-            CurrentInventory = inventory;
-            currentBuilding = building;
-            
-            BlueprintSelect();
-            crafter.OpenCraft(sheme, inventory, crafter);
-            if (CurrentCrafter._craftController.CraftProcesses.Count > 0)
-            {
-                processPanel.SetActive(true);
-            }
-            else
-            {
-                processPanel.SetActive(false);
-            }
-            OneSecondTick();
+            currentBuilding = triggerBuilding;
+            Refresh();
         }
         
-
         private void StartCraftButtonClick()
         {
-            processPanel.SetActive(true);
-            CurrentCrafter._craftController.StartBuild(CurrentCrafter.Sheme.Blueprints[0], currentBuilding);
-            OneSecondTick();
+            
         }
         
-        [System.Serializable]
-        public class CraftInfoPanel
-        {
-            public TMP_Text ItemNameText;
-            public Transform Panel;
-            public Image ItemImage;
-            public TMP_Text DescriptionText;
-        }
-
-        [System.Serializable]
-        public class CrafterRequiredPanel
-        {
-            public Transform Panel;
-            public List<CraftReqSlot> Slots = new List<CraftReqSlot>();
-            public CraftReqSlot TimerSlot;
-            public CraftReqSlot EnergySlot;
-            public GameObject SlotPrefab;
-
-            public void AddSlot(Sprite item, int needcount, int currentcount)
-            {
-                CraftReqSlot slot = Instantiate(SlotPrefab, Panel).GetComponent<CraftReqSlot>();
-                slot.transform.localPosition = Vector3.zero;
-                slot.Image.sprite = item;
-                slot.Text.text = needcount.ToString() + "/" + currentcount.ToString();
-                Slots.Add(slot);
-            }
-
-        }
-
-        public void BlueprintSelect()
-        {
-            StartCraftButton.interactable = true;
-            blueprintItemsCollection = new BlueprintItemsCollection();
-
-            foreach (var slot in crafterRequiredPanel.Slots)
-            {
-                Destroy(slot.gameObject, 0.01f);
-            }
-
-            crafterRequiredPanel.Slots.Clear();
-            
-            float energycost = CurrentCrafter.Sheme.Blueprints[0].EnergyCost;
-            float playerenergy = Player.Instance.PlayerStats.CurrentEnergy;
-            float time = CurrentCrafter.Sheme.Blueprints[0].CraftTimeInSeconds;
-            int exp = CurrentCrafter.Sheme.Blueprints[0].Exp;
-            print("Select Blueprint" + CurrentCrafter.Sheme.Blueprints[0].BlueprintId.ToLower());
-            craftInfoPanel.ItemNameText.text =
-                DatabaseManager.Instance.Localization.GetLocalization(CurrentCrafter.Sheme.Blueprints[0].BlueprintId);
-            
-            ItemDataSO itemdata = DatabaseManager
-                .Instance.GetItemData(CurrentCrafter.Sheme.Blueprints[0].OutputItem.ItemId);
-
-            if (itemdata)
-            {
-                craftInfoPanel.DescriptionText.text = DatabaseManager.Instance.Localization.GetLocalization(itemdata.DescriptionId);
-                craftInfoPanel.ItemImage.sprite = itemdata.Sprite;
-            }
-            
-            crafterRequiredPanel.EnergySlot.Text.text = energycost.ToString("0") + "/" +
-                                                        Player.Instance.PlayerStats.CurrentEnergy.ToString("0");
-            crafterRequiredPanel.TimerSlot.Text.text = Support.ConvertTimeSecondsToString(time);
-
-            if (energycost > playerenergy)
-            {
-                StartCraftButton.interactable = false;
-            }
-
-            foreach (var reqitem in CurrentCrafter.Sheme.Blueprints[0].RequiredItems)
-            {
-                var item = DatabaseManager.Instance.GetItemData(reqitem.ItemId);
-                int itemcount = reqitem.ItemValue;
-                blueprintItemsCollection.Items.Add(
-                    new BlueprintItemsCollection.ItemsToCraft(Player.Instance.PlayerInventory.GetItem(reqitem.ItemId),
-                        itemcount));
-                crafterRequiredPanel.AddSlot(item.Sprite, itemcount,
-                    Player.Instance.PlayerInventory.GetContainsItemCount(reqitem.ItemId));
-
-                if (itemcount > Player.Instance.PlayerInventory.GetContainsItemCount(reqitem.ItemId))
-                {
-                    StartCraftButton.interactable = false;
-                }
-            }
-
-            blueprintItemsCollection.OutputItemId = CurrentCrafter.Sheme.Blueprints[0].BlueprintId;
-            blueprintItemsCollection.Energy = energycost;
-            blueprintItemsCollection.Time = time;
-            blueprintItemsCollection.exp = exp;
-        }
-
-        public class BlueprintItemsCollection
-        {
-            public float Time;
-            public float Energy;
-            public List<ItemsToCraft> Items = new List<ItemsToCraft>();
-            public string OutputItemId;
-            public int OutputItemValue;
-            public int exp;
-
-            public struct ItemsToCraft
-            {
-                public ItemView Item;
-                public int Count;
-
-                public ItemsToCraft(ItemView item, int count)
-                {
-                    Item = item;
-                    Count = count;
-                }
-            }
-        }
+      
         
     }
     

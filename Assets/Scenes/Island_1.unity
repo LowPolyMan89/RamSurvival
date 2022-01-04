@@ -243,7 +243,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-16212
+  m_Name: pb_Mesh-2402
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1544,7 +1544,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-56254
+  m_Name: pb_Mesh-2448
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4393,6 +4393,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WorkbenchHouse_Main
       objectReference: {fileID: 0}
+    - target: {fileID: 9105801508486902523, guid: adabf752fee11574db49f6db4cb2f60d, type: 3}
+      propertyPath: upgradeProcess._upgradeData
+      value: 
+      objectReference: {fileID: 11400000, guid: d25c6103177bfe7449914a0ae593c6b2, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: adabf752fee11574db49f6db4cb2f60d, type: 3}
 --- !u!1001 &4304873964922102863

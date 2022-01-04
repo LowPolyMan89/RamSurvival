@@ -87,6 +87,16 @@ public class ItemUIElement : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
                 return;
             }
             
+            if (h.gameObject.name.Contains("building_cell"))
+            {
+                int ret =
+                    UIController.Instance.UiBuildings.CurrentBuilding.Inventory.AddItemAndReturnIfFull(Item.ItemId,
+                        Item.Count);
+                ItemInventory.AddItem(this.Item.ItemId, ret);
+                Destroy(this.gameObject, 0.01f);
+                return;
+            }
+            
         }
         
         ItemInventory.AddItem(this.Item.ItemId, this.Item.Count);

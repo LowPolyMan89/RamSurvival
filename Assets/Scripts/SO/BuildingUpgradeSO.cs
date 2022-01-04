@@ -5,10 +5,16 @@
   public class BuildingUpgradeSO : ScriptableObject
   {
       public string BlueprintId;
-      public List<Constrains> Constrainses = new List<Constrains>();
-      public List<BlueprintItem> RequiredItems = new List<BlueprintItem>();
+      public List<ItemToUpgrade> ItemsToUpgrade = new List<ItemToUpgrade>();
       public float CraftTimeInSeconds;
       public float EnergyCost;
       public int Exp;
+      
+      [System.Serializable]
+      public class ItemToUpgrade
+      {
+          public ItemDataSO item;
+          public int ItemValue;
+      }
   }
   
